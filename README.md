@@ -1,2 +1,2 @@
 # SupplyChainManagement
-Xây dựng website quản lý chuỗi cung ứng
+Xây dựng website quản lý chuỗi cung ứng.
