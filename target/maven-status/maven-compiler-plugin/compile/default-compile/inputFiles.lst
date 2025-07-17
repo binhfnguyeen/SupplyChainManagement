@@ -1,4 +1,5 @@
-D:\JavaProjects\SupplyChainManagement\SupplyChainManagement\src\main\java\com\scm\configs\DispatcherServletInit.java
-D:\JavaProjects\SupplyChainManagement\SupplyChainManagement\src\main\java\com\scm\configs\ThymeleafConfigs.java
-D:\JavaProjects\SupplyChainManagement\SupplyChainManagement\src\main\java\com\scm\configs\WebAppContextConfigs.java
-D:\JavaProjects\SupplyChainManagement\SupplyChainManagement\src\main\java\com\scm\controllers\HomeController.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\DispatcherServletInit.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\HibernateConfigs.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\ThymeleafConfigs.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\WebAppContextConfigs.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\controllers\HomeController.java

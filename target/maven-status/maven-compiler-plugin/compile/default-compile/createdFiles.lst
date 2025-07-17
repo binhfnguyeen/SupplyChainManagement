@@ -1,4 +1,5 @@
-com\scm\controllers\HomeController.class
+com\scm\configs\HibernateConfigs.class
 com\scm\configs\ThymeleafConfigs.class
+com\scm\controllers\HomeController.class
 com\scm\configs\WebAppContextConfigs.class
 com\scm\configs\DispatcherServletInit.class
