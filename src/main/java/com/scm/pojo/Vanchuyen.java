@@ -4,11 +4,14 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -32,6 +35,7 @@ public class Vanchuyen implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -40,8 +44,10 @@ public class Vanchuyen implements Serializable {
     @Column(name = "IDDonHang")
     private Integer iDDonHang;
     @OneToMany(mappedBy = "iDVanChuyen")
+    @JsonIgnore
     private Set<Donhangxuat> donhangxuatSet;
     @OneToMany(mappedBy = "iDVanChuyen")
+    @JsonIgnore
     private Set<Donhangnhap> donhangnhapSet;
     @JoinColumn(name = "IDDoiTacVanChuyen", referencedColumnName = "ID")
     @ManyToOne

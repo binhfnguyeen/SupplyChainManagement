@@ -4,10 +4,13 @@
  */
 package com.scm.repositories;
 
+import com.scm.pojo.User;
+
 /**
  *
  * @author Dell
  */
 public interface UserRepository {
-    
+    User getUserByUsername(String username);
+    User addUser(User u);
 }
