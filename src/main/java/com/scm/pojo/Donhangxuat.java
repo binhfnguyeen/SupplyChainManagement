@@ -4,12 +4,15 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -33,6 +36,7 @@ public class Donhangxuat implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -51,8 +55,10 @@ public class Donhangxuat implements Serializable {
     @ManyToOne
     private Vanchuyen iDVanChuyen;
     @OneToMany(mappedBy = "iDDonHang")
+    @JsonIgnore
     private Set<Chitietdonhangxuat> chitietdonhangxuatSet;
     @OneToMany(mappedBy = "iDDonHang")
+    @JsonIgnore
     private Set<Hoadonxuat> hoadonxuatSet;
 
     public Donhangxuat() {

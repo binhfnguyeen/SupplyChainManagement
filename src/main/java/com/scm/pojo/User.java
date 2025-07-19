@@ -4,10 +4,13 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
@@ -30,6 +33,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -39,9 +43,13 @@ public class User implements Serializable {
     private String password;
     @Column(name = "Role")
     private String role;
+    @Column(name = "avatar")
+    private String avatar;
     @OneToOne(mappedBy = "userID")
+    @JsonManagedReference
     private Khachhang khachhang;
     @OneToOne(mappedBy = "userID")
+    @JsonManagedReference
     private Nhanvien nhanvien;
 
     public User() {
@@ -123,5 +131,19 @@ public class User implements Serializable {
     public String toString() {
         return "com.scm.pojo.User[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the avatar
+     */
+    public String getAvatar() {
+        return avatar;
+    }
+
+    /**
+     * @param avatar the avatar to set
+     */
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
 }

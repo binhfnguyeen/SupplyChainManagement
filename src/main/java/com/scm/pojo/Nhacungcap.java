@@ -4,11 +4,14 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Set;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.NamedQueries;
@@ -32,6 +35,7 @@ public class Nhacungcap implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
@@ -45,8 +49,10 @@ public class Nhacungcap implements Serializable {
     @Column(name = "DieuKienThanhToan")
     private String dieuKienThanhToan;
     @OneToMany(mappedBy = "iDNhaCungCap")
+    @JsonIgnore
     private Set<SanphamNhacungcap> sanphamNhacungcapSet;
     @OneToMany(mappedBy = "iDNhaCungCap")
+    @JsonIgnore
     private Set<Danhgia> danhgiaSet;
 
     public Nhacungcap() {
