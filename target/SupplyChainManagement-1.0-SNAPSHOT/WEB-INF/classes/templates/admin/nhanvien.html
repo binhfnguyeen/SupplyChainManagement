@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container">
+        <div class="mt-2 mb-2">
+            <a th:href="@{/admin/employees/form}" class="btn btn-success">Thêm nhân viên</a>
+        </div>
+
+        <div>
+            <form th:action="@{/admin/employees}">
+                <div class="form-floating mb-3 mt-3">
+                    <input type="text" class="form-control" id="kw" placeholder="Nhập tên" name="kw" />
+                    <label for="kw">Nhập tên</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <select class="form-select" id="cv" name="cv">
+                        <option value="">Tất cả chức vụ</option>
+                        <option value="ADMIN">Admin</option>
+                        <option value="THUMUA">Nhân viên thu mua</option>
+                        <option value="VANCHUYEN">Nhân viên vận chuyển</option>
+                        <option value="KHO">Nhân viên kho</option>
+                        <option value="BANHANG">Nhân viên bán hàng</option>
+                    </select>
+                    <label for="cv">Chức vụ</label>
+                </div>
+                <div class="form-floating mb-3 mt-3">
+                    <button type="submit" class="btn btn-info">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="container mt-4">
+            <h2 class="mb-4">Danh sách nhân viên</h2>
+            <div class="row" th:if="${nhanvien}">
+                <div class="col-md-3 mb-4" th:each="nv : ${nhanvien}">
+                    <div class="card h-100 shadow-sm">
+                        <img th:src="${nv.userID.avatar}" class="card-img-top" alt="Avatar" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${nv.hoTen}">Tên nhân viên</h5>
+                            <p class="card-text">
+                                <strong>Chức vụ:</strong> <span th:text="${nv.chucVu}">Chức vụ</span>
+                            </p>
+                            <a th:href="@{/admin/employees/update/{id}(id=${nv.id})}" class="btn btn-info">Cập nhật</a>
+                            <button th:onclick="'deleteEmployee(\'' + @{/admin/employees/{id}(id=${nv.id})} + '\')'" class="btn btn-danger">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

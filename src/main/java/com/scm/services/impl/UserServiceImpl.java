@@ -14,6 +14,7 @@ import com.scm.repositories.KhachHangRepository;
 import com.scm.repositories.NhanVienRepository;
 import com.scm.repositories.UserRepository;
 import com.scm.services.UserService;
+import jakarta.annotation.PostConstruct;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Map;
@@ -97,16 +98,52 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       User u = this.getUserByUsername(username);
+        User u = this.getUserByUsername(username);
         if (u == null) {
-            throw new UsernameNotFoundException("Invalid username!");
+            throw new UsernameNotFoundException("User not found");
         }
-
+        
+        if (!u.getRole().equals("ADMIN"))
+            throw new UsernameNotFoundException("Not authorized");
+        
         Set<GrantedAuthority> authorities = new HashSet<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_" + u.getRole()));
-        
+
         return new org.springframework.security.core.userdetails.User(
                 u.getUsername(), u.getPassword(), authorities);
+    }
+
+    @Override
+    @PostConstruct
+    public void createAdminUser() {
+        try {
+            if (userRepository.existedByUsername("admin") == false) {
+                User u = new User();
+                u.setUsername("admin");
+                u.setPassword(this.passwordEncoder.encode("admin"));
+                u.setRole("ADMIN");
+                u.setAvatar("https://res.cloudinary.com/dwivkhh8t/image/upload/v1752911421/s17hqjuqfy2ao4z9umtn.jpg");
+
+                userRepository.addUser(u);
+
+                if ("ADMIN".equals(u.getRole())) {
+                    Nhanvien nv = new Nhanvien();
+                    nv.setHoTen("Admin SupChain");
+                    nv.setChucVu("NHANVIEN_ADMIN");
+                    nv.setUserID(u);
+
+                    this.nvRepository.add(nv);
+                    u.setNhanvien(nv);
+                }
+
+                System.out.println(">> Admin user created! (username: admin, password: admin)");
+            } else {
+                System.out.println(">> Admin user already exists.");
+            }
+        } catch (Exception e) {
+            System.err.println(">> Error when creating admin user: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

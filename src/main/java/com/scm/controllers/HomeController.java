@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @author Dell
  */
 @Controller
+@RequestMapping("/admin")
 public class HomeController {
     @RequestMapping("/")
     public String index(Model model){
-        model.addAttribute("msg", "Nguyen");
-        return "index";
+        return "admin/index";
     }
 }

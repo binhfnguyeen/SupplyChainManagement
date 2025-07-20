@@ -4,9 +4,11 @@
  */
 package com.scm.repositories.impl;
 
+import com.scm.pojo.Nhanvien;
 import com.scm.pojo.User;
 import com.scm.repositories.UserRepository;
 import jakarta.persistence.Query;
+import java.util.List;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -39,6 +41,15 @@ public class UserRepositoryImpl implements UserRepository{
         s.persist(u);
         
         return u;
+    }
+
+    @Override
+    public boolean existedByUsername(String username) {
+        Session s = this.factory.getObject().getCurrentSession();
+        List<User> users = s.createNamedQuery("User.findByUsername", User.class)
+                                        .setParameter("username", username)
+                                        .getResultList();
+        return !users.isEmpty();
     }
     
 }

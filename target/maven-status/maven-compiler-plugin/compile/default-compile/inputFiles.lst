@@ -4,8 +4,10 @@ D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\SecurityWebA
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\SpringSecurityConfigs.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\ThymeleafConfigs.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\configs\WebAppContextConfigs.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\controllers\AdminController.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\controllers\ApiUserController.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\controllers\HomeController.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\controllers\NhanVienController.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\pojo\Chiphi.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\pojo\Chitietdonhangnhap.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\pojo\Chitietdonhangxuat.java
@@ -31,5 +33,7 @@ D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\repositories\impl\Us
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\repositories\KhachHangRepository.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\repositories\NhanVienRepository.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\repositories\UserRepository.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\services\impl\NhanVienServiceImpl.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\services\impl\UserServiceImpl.java
+D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\services\NhanVienService.java
 D:\JavaProjects\SupplyChainManagement\src\main\java\com\scm\services\UserService.java

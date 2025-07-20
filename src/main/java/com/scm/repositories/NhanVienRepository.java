@@ -5,6 +5,8 @@
 package com.scm.repositories;
 
 import com.scm.pojo.Nhanvien;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -12,4 +14,8 @@ import com.scm.pojo.Nhanvien;
  */
 public interface NhanVienRepository {
     Nhanvien add(Nhanvien nv);
+    List<Nhanvien> getDsNhanVien(Map<String, String> params);
+    void deleteNhanVien(Integer id);
+    Nhanvien getNhanvienById(int id);
+    void addOrUpdateNhanvienWithUser(Nhanvien nv);
 }
