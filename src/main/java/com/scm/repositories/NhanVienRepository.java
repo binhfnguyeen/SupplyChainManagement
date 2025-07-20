@@ -18,4 +18,5 @@ public interface NhanVienRepository {
     void deleteNhanVien(Integer id);
     Nhanvien getNhanvienById(int id);
     void addOrUpdateNhanvienWithUser(Nhanvien nv);
+    int soNhanVien();
 }

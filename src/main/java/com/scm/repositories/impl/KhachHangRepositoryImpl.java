@@ -6,6 +6,10 @@ package com.scm.repositories.impl;
 
 import com.scm.pojo.Khachhang;
 import com.scm.repositories.KhachHangRepository;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -27,6 +31,20 @@ public class KhachHangRepositoryImpl implements KhachHangRepository{
        Session s = this.factory.getObject().getCurrentSession();
         s.persist(kh);
         return kh;
+    }
+
+    @Override
+    public int soKhachHang() {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Long> q = b.createQuery(Long.class);
+
+        Root<Khachhang> khRoot = q.from(Khachhang.class);
+        q.select(b.count(khRoot.get("id")));
+
+        Query query = s.createQuery(q);
+        Long result = (Long) query.getSingleResult();
+        return result.intValue();
     }
     
 }

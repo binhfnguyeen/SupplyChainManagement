@@ -7,10 +7,42 @@
 </head>
 <body>
     <div th:replace="admin/base :: header"></div>
-    <main class="container">
-        <h1 class="text-info text-center mt-2">Quản trị viên</h1>
+
+    <main class="container mt-4">
+        <h1 class="text-info text-center mb-4">Quản trị viên</h1>
+
+        <div class="row justify-content-center gap-4">
+            <div class="col-md-5">
+                <div class="card text-white bg-primary shadow rounded-4">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="bi bi-person-badge" style="font-size: 2rem;"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-1">Số lượng nhân viên</h5>
+                            <h3 th:text="${soNV}">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card text-white bg-success shadow rounded-4">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="bi bi-people-fill" style="font-size: 2rem;"></i>
+                        </div>
+                        <div>
+                            <h5 class="card-title mb-1">Số lượng khách hàng</h5>
+                            <h3 th:text="${soKH}">0</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
     <div th:replace="admin/base :: footer"></div>
-    <!--<script th:src="@{/js/main.js}"></script>-->
+    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ import com.scm.repositories.NhanVienRepository;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Expression;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
@@ -32,9 +33,9 @@ public class NhanVienRepositoryImpl implements NhanVienRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     private static final int PAGE_SIZE = 8;
-    
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -59,17 +60,17 @@ public class NhanVienRepositoryImpl implements NhanVienRepository {
             if (kw != null && !kw.isEmpty()) {
                 predicates.add((Predicate) b.like(root.get("hoTen"), String.format("%%%s%%", kw)));
             }
-            
+
             String cv = params.get("cv");
             if (cv != null && !cv.isEmpty()) {
                 predicates.add(b.equal(root.get("chucVu"), cv));
             }
-            
+
             q.where(predicates.toArray(Predicate[]::new));
         }
 
         Query query = s.createQuery(q);
-        
+
         if (params != null) {
             String page = params.get("page");
             if (page != null) {
@@ -127,6 +128,20 @@ public class NhanVienRepositoryImpl implements NhanVienRepository {
         } else {
             s.merge(nv);
         }
+    }
+
+    @Override
+    public int soNhanVien() {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Long> q = b.createQuery(Long.class);
+
+        Root<Nhanvien> nvRoot = q.from(Nhanvien.class);
+        q.select(b.count(nvRoot.get("id")));
+
+        Query query = s.createQuery(q);
+        Long result = (Long) query.getSingleResult();
+        return result.intValue();
     }
 
 }

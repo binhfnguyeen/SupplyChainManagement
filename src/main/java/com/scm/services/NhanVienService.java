@@ -17,4 +17,5 @@ public interface NhanVienService {
      void deleteNhanVien(Integer id);
      void addOrUpdateNhanvienWithUser(Nhanvien nv);
      Nhanvien getNhanvienById(int id);
+     int soNhanVien();
 }
