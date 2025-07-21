@@ -20,6 +20,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Date;
 
 /**
  *
@@ -155,6 +156,10 @@ public class Donhangxuat implements Serializable {
     @Override
     public String toString() {
         return "com.scm.pojo.Donhangxuat[ id=" + id + " ]";
+    }
+
+    public void setCreatedDate(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

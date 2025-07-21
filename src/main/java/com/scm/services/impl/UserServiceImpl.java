@@ -27,6 +27,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -114,6 +116,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+<<<<<<< Updated upstream
     @PostConstruct
     public void createAdminUser() {
         try {
@@ -145,5 +148,16 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
     }
+=======
+    public User getCurrentUser() {
+        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
+        String username = auth.getName(); // lấy username từ context
+        return this.getUserByUsername(username);}
+        return null;
+    }
+    
+    
+>>>>>>> Stashed changes
 
 }

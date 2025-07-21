@@ -8,6 +8,7 @@ import com.scm.pojo.Nhanvien;
 import com.scm.pojo.User;
 import com.scm.repositories.NhanVienRepository;
 import jakarta.persistence.Query;
+<<<<<<< Updated upstream
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
@@ -16,6 +17,8 @@ import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+=======
+>>>>>>> Stashed changes
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -47,6 +50,7 @@ public class NhanVienRepositoryImpl implements NhanVienRepository {
     }
 
     @Override
+<<<<<<< Updated upstream
     public List<Nhanvien> getDsNhanVien(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
         CriteriaBuilder b = s.getCriteriaBuilder();
@@ -144,4 +148,14 @@ public class NhanVienRepositoryImpl implements NhanVienRepository {
         return result.intValue();
     }
 
+=======
+    public Nhanvien getNhanVienByID(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createNamedQuery("Nhanvien.findById", Nhanvien.class);
+        q.setParameter("id", id);
+        
+        return (Nhanvien) q.getSingleResult();
+    }
+    
+>>>>>>> Stashed changes
 }

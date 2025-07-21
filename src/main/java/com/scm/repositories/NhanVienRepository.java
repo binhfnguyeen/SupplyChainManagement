@@ -14,9 +14,13 @@ import java.util.Map;
  */
 public interface NhanVienRepository {
     Nhanvien add(Nhanvien nv);
+<<<<<<< Updated upstream
     List<Nhanvien> getDsNhanVien(Map<String, String> params);
     void deleteNhanVien(Integer id);
     Nhanvien getNhanvienById(int id);
     void addOrUpdateNhanvienWithUser(Nhanvien nv);
     int soNhanVien();
+=======
+    Nhanvien getNhanVienByID(int id);
+>>>>>>> Stashed changes
 }

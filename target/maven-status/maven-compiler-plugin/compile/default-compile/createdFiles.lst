@@ -1,4 +1,5 @@
 com\scm\configs\HibernateConfigs.class
+<<<<<<< Updated upstream
 com\scm\services\impl\SanPhamNhaCungCapServiceImpl.class
 com\scm\repositories\impl\SanPhamRepositoryImpl.class
 com\scm\repositories\StatsRepository.class
@@ -40,14 +41,42 @@ com\scm\repositories\impl\UserRepositoryImpl.class
 com\scm\repositories\NhaCungCapRepository.class
 com\scm\services\impl\SanPhamServiceImpl.class
 com\scm\controllers\ApiNhaCungCapController.class
+=======
+com\scm\repositories\SanPhamReponsitory.class
+com\scm\pojo\Chiphi.class
+com\scm\pojo\Vanchuyen.class
+com\scm\pojo\Chitietdonhangnhap.class
+com\scm\services\impl\DonHangXuatServiceImpl.class
+com\scm\pojo\User.class
+com\scm\pojo\SanphamNhacungcap.class
+com\scm\repositories\impl\SanPhamNhaCungCapReponsitoryImpl.class
+com\scm\pojo\Cart.class
+com\scm\pojo\Chitietdonhangxuat.class
+com\scm\repositories\SanPhamNhaCungCapReponsitory.class
+com\scm\repositories\UserRepository.class
+com\scm\services\impl\UserServiceImpl.class
+com\scm\pojo\Role.class
+com\scm\configs\SpringSecurityConfigs.class
+com\scm\controllers\ApiUserController.class
+com\scm\repositories\KhachHangRepository.class
+com\scm\pojo\Nhanvien.class
+com\scm\repositories\impl\DonHangXuatReponsitoryImpl.class
+com\scm\repositories\impl\UserRepositoryImpl.class
+>>>>>>> Stashed changes
 com\scm\pojo\Donhangnhap.class
 com\scm\pojo\KhoSanpham.class
 com\scm\pojo\Kho.class
 com\scm\repositories\impl\NhaCungCapRepositoryImpl.class
 com\scm\repositories\impl\NhanVienRepositoryImpl.class
+<<<<<<< Updated upstream
 com\scm\services\impl\NhanVienServiceImpl.class
+=======
+com\scm\pojo\DonHangXuatRequest.class
+>>>>>>> Stashed changes
 com\scm\pojo\Hoadonnhap.class
+com\scm\services\DonHangXuatService.class
 com\scm\configs\SecurityWebApplicationInitializer.class
+<<<<<<< Updated upstream
 com\scm\repositories\SanPhamRepository.class
 com\scm\services\impl\DanhGiaServiceImpl.class
 com\scm\pojo\Hoadonxuat.class
@@ -56,21 +85,40 @@ com\scm\configs\DispatcherServletInit.class
 com\scm\pojo\Danhgia.class
 com\scm\services\UserService.class
 com\scm\services\impl\NhaCungCapServiceImpl.class
+=======
+com\scm\repositories\impl\NhaCungCapReponsitoryImpl.class
+com\scm\pojo\Hoadonxuat.class
+com\scm\configs\DispatcherServletInit.class
+com\scm\pojo\Danhgia.class
+com\scm\services\UserService.class
+>>>>>>> Stashed changes
 com\scm\pojo\Donhangxuat.class
 com\scm\pojo\Khachhang.class
 com\scm\controllers\HomeController.class
+com\scm\repositories\DonHangXuatReponsitory.class
 com\scm\configs\WebAppContextConfigs.class
 com\scm\pojo\Nhacungcap.class
+<<<<<<< Updated upstream
 com\scm\services\impl\QuanLyKhoServiceImpl.class
 com\scm\repositories\DanhGiaRepository.class
 com\scm\repositories\impl\SanPhamNhaCungCapRepositoryImpl.class
 com\scm\controllers\AdminController.class
+=======
+com\scm\repositories\NhaCungCapReponsitory.class
+com\scm\controllers\ApiDonHangXuatController.class
+>>>>>>> Stashed changes
 com\scm\configs\ThymeleafConfigs.class
 com\scm\controllers\ApiKhoController.class
 com\scm\repositories\NhanVienRepository.class
+<<<<<<< Updated upstream
 com\scm\services\impl\StatsServiceImpl.class
 com\scm\services\QuanLyKhoService.class
 com\scm\pojo\Doitacvanchuyen.class
 com\scm\pojo\Sanpham.class
 com\scm\repositories\impl\StatsRepositoryImpl.class
+=======
+com\scm\repositories\impl\SanPhamReponsitoryImpl.class
+com\scm\pojo\Doitacvanchuyen.class
+com\scm\pojo\Sanpham.class
+>>>>>>> Stashed changes
 com\scm\repositories\impl\KhachHangRepositoryImpl.class
