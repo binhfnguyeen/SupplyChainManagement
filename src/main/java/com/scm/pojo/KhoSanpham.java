@@ -4,6 +4,7 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -42,6 +43,7 @@ public class KhoSanpham implements Serializable {
     private Integer soLuong;
     @Column(name = "HanSuDung")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private Date hanSuDung;
     @JoinColumn(name = "IDKho", referencedColumnName = "ID")
     @ManyToOne
