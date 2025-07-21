@@ -12,9 +12,6 @@ import com.scm.pojo.Khachhang;
  */
 public interface KhachHangRepository {
     Khachhang add(Khachhang kh);
-<<<<<<< Updated upstream
     int soKhachHang();
-=======
     Khachhang getKhachHangByKhachHangName(String name);
->>>>>>> Stashed changes
 }

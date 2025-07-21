@@ -8,7 +8,6 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.scm.pojo.Khachhang;
 import com.scm.pojo.Nhanvien;
-import com.scm.pojo.Role;
 import com.scm.pojo.User;
 import com.scm.repositories.KhachHangRepository;
 import com.scm.repositories.NhanVienRepository;
@@ -116,7 +115,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-<<<<<<< Updated upstream
     @PostConstruct
     public void createAdminUser() {
         try {
@@ -148,7 +146,7 @@ public class UserServiceImpl implements UserService {
             e.printStackTrace();
         }
     }
-=======
+
     public User getCurrentUser() {
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
@@ -156,8 +154,5 @@ public class UserServiceImpl implements UserService {
         return this.getUserByUsername(username);}
         return null;
     }
-    
-    
->>>>>>> Stashed changes
 
 }

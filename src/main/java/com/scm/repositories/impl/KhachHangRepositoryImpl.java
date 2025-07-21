@@ -8,12 +8,9 @@ import com.scm.pojo.Khachhang;
 import com.scm.pojo.User;
 import com.scm.repositories.KhachHangRepository;
 import jakarta.persistence.Query;
-<<<<<<< Updated upstream
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
-=======
->>>>>>> Stashed changes
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -38,7 +35,6 @@ public class KhachHangRepositoryImpl implements KhachHangRepository{
     }
 
     @Override
-<<<<<<< Updated upstream
     public int soKhachHang() {
         Session s = this.factory.getObject().getCurrentSession();
         CriteriaBuilder b = s.getCriteriaBuilder();
@@ -50,14 +46,15 @@ public class KhachHangRepositoryImpl implements KhachHangRepository{
         Query query = s.createQuery(q);
         Long result = (Long) query.getSingleResult();
         return result.intValue();
-=======
+    }
+
+    @Override
     public Khachhang getKhachHangByKhachHangName(String name) {
         Session s = this.factory.getObject().getCurrentSession();
         Query q = s.createNamedQuery("Khachhang.findByTen", Khachhang.class);
         q.setParameter("ten", name);
         
         return (Khachhang) q.getSingleResult();
->>>>>>> Stashed changes
     }
     
 }
