@@ -4,6 +4,7 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
@@ -16,6 +17,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.util.Date;
 
 /**
  *
@@ -37,6 +41,10 @@ public class KhoSanpham implements Serializable {
     private Integer id;
     @Column(name = "SoLuong")
     private Integer soLuong;
+    @Column(name = "HanSuDung")
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+    private Date hanSuDung;
     @JoinColumn(name = "IDKho", referencedColumnName = "ID")
     @ManyToOne
     private Kho iDKho;
@@ -106,6 +114,20 @@ public class KhoSanpham implements Serializable {
     @Override
     public String toString() {
         return "com.scm.pojo.KhoSanpham[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the hanSuDung
+     */
+    public Date getHanSuDung() {
+        return hanSuDung;
+    }
+
+    /**
+     * @param hanSuDung the hanSuDung to set
+     */
+    public void setHanSuDung(Date hanSuDung) {
+        this.hanSuDung = hanSuDung;
     }
     
 }

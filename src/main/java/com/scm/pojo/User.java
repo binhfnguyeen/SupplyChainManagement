@@ -16,6 +16,8 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -51,6 +53,9 @@ public class User implements Serializable {
     @OneToOne(mappedBy = "userID")
     @JsonManagedReference
     private Nhanvien nhanvien;
+    
+    @Transient
+    private MultipartFile file;
 
     public User() {
     }
@@ -144,6 +149,20 @@ public class User implements Serializable {
      */
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    /**
+     * @return the file
+     */
+    public MultipartFile getFile() {
+        return file;
+    }
+
+    /**
+     * @param file the file to set
+     */
+    public void setFile(MultipartFile file) {
+        this.file = file;
     }
 
 }

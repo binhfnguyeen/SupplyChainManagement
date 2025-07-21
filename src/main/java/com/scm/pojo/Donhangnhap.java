@@ -20,6 +20,9 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import java.util.Date;
 
 /**
  *
@@ -45,6 +48,12 @@ public class Donhangnhap implements Serializable {
     private BigDecimal tongTien;
     @Column(name = "TinhTrang")
     private String tinhTrang;
+    @Column(name = "ThoiGianDuKien")
+    @Temporal(TemporalType.DATE)
+    private Date thoiGianDuKien;
+    @Column(name = "ThoiGianNhan")
+    @Temporal(TemporalType.DATE)
+    private Date thoiGianNhan;
     @OneToMany(mappedBy = "iDDonHang")
     private Set<Chitietdonhangnhap> chitietdonhangnhapSet;
     @OneToMany(mappedBy = "iDDonHang")
@@ -165,5 +174,33 @@ public class Donhangnhap implements Serializable {
     public String toString() {
         return "com.scm.pojo.Donhangnhap[ id=" + id + " ]";
     }
-    
+
+    /**
+     * @return the thoiGianDuKien
+     */
+    public Date getThoiGianDuKien() {
+        return thoiGianDuKien;
+    }
+
+    /**
+     * @param thoiGianDuKien the thoiGianDuKien to set
+     */
+    public void setThoiGianDuKien(Date thoiGianDuKien) {
+        this.thoiGianDuKien = thoiGianDuKien;
+    }
+
+    /**
+     * @return the thoiGianNhan
+     */
+    public Date getThoiGianNhan() {
+        return thoiGianNhan;
+    }
+
+    /**
+     * @param thoiGianNhan the thoiGianNhan to set
+     */
+    public void setThoiGianNhan(Date thoiGianNhan) {
+        this.thoiGianNhan = thoiGianNhan;
+    }
+
 }
