@@ -147,6 +147,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
     public User getCurrentUser() {
         Authentication auth= SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {

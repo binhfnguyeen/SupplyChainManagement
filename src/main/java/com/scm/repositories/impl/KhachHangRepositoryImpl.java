@@ -5,7 +5,6 @@
 package com.scm.repositories.impl;
 
 import com.scm.pojo.Khachhang;
-import com.scm.pojo.User;
 import com.scm.repositories.KhachHangRepository;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -56,5 +55,4 @@ public class KhachHangRepositoryImpl implements KhachHangRepository{
         
         return (Khachhang) q.getSingleResult();
     }
-    
 }

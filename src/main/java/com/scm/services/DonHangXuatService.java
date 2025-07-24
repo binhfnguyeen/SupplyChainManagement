@@ -16,4 +16,8 @@ import java.util.Map;
  */
 public interface DonHangXuatService {
     void addExportInvoice(DonHangXuatRequest dhxr);
+    List<Donhangxuat> getDonhangxuat(Map<String,String> params);
+    Donhangxuat getDonhangxuatById(int id);
+    void UpdateDonhangxuat(Donhangxuat dhx);
+    void deleteDonhangxuat(int id);
 }

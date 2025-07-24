@@ -8,6 +8,7 @@ import com.scm.pojo.Cart;
 import com.scm.pojo.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,4 +16,8 @@ import java.util.List;
  */
 public interface DonHangXuatReponsitory {
     void addDonHangXuat(DonHangXuatRequest dhxr);
+    List<Donhangxuat> getDonhangxuat(Map<String,String>params);
+    Donhangxuat getDonhangxuatById(int id);
+    void UpdateDonHangXuat(Donhangxuat dhx);
+    void deleteDonHangXuat(int id);
 }

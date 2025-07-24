@@ -18,4 +18,5 @@ public interface UserService extends UserDetailsService{
     User addUser(Map<String, String> params, MultipartFile avatar);
     void createAdminUser();
     User getCurrentUser();
+
 }
