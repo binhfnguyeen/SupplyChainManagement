@@ -4,6 +4,8 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import jakarta.persistence.Basic;
@@ -31,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
     @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role = :role")})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,6 +58,7 @@ public class User implements Serializable {
     private Nhanvien nhanvien;
     
     @Transient
+    @JsonIgnore
     private MultipartFile file;
 
     public User() {

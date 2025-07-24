@@ -74,15 +74,7 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.addUser(u);
 
-        if ("NHANVIEN".equals(u.getRole())) {
-            Nhanvien nv = new Nhanvien();
-            nv.setHoTen(params.get("hoTen"));
-            nv.setChucVu(params.get("chucVu"));
-            nv.setUserID(u);
-
-            this.nvRepository.add(nv);
-            u.setNhanvien(nv);
-        } else if ("KHACHHANG".equals(u.getRole())) {
+        if ("KHACHHANG".equals(u.getRole())) {
             Khachhang kh = new Khachhang();
             kh.setTen(params.get("ten"));
             kh.setDiaChi(params.get("diaChi"));
@@ -148,12 +140,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getCurrentUser() {
-        Authentication auth= SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && auth.isAuthenticated() && !"anonymousUser".equals(auth.getPrincipal())) {
-        String username = auth.getName(); // lấy username từ context
-        return this.getUserByUsername(username);}
-        return null;
+    public boolean authenticate(String username, String password) {
+        return this.userRepository.authenticate(username, password);
     }
-
+    
 }

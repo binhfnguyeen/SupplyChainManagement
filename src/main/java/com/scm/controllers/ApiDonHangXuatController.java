@@ -52,9 +52,10 @@ public class ApiDonHangXuatController {
     
     @PostMapping("/updateDonHangXuat")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addOrUpdateDonHangXuat(@RequestBody Donhangxuat dhx){
-        this.dhxService.addOrUpdateDonhangxuat(dhx);
+    public void updateDonHangXuat(@RequestBody Donhangxuat dhx){
+        this.dhxService.UpdateDonhangxuat(dhx);
     }
+    
     @DeleteMapping("/DonHangXuat/{dhID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDonHangXuat(@PathVariable(value = "dhID") int id){
