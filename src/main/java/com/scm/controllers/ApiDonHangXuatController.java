@@ -53,6 +53,7 @@ public class ApiDonHangXuatController {
     @PostMapping("/updateDonHangXuat")
     @ResponseStatus(HttpStatus.CREATED)
     public void updateDonHangXuat(@RequestBody Donhangxuat dhx){
+
         this.dhxService.UpdateDonhangxuat(dhx);
     }
     
