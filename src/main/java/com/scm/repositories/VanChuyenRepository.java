@@ -4,14 +4,12 @@
  */
 package com.scm.repositories;
 
-import com.scm.pojo.Nhacungcap;
-import com.scm.pojo.Sanpham;
-import java.math.BigDecimal;
+import com.scm.pojo.Vanchuyen;
 
 /**
  *
  * @author Admin
  */
-public interface SanPhamNhaCungCapReponsitory {
-    BigDecimal getGia(Sanpham s, Nhacungcap ncc);
+public interface VanChuyenRepository {
+    Vanchuyen addVanCuyen(Vanchuyen vc);
 }

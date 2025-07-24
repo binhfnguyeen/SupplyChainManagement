@@ -2,9 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.scm.repositories.impl;
 
-import com.scm.pojo.Kho;
+
 import com.scm.pojo.Sanpham;
 import com.scm.repositories.SanPhamRepository;
 import jakarta.persistence.Query;

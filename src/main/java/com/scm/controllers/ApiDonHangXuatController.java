@@ -4,7 +4,7 @@
  */
 package com.scm.controllers;
 
-import com.scm.pojo.DonHangXuatRequest;
+import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
 import com.scm.services.DonHangXuatService;
 import java.util.List;

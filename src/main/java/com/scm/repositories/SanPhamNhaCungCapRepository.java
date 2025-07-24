@@ -4,7 +4,10 @@
  */
 package com.scm.repositories;
 
+import com.scm.pojo.Nhacungcap;
+import com.scm.pojo.Sanpham;
 import com.scm.pojo.SanphamNhacungcap;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -14,4 +17,5 @@ import java.util.List;
 public interface SanPhamNhaCungCapRepository {
     void add(SanphamNhacungcap spncc);
     List<SanphamNhacungcap> findByIDNhaCungCap(int id);
+    BigDecimal getGia(Sanpham s, Nhacungcap ncc);
 }

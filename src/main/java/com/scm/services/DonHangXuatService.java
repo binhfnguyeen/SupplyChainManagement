@@ -5,7 +5,7 @@
 package com.scm.services;
 
 import com.scm.pojo.Cart;
-import com.scm.pojo.DonHangXuatRequest;
+import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
 import java.util.List;
 import java.util.Map;

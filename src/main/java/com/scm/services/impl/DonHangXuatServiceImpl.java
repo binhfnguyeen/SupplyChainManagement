@@ -5,7 +5,7 @@
 package com.scm.services.impl;
 
 import com.scm.pojo.Cart;
-import com.scm.pojo.DonHangXuatRequest;
+import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
 import com.scm.repositories.DonHangXuatReponsitory;
 import com.scm.services.DonHangXuatService;
