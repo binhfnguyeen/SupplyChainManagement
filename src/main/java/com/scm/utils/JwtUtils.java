@@ -12,24 +12,33 @@ import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
+import com.scm.pojo.User;
+import com.scm.repositories.UserRepository;
 import java.util.Date;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Dell
  */
+@Service
 public class JwtUtils {
 
     private static final String SECRECT = "tpn0vLsTEgz/b3zEp/V7w00v+tsfTFV3pi9BBqk0/bUMAzCDSfzI8TLddzqeGteh";
     private static final long EXPIRATION_MS = 86400000;
+    
+    @Autowired
+    private UserRepository userRepository;
 
-    public static String generateToken(String username) throws Exception {
+    public String generateToken(String username) throws Exception {
         JWSSigner signer = new MACSigner(SECRECT);
-        
+        User u = this.userRepository.getUserByUsername(username);
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
                 .subject(username)
                 .expirationTime(new Date(System.currentTimeMillis() + EXPIRATION_MS))
                 .issueTime(new Date())
+                .claim("scope", "ROLE_"+u.getRole())
                 .build();
         
         SignedJWT signedJWT = new SignedJWT(
@@ -41,7 +50,7 @@ public class JwtUtils {
         return signedJWT.serialize();
     }
     
-    public static String validateTokenAndGetUsername(String token) throws Exception {
+    public String validateTokenAndGetUsername(String token) throws Exception {
         SignedJWT signedJWT = SignedJWT.parse(token);
         JWSVerifier verifier = new MACVerifier(SECRECT);
         
