@@ -57,8 +57,6 @@ public class Donhangnhap implements Serializable {
     @OneToMany(mappedBy = "iDDonHang")
     private Set<Chitietdonhangnhap> chitietdonhangnhapSet;
     @OneToMany(mappedBy = "iDDonHang")
-    private Set<Chiphi> chiphiSet;
-    @OneToMany(mappedBy = "iDDonHang")
     @JsonIgnore
     private Set<Hoadonnhap> hoadonnhapSet;
     @JoinColumn(name = "IDKho", referencedColumnName = "ID")
@@ -108,14 +106,6 @@ public class Donhangnhap implements Serializable {
 
     public void setChitietdonhangnhapSet(Set<Chitietdonhangnhap> chitietdonhangnhapSet) {
         this.chitietdonhangnhapSet = chitietdonhangnhapSet;
-    }
-
-    public Set<Chiphi> getChiphiSet() {
-        return chiphiSet;
-    }
-
-    public void setChiphiSet(Set<Chiphi> chiphiSet) {
-        this.chiphiSet = chiphiSet;
     }
 
     public Set<Hoadonnhap> getHoadonnhapSet() {

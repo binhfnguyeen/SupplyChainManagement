@@ -6,7 +6,6 @@
     <class>com.scm.pojo.Vanchuyen</class>
     <class>com.scm.pojo.SanphamNhacungcap</class>
     <class>com.scm.pojo.Sanpham</class>
-    <class>com.scm.pojo.Chiphi</class>
     <class>com.scm.pojo.User</class>
     <class>com.scm.pojo.KhoSanpham</class>
     <class>com.scm.pojo.Donhangxuat</class>
