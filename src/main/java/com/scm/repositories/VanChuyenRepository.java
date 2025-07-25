@@ -5,6 +5,7 @@
 package com.scm.repositories;
 
 import com.scm.pojo.Vanchuyen;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -17,4 +18,5 @@ public interface VanChuyenRepository {
     List <Vanchuyen> getAllVanChuyen(Map<String, String> params);
     void deleteVanChuyen(int id);
     Vanchuyen getVanChuyenById(int id);
+    BigDecimal getSoTien(Vanchuyen vc);
 }

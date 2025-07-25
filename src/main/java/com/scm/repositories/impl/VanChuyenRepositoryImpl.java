@@ -11,6 +11,7 @@ import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
@@ -65,6 +66,13 @@ public class VanChuyenRepositoryImpl implements VanChuyenRepository{
     public Vanchuyen getVanChuyenById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
         return s.get(Vanchuyen.class, id);
+    }
+
+    @Override
+    public BigDecimal getSoTien(Vanchuyen vc) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Vanchuyen v = s.get(Vanchuyen.class, vc.getId());  // Lấy lại từ DB theo ID
+        return v.getSoTien();
     }
     
 }
