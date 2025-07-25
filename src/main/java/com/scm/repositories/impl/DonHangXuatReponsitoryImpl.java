@@ -60,7 +60,7 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
             Session s = this.factory.getObject().getCurrentSession();
             Donhangxuat dhx = new Donhangxuat();
             dhx.setIDKhachHang(this.khRepo.getKhachHangByKhachHangName("Công ty TNHH A"));
-            dhx.setIDNhanVien(this.nvRepo.getNhanVienByID(dhxr.getIdNhanVien()));
+            dhx.setIDNhanVien(this.nvRepo.getNhanvienById(dhxr.getIdNhanVien()));
             s.persist(dhx);
             
             BigDecimal total=BigDecimal.ZERO;

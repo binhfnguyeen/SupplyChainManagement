@@ -27,16 +27,16 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapRepository{
-    
+public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapRepository {
+
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Override
     public void add(SanphamNhacungcap spncc) {
         Session session = this.factory.getObject().getCurrentSession();
-        
-        if (spncc.getId() == null){
+
+        if (spncc.getId() == null) {
             session.persist(spncc);
         }
     }
@@ -47,12 +47,13 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<SanphamNhacungcap> q = b.createQuery(SanphamNhacungcap.class);
         Root<SanphamNhacungcap> root = q.from(SanphamNhacungcap.class);
-        
+
         q.select(root).where(b.equal(root.get("iDNhaCungCap").get("id"), id));
-        
+
         Query query = s.createQuery(q);
         return query.getResultList();
     }
+
     @Override
     public BigDecimal getGia(Sanpham s, Nhacungcap ncc) {
         Session session = this.factory.getObject().getCurrentSession();
@@ -68,5 +69,5 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
             System.err.println("Không tìm thấy giá sản phẩm cho nhà cung cấp này!");
             return BigDecimal.ZERO; // hoặc -1 tùy bạn
         }
-        }
+    }
 }

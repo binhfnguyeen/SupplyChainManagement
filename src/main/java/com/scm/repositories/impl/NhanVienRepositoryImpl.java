@@ -144,13 +144,4 @@ public class NhanVienRepositoryImpl implements NhanVienRepository {
         return result.intValue();
     }
 
-    @Override
-    public Nhanvien getNhanVienByID(int id) {
-        Session s = this.factory.getObject().getCurrentSession();
-        Query q = s.createNamedQuery("Nhanvien.findById", Nhanvien.class);
-        q.setParameter("id", id);
-        
-        return (Nhanvien) q.getSingleResult();
-    }
-
 }

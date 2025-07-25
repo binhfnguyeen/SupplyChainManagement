@@ -31,7 +31,7 @@ import java.math.BigDecimal;
     @NamedQuery(name = "Vanchuyen.findAll", query = "SELECT v FROM Vanchuyen v"),
     @NamedQuery(name = "Vanchuyen.findById", query = "SELECT v FROM Vanchuyen v WHERE v.id = :id"),
     @NamedQuery(name = "Vanchuyen.findByTinhTrang", query = "SELECT v FROM Vanchuyen v WHERE v.tinhTrang = :tinhTrang"),
-    @NamedQuery(name = "Vanchuyen.findByIDDonHang", query = "SELECT v FROM Vanchuyen v WHERE v.iDDonHang = :iDDonHang")})
+    @NamedQuery(name = "Vanchuyen.findBySoTien", query = "SELECT v FROM Vanchuyen v WHERE v.soTien = :soTien")})
 public class Vanchuyen implements Serializable {
 
     private static final long serialVersionUID = 1L;

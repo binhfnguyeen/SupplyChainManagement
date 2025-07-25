@@ -19,6 +19,5 @@ public interface NhanVienRepository {
     Nhanvien getNhanvienById(int id);
     void addOrUpdateNhanvienWithUser(Nhanvien nv);
     int soNhanVien();
-    Nhanvien getNhanVienByID(int id);
 
 }
