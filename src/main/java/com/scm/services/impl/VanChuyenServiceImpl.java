@@ -23,7 +23,7 @@ public class VanChuyenServiceImpl implements VanChuyenService{
     private VanChuyenRepository vcRepository;
     
     @Override
-    public void addOrUpdateVanCuyen(Vanchuyen vc) {
+    public void addOrUpdateVanChuyen(Vanchuyen vc) {
        if (vc.getTinhTrang() == null || vc.getTinhTrang().trim().isEmpty()){
            throw new IllegalArgumentException("Tình trạng không được để trống.");
        }

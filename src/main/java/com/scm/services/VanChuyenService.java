@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Dell
  */
 public interface VanChuyenService {
-    void addOrUpdateVanCuyen(Vanchuyen vc);
+    void addOrUpdateVanChuyen(Vanchuyen vc);
     List <Vanchuyen> getAllVanChuyen(Map<String, String> params);
     void deleteVanChuyen(int id);
     Vanchuyen getVanChuyenById(int id);

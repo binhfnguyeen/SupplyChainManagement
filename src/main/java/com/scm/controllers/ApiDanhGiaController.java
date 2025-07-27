@@ -32,7 +32,7 @@ public class ApiDanhGiaController {
     @PostMapping("/danhgia")
     public ResponseEntity<String> danhgia(@RequestBody Danhgia dg){
         try {
-            this.dgService.addDanhGia(dg);
+            this.dgService.addOrUpdateDanhGia(dg);
             return ResponseEntity.ok().body("Thêm đánh giá thành công");
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body("Thêm đánh giá thất bại: " + ex.getMessage());

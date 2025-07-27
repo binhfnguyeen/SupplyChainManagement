@@ -37,7 +37,7 @@ public class ApiVanChuyenController {
     @PostMapping("/ds-vanchuyen")
     @ResponseStatus(HttpStatus.CREATED)
     public void addOrUpdateVanChuyen(@RequestBody Vanchuyen vc) {
-        this.vcService.addOrUpdateVanCuyen(vc);
+        this.vcService.addOrUpdateVanChuyen(vc);
     }
 
     @GetMapping("/ds-vanchuyen")

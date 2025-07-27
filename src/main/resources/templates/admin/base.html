@@ -25,6 +25,12 @@
                     <li class="nav-item" >
                         <a class="nav-link" th:href="@{/admin/employees}" sec:authorize="isAuthenticated()">Nhân viên</a>
                     </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" th:href="@{/admin/ds-vanchuyen}" sec:authorize="isAuthenticated()">Vận chuyển</a>
+                    </li>
+                    <li class="nav-item" >
+                        <a class="nav-link" th:href="@{/admin/ds-danhgia}" sec:authorize="isAuthenticated()">Đánh giá</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/admin/stats}" sec:authorize="isAuthenticated()" >Thống kê</a>
                     </li>

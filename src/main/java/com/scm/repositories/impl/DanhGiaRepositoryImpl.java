@@ -29,7 +29,7 @@ public class DanhGiaRepositoryImpl implements DanhGiaRepository {
     private LocalSessionFactoryBean factory;
 
     @Override
-    public void addDanhGia(Danhgia dg) {
+    public void addOrUpdateDanhGia(Danhgia dg) {
         Session session = this.factory.getObject().getCurrentSession();
         if (dg.getId() == null) {
             session.persist(dg);
@@ -49,6 +49,32 @@ public class DanhGiaRepositoryImpl implements DanhGiaRepository {
         
         Query query = s.createQuery(q);
         return query.getResultList();
+    }
+
+    @Override
+    public List<Danhgia> getAllDanhGia() {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Danhgia> q = b.createQuery(Danhgia.class);
+
+        Root root = q.from(Danhgia.class);
+        q.select(root);
+        
+        Query query = s.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public void deleteDanhGia(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Danhgia dg = this.getDanhGiaById(id);
+        s.remove(dg);
+    }
+
+    @Override
+    public Danhgia getDanhGiaById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(Danhgia.class, id);
     }
 
 }

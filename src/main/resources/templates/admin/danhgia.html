@@ -1,0 +1,51 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="mb-4 text-center text-primary">Đánh giá nhà cung cấp</h2>
+
+        <div class="mt-2 mb-2">
+            <a th:href="@{/admin/ds-danhgia/form}" class="btn btn-success">Thêm đánh giá</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Chất Lượng (1-5)</th>
+                        <th scope="col">Giao Hàng Đúng Hạn</th>
+                        <th scope="col">Nhà Cung Cấp</th>
+                        <th scope="col">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="dg : ${danhgia}">
+                        <td th:text="${dg.id}"></td>
+                        <td th:text="${dg.chatLuong}"></td>
+                        <td th:text="${dg.giaoHangDungHan != null && dg.giaoHangDungHan} ? 'Có' : 'Không'"></td>
+                        <td th:text="${dg.iDNhaCungCap.ten}"></td>
+                        <td>
+                            <a class="btn btn-sm btn-info text-white me-1" th:href="@{/admin/ds-danhgia/update/{id}(id=${dg.id})}">
+                                <i class="bi bi-pencil-square"></i> Cập nhật
+                            </a>
+                            <a class="btn btn-sm btn-danger" th:onclick="'deleteFunc(\'' + @{/admin/ds-danhgia/{id}(id=${dg.id})} + '\')'">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

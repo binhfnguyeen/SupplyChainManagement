@@ -1,0 +1,54 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="mb-4 text-center text-primary">[[${danhgia.id == null ? 'Thêm' : 'Cập nhật'}]] đánh giá</h2>
+        <form th:action="@{/admin/ds-danhgia/form}" method="post" th:object="${danhgia}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-6">
+                <label class="form-label">Chất Lượng (1-5)</label>
+                <input type="number" class="form-control" th:field="*{chatLuong}" min="1" max="5" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Giao Hàng Đúng Hạn</label>
+                <select class="form-select" th:field="*{giaoHangDungHan}" required>
+                    <option value="">-- Chọn --</option>
+                    <option th:value="true">Có</option>
+                    <option th:value="false">Không</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Nhà Cung Cấp</label>
+                <select class="form-select" th:field="*{iDNhaCungCap.id}" required>
+                    <option value="" disabled selected>-- Chọn nhà cung cấp --</option>
+                    <option th:each="ncc : ${dsNhaCungCap}"
+                            th:value="${ncc.id}"
+                            th:text="${ncc.ten}"
+                            th:selected="${ncc.id == danhgia.iDNhaCungCap?.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${danhgia.id == null}">Thêm đánh giá</span>
+                    <span th:if="${danhgia.id != null}">Cập nhật đánh giá</span>
+                </button>
+                <a th:href="@{/admin/ds-danhgia}" class="btn btn-secondary ms-2">Quay lại</a>
+            </div>
+        </form>
+    </main>
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
