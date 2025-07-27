@@ -56,7 +56,13 @@ public class DonHangNhapRepositoryImpl implements DonHangNhapRepository {
     @Override
     public Donhangnhap getDonHangNhapById(int id) {
         Session s = this.factory.getObject().getCurrentSession();
-        return s.get(Donhangnhap.class, id);
+        CriteriaBuilder cb = s.getCriteriaBuilder();
+        CriteriaQuery<Donhangnhap> cq = cb.createQuery(Donhangnhap.class);
+        Root<Donhangnhap> root = cq.from(Donhangnhap.class);
+        root.fetch("chitietdonhangnhapSet", JoinType.LEFT);
+        cq.select(root).where(cb.equal(root.get("id"), id)).distinct(true);
+
+        return s.createQuery(cq).getSingleResult();
     }
 
     @Override

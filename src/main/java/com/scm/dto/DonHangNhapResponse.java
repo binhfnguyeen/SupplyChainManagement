@@ -4,6 +4,7 @@
  */
 package com.scm.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -14,9 +15,14 @@ import java.util.List;
  */
 public class DonHangNhapResponse {
     private int id;
+    private String tenNhanVien;
+    private String diaChiKho;
+    private String tinhTrangVanChuyen;
     private String tinhTrang;
     private BigDecimal tongTien;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date thoiGianDuKien;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date thoiGianNhan;
     private List<ChiTietDonHangNhapResponse> chiTiet;
 
@@ -102,5 +108,47 @@ public class DonHangNhapResponse {
      */
     public void setChiTiet(List<ChiTietDonHangNhapResponse> chiTiet) {
         this.chiTiet = chiTiet;
+    }
+
+    /**
+     * @return the tenNhanVien
+     */
+    public String getTenNhanVien() {
+        return tenNhanVien;
+    }
+
+    /**
+     * @param tenNhanVien the tenNhanVien to set
+     */
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
+    }
+
+    /**
+     * @return the diaChiKho
+     */
+    public String getDiaChiKho() {
+        return diaChiKho;
+    }
+
+    /**
+     * @param diaChiKho the diaChiKho to set
+     */
+    public void setDiaChiKho(String diaChiKho) {
+        this.diaChiKho = diaChiKho;
+    }
+
+    /**
+     * @return the tinhTrangVanChuyen
+     */
+    public String getTinhTrangVanChuyen() {
+        return tinhTrangVanChuyen;
+    }
+
+    /**
+     * @param tinhTrangVanChuyen the tinhTrangVanChuyen to set
+     */
+    public void setTinhTrangVanChuyen(String tinhTrangVanChuyen) {
+        this.tinhTrangVanChuyen = tinhTrangVanChuyen;
     }
 }

@@ -5,7 +5,11 @@
 package com.scm.repositories.impl;
 
 import com.scm.pojo.Chitietdonhangnhap;
+import com.scm.pojo.Donhangnhap;
 import com.scm.repositories.ChiTietDonHangNhapRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -18,18 +22,32 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional
-public class ChiTietDonHangNhapRepositoryImpl implements ChiTietDonHangNhapRepository{
+public class ChiTietDonHangNhapRepositoryImpl implements ChiTietDonHangNhapRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Override
     public void addChiTiet(Chitietdonhangnhap chitiet) {
         Session s = this.factory.getObject().getCurrentSession();
-        
-        if (chitiet.getId() == null){
+
+        if (chitiet.getId() == null) {
             s.persist(chitiet);
         }
     }
-    
+
+    @Override
+    public void deleteChiTietByDonHangId(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Chitietdonhangnhap> q = b.createQuery(Chitietdonhangnhap.class);
+        Root<Chitietdonhangnhap> root = q.from(Chitietdonhangnhap.class);
+        q.select(root).where(b.equal(root.get("iDDonHang").get("id"), id));
+        
+        var rsList = s.createQuery(q).getResultList();
+        for (Chitietdonhangnhap ct: rsList){
+            s.remove(ct);
+        }
+    }
+
 }

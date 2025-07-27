@@ -12,4 +12,5 @@ import com.scm.pojo.Chitietdonhangnhap;
  */
 public interface ChiTietDonHangNhapRepository {
     void addChiTiet(Chitietdonhangnhap chitiet);
+    void deleteChiTietByDonHangId(int id);
 }
