@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+    <main class="container my-4">
+        <h2 class="mb-4 text-center text-primary">[[${vanchuyen.id == null ? 'Thêm' : 'Cập nhật'}]] vận chuyển</h2>
+        <form th:action="@{/admin/ds-vanchuyen/form}" method="post" th:object="${vanchuyen}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-6">
+                <label for="tinhTrang" class="form-label">Tình Trạng</label>
+                <input type="text" class="form-control" th:field="*{tinhTrang}" id="tinhTrang" placeholder="Nhập tình trạng" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="soTien" class="form-label">Số Tiền</label>
+                <input type="number" class="form-control" th:field="*{soTien}" id="soTien" placeholder="Nhập số tiền" step="1000" required>
+            </div>
+
+            <div class="col-md-12">
+                <label for="doiTac" class="form-label">Đối Tác Vận Chuyển</label>
+                <select class="form-select" th:field="*{iDDoiTacVanChuyen.id}" id="doiTac" required>
+                    <option value="" disabled selected>-- Chọn đối tác --</option>
+                    <option th:each="dt : ${dsDoiTac}" 
+                            th:value="${dt.id}" 
+                            th:text="${dt.ten}"
+                            th:selected="${dt.id == vanchuyen.iDDoiTacVanChuyen?.id}">
+                    </option>
+                </select>
+
+                <div class="col-12 mt-4 text-center">
+                    <button type="submit" class="btn btn-success">
+                        <span th:if="${vanchuyen.id == null}">Thêm vận chuyển</span>
+                        <span th:if="${vanchuyen.id != null}">Cập nhật vận chuyển</span>
+                    </button>
+                    <a th:href="@{/admin/ds-vanchuyen}" class="btn btn-secondary ms-2">Quay lại</a>
+                </div>
+        </form>
+    </main>
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

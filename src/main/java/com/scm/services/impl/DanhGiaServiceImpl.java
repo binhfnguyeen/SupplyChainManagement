@@ -27,7 +27,7 @@ public class DanhGiaServiceImpl implements DanhGiaService{
     private NhaCungCapRepository nhaCungCapRepo;
     
     @Override
-    public void addDanhGia(Danhgia dg) {
+    public void addOrUpdateDanhGia(Danhgia dg) {
         if (dg.getChatLuong() == null || dg.getChatLuong() < 1 || dg.getChatLuong() > 5) {
             throw new IllegalArgumentException("Chất lượng phải từ 1 đến 5.");
         }
@@ -45,12 +45,27 @@ public class DanhGiaServiceImpl implements DanhGiaService{
             throw new IllegalArgumentException("Nhà cung cấp không tồn tại.");
         }
 
-        danhGiaRepo.addDanhGia(dg);
+        danhGiaRepo.addOrUpdateDanhGia(dg);
     }
 
     @Override
     public List<Danhgia> findDanhGiaByNCC(int nccId) {
         return danhGiaRepo.findDanhGiaByNCC(nccId);
+    }
+
+    @Override
+    public List<Danhgia> getAllDanhGia() {
+        return this.danhGiaRepo.getAllDanhGia();
+    }
+
+    @Override
+    public void deleteDanhGia(int id) {
+        this.danhGiaRepo.deleteDanhGia(id);
+    }
+
+    @Override
+    public Danhgia getDanhGiaById(int id) {
+        return this.danhGiaRepo.getDanhGiaById(id);
     }
     
 }

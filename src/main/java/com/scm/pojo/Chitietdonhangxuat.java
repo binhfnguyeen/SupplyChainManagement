@@ -44,6 +44,10 @@ public class Chitietdonhangxuat implements Serializable {
     @ManyToOne
     private Sanpham iDSanPham;
 
+    @JoinColumn(name = "IDNhaCungCap", referencedColumnName = "ID")
+    @ManyToOne
+    private Nhacungcap iDNhaCungCap;
+
     public Chitietdonhangxuat() {
     }
 
@@ -83,6 +87,14 @@ public class Chitietdonhangxuat implements Serializable {
         this.iDSanPham = iDSanPham;
     }
 
+    public Nhacungcap getIDNhaCungCap() {
+        return iDNhaCungCap;
+    }
+
+    public void setIDNhaCungCap(Nhacungcap iDNhaCungCap) {
+        this.iDNhaCungCap = iDNhaCungCap;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -107,5 +119,9 @@ public class Chitietdonhangxuat implements Serializable {
     public String toString() {
         return "com.scm.pojo.Chitietdonhangxuat[ id=" + id + " ]";
     }
-    
+
+    public void setGia(Long price) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

@@ -31,7 +31,7 @@ public class NhanVienController {
 
     @Autowired
     private NhanVienService nvService;
-
+    
     @RequestMapping("/employees")
     public String dsNhanVien(Model model, @RequestParam Map<String, String> params) {
         model.addAttribute("nhanvien", this.nvService.getDsNhanVien(params));

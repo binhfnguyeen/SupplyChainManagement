@@ -28,6 +28,11 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "SanphamNhacungcap.findAll", query = "SELECT s FROM SanphamNhacungcap s"),
     @NamedQuery(name = "SanphamNhacungcap.findById", query = "SELECT s FROM SanphamNhacungcap s WHERE s.id = :id"),
     @NamedQuery(name = "SanphamNhacungcap.findByGia", query = "SELECT s FROM SanphamNhacungcap s WHERE s.gia = :gia")})
+    @NamedQuery(
+            name = "SanphamNhacungcap.findBySanphamAndNcc",
+            query = "SELECT s FROM SanphamNhacungcap s WHERE s.iDSanPham = :sp AND s.iDNhaCungCap = :ncc"
+    )
+
 public class SanphamNhacungcap implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -109,5 +114,5 @@ public class SanphamNhacungcap implements Serializable {
     public String toString() {
         return "com.scm.pojo.SanphamNhacungcap[ id=" + id + " ]";
     }
-    
+
 }

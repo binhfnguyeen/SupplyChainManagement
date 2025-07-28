@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="text-center text-primary mb-4">Danh sách Sản phẩm - Nhà cung cấp</h2>
+
+        <div class="text-end mb-3">
+            <a th:href="@{/admin/ds-spncc/form}" class="btn btn-success">Thêm mới</a>
+        </div>
+        <div class="text-end mb-3">
+            <a th:href="@{/admin/ds-sanpham}" class="btn btn-success">Quay lại</a>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-light">
+                <tr class="text-center">
+                    <th>ID</th>
+                    <th>Sản phẩm</th>
+                    <th>Nhà cung cấp</th>
+                    <th>Giá</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${spncc}">
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.iDSanPham.ten}"></td>
+                    <td th:text="${item.iDNhaCungCap.ten}"></td>
+                    <td th:text="${#numbers.formatDecimal(item.gia, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
+                    <td>
+                            <a class="btn btn-sm btn-info text-white me-1" th:href="@{/admin/ds-spncc/update/{id}(id=${item.id})}">
+                                <i class="bi bi-pencil-square"></i> Sửa
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger btn-delete" th:onclick="'deleteFunc(\'' + @{/admin/ds-spncc/{id}(id=${item.id})} + '\')'">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(spncc)}">
+                    <td colspan="5" class="text-center">Không có dữ liệu</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

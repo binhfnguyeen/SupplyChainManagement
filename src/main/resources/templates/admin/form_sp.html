@@ -1,0 +1,44 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="mb-4 text-center text-primary">[[${sanpham.id == null ? 'Thêm' : 'Cập nhật'}]] sản phẩm</h2>
+
+        <form th:action="@{/admin/ds-sanpham/form}" method="post" th:object="${sanpham}" enctype="multipart/form-data" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-12">
+                <label class="form-label">Tên sản phẩm</label>
+                <input type="text" class="form-control" th:field="*{ten}" placeholder="Nhập tên sản phẩm" required />
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Hình ảnh</label>
+                <input type="file" name="file" class="form-control" accept="image/*" />
+                <div class="mt-2" th:if="${sanpham.hinh != null}">
+                    <img th:src="@{${sanpham.hinh}}" alt="Hình sản phẩm" style="max-width: 200px;" class="img-thumbnail" />
+                </div>
+            </div>
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${sanpham.id == null}">Thêm sản phẩm</span>
+                    <span th:if="${sanpham.id != null}">Cập nhật sản phẩm</span>
+                </button>
+                <a th:href="@{/admin/ds-sanpham}" class="btn btn-secondary ms-2">Quay lại</a>
+            </div>
+        </form>
+
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

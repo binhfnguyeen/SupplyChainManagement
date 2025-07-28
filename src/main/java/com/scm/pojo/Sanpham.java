@@ -38,6 +38,8 @@ public class Sanpham implements Serializable {
     private Integer id;
     @Column(name = "Ten")
     private String ten;
+    @Column(name = "Hinh")
+    private String hinh;
     @OneToMany(mappedBy = "iDSanPham")
     @JsonIgnore
     private Set<Chitietdonhangnhap> chitietdonhangnhapSet;
@@ -106,6 +108,20 @@ public class Sanpham implements Serializable {
         this.sanphamNhacungcapSet = sanphamNhacungcapSet;
     }
 
+    /**
+     * @return the hinh
+     */
+    public String getHinh() {
+        return hinh;
+    }
+
+    /**
+     * @param hinh the hinh to set
+     */
+    public void setHinh(String hinh) {
+        this.hinh = hinh;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -130,5 +146,5 @@ public class Sanpham implements Serializable {
     public String toString() {
         return "com.scm.pojo.Sanpham[ id=" + id + " ]";
     }
-    
+
 }

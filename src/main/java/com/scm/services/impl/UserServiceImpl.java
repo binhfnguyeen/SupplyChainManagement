@@ -8,7 +8,6 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.scm.pojo.Khachhang;
 import com.scm.pojo.Nhanvien;
-import com.scm.pojo.Role;
 import com.scm.pojo.User;
 import com.scm.repositories.KhachHangRepository;
 import com.scm.repositories.NhanVienRepository;
@@ -27,6 +26,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -73,15 +74,7 @@ public class UserServiceImpl implements UserService {
 
         this.userRepository.addUser(u);
 
-        if ("NHANVIEN".equals(u.getRole())) {
-            Nhanvien nv = new Nhanvien();
-            nv.setHoTen(params.get("hoTen"));
-            nv.setChucVu(params.get("chucVu"));
-            nv.setUserID(u);
-
-            this.nvRepository.add(nv);
-            u.setNhanvien(nv);
-        } else if ("KHACHHANG".equals(u.getRole())) {
+        if ("KHACHHANG".equals(u.getRole())) {
             Khachhang kh = new Khachhang();
             kh.setTen(params.get("ten"));
             kh.setDiaChi(params.get("diaChi"));
@@ -146,4 +139,9 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public boolean authenticate(String username, String password) {
+        return this.userRepository.authenticate(username, password);
+    }
+    
 }

@@ -9,6 +9,7 @@ import com.scm.services.DanhGiaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +32,7 @@ public class ApiDanhGiaController {
     @PostMapping("/danhgia")
     public ResponseEntity<String> danhgia(@RequestBody Danhgia dg){
         try {
-            this.dgService.addDanhGia(dg);
+            this.dgService.addOrUpdateDanhGia(dg);
             return ResponseEntity.ok().body("Thêm đánh giá thành công");
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body("Thêm đánh giá thất bại: " + ex.getMessage());

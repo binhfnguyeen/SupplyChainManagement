@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Set;
 import jakarta.persistence.Basic;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.Date;
 
 /**
  *
@@ -54,7 +56,7 @@ public class Donhangxuat implements Serializable {
     @JoinColumn(name = "IDVanChuyen", referencedColumnName = "ID")
     @ManyToOne
     private Vanchuyen iDVanChuyen;
-    @OneToMany(mappedBy = "iDDonHang")
+    @OneToMany(mappedBy = "iDDonHang",cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Set<Chitietdonhangxuat> chitietdonhangxuatSet;
     @OneToMany(mappedBy = "iDDonHang")
@@ -155,6 +157,10 @@ public class Donhangxuat implements Serializable {
     @Override
     public String toString() {
         return "com.scm.pojo.Donhangxuat[ id=" + id + " ]";
+    }
+
+    public void setCreatedDate(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -19,6 +19,7 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  *
@@ -30,7 +31,7 @@ import jakarta.persistence.Table;
     @NamedQuery(name = "Vanchuyen.findAll", query = "SELECT v FROM Vanchuyen v"),
     @NamedQuery(name = "Vanchuyen.findById", query = "SELECT v FROM Vanchuyen v WHERE v.id = :id"),
     @NamedQuery(name = "Vanchuyen.findByTinhTrang", query = "SELECT v FROM Vanchuyen v WHERE v.tinhTrang = :tinhTrang"),
-    @NamedQuery(name = "Vanchuyen.findByIDDonHang", query = "SELECT v FROM Vanchuyen v WHERE v.iDDonHang = :iDDonHang")})
+    @NamedQuery(name = "Vanchuyen.findBySoTien", query = "SELECT v FROM Vanchuyen v WHERE v.soTien = :soTien")})
 public class Vanchuyen implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,8 +42,8 @@ public class Vanchuyen implements Serializable {
     private Integer id;
     @Column(name = "TinhTrang")
     private String tinhTrang;
-    @Column(name = "IDDonHang")
-    private Integer iDDonHang;
+    @Column(name = "SoTien")
+    private BigDecimal soTien;
     @OneToMany(mappedBy = "iDVanChuyen")
     @JsonIgnore
     private Set<Donhangxuat> donhangxuatSet;
@@ -75,13 +76,20 @@ public class Vanchuyen implements Serializable {
     public void setTinhTrang(String tinhTrang) {
         this.tinhTrang = tinhTrang;
     }
-
-    public Integer getIDDonHang() {
-        return iDDonHang;
+    
+    
+    /**
+     * @return the soTien
+     */
+    public BigDecimal getSoTien() {
+        return soTien;
     }
 
-    public void setIDDonHang(Integer iDDonHang) {
-        this.iDDonHang = iDDonHang;
+    /**
+     * @param soTien the soTien to set
+     */
+    public void setSoTien(BigDecimal soTien) {
+        this.soTien = soTien;
     }
 
     public Set<Donhangxuat> getDonhangxuatSet() {
@@ -132,5 +140,5 @@ public class Vanchuyen implements Serializable {
     public String toString() {
         return "com.scm.pojo.Vanchuyen[ id=" + id + " ]";
     }
-    
+
 }

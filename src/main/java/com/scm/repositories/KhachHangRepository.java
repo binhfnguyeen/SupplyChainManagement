@@ -13,4 +13,5 @@ import com.scm.pojo.Khachhang;
 public interface KhachHangRepository {
     Khachhang add(Khachhang kh);
     int soKhachHang();
+    Khachhang getKhachHangByKhachHangName(String name);
 }

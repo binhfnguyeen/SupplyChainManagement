@@ -46,5 +46,13 @@ public class KhachHangRepositoryImpl implements KhachHangRepository{
         Long result = (Long) query.getSingleResult();
         return result.intValue();
     }
-    
+
+    @Override
+    public Khachhang getKhachHangByKhachHangName(String name) {
+        Session s = this.factory.getObject().getCurrentSession();
+        Query q = s.createNamedQuery("Khachhang.findByTen", Khachhang.class);
+        q.setParameter("ten", name);
+        
+        return (Khachhang) q.getSingleResult();
+    }
 }

@@ -24,7 +24,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @ComponentScan(basePackages = {
     "com.scm.controllers",
     "com.scm.repositories",
-    "com.scm.services"
+    "com.scm.services",
+    "com.scm.filters",
+    "com.scm.utils"
 })
 public class WebAppContextConfigs implements WebMvcConfigurer {
 

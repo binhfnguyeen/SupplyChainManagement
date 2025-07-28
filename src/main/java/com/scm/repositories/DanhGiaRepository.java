@@ -12,6 +12,9 @@ import java.util.List;
  * @author Dell
  */
 public interface DanhGiaRepository {
-    void addDanhGia(Danhgia dg);
+    void addOrUpdateDanhGia(Danhgia dg);
     List<Danhgia> findDanhGiaByNCC(int id); 
+    List<Danhgia> getAllDanhGia();
+    void deleteDanhGia(int id);
+    Danhgia getDanhGiaById(int id);
 }
