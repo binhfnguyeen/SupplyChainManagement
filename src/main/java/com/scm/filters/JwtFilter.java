@@ -34,14 +34,18 @@ public class JwtFilter implements Filter {
 
         if (httpRequest.getRequestURI().startsWith(String.format("%s/api/secure", httpRequest.getContextPath())) == true) {
             String header = httpRequest.getHeader("Authorization");
+            
+            System.err.println(header);
 
             if (header == null || !header.startsWith("Bearer ")) {
                 ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid Authorization header.");
                 return;
             } else {
+                System.err.println(header);
                 String token = header.substring(7);
                 try {
                     String username = this.jwtUtils.validateTokenAndGetUsername(token);
+                    System.err.println(username);
                     if (username != null) {
                         httpRequest.setAttribute("username", username);
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, null);
@@ -54,11 +58,9 @@ public class JwtFilter implements Filter {
                     System.err.println(e);
                 }
             }
-
             ((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED,
                     "Token không hợp lệ hoặc hết hạn");
         }
         chain.doFilter(request, response);
     }
-
 }

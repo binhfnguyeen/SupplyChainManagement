@@ -7,7 +7,9 @@ package com.scm.services.impl;
 import com.scm.pojo.Cart;
 import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
+import com.scm.pojo.User;
 import com.scm.repositories.DonHangXuatReponsitory;
+import com.scm.repositories.UserRepository;
 import com.scm.services.DonHangXuatService;
 import java.util.List;
 import java.util.Map;
@@ -22,10 +24,15 @@ import org.springframework.stereotype.Service;
 public class DonHangXuatServiceImpl implements DonHangXuatService{
     @Autowired
     private DonHangXuatReponsitory dhxRepo;
+    
+    @Autowired
+    private UserRepository userRepo;
 
     @Override
-    public void addExportInvoice(DonHangXuatRequest dhxr) {
-       this.dhxRepo.addDonHangXuat(dhxr);
+    public void addExportInvoice(DonHangXuatRequest dhxr,String username) {
+        
+       User u=this.userRepo.getUserByUsername(username);
+       this.dhxRepo.addDonHangXuat(dhxr,u);
     }
 
     @Override

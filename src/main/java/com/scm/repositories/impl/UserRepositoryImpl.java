@@ -55,6 +55,7 @@ public class UserRepositoryImpl implements UserRepository{
                                         .getResultList();
         return !users.isEmpty();
     }
+    
 
     @Override
     public boolean authenticate(String username, String password) {

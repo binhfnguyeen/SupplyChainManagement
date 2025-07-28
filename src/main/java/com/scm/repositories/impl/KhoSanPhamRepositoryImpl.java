@@ -5,9 +5,12 @@
 package com.scm.repositories.impl;
 
 import com.scm.pojo.KhoSanpham;
+import com.scm.pojo.Sanpham;
 import com.scm.repositories.KhoSanPhamRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.List;
@@ -43,11 +46,20 @@ public class KhoSanPhamRepositoryImpl implements KhoSanPhamRepository {
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<KhoSanpham> q = b.createQuery(KhoSanpham.class);
         Root<KhoSanpham> root = q.from(KhoSanpham.class);
-
+//        Join<KhoSanpham,Sanpham> join=root.join("iDSanPham",JoinType.RIGHT);
+//        q.multiselect(join.get("id"),join.get("ten"),join.get("soLuong"));
+        String hql = "SELECT ks FROM KhoSanpham ks "
+               + "JOIN FETCH ks.iDSanPham sp "
+               + "WHERE ks.iDKho.id = :khoId";
         Predicate predicate = b.equal(root.get("iDKho").get("id"), khoId);
         q.where(predicate);
-
-        return s.createQuery(q).getResultList();
+        
+        System.out.println(s.createQuery(hql, KhoSanpham.class)
+            .setParameter("khoId", khoId)
+            .getResultList());
+        return s.createQuery(hql, KhoSanpham.class)
+            .setParameter("khoId", khoId)
+            .getResultList();
     }
 
     @Override

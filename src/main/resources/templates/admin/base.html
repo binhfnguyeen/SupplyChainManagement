@@ -32,10 +32,22 @@
                         <a class="nav-link" th:href="@{/admin/ds-donhangnhap}" sec:authorize="isAuthenticated()">Đơn hàng nhập</a>
                     </li>
                     <li class="nav-item" >
+                        <a class="nav-link" th:href="@{/admin/ds-donhangxuat}" sec:authorize="isAuthenticated()">Đơn hàng xuất</a>
+                    </li>
+                    <li class="nav-item" >
                         <a class="nav-link" th:href="@{/admin/ds-vanchuyen}" sec:authorize="isAuthenticated()">Vận chuyển</a>
                     </li>
                     <li class="nav-item" >
                         <a class="nav-link" th:href="@{/admin/ds-danhgia}" sec:authorize="isAuthenticated()">Đánh giá</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/supplier}" sec:authorize="isAuthenticated()" >Nhà cung cấp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/customer}" sec:authorize="isAuthenticated()" >Khách hàng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/kho}" sec:authorize="isAuthenticated()" >Kho</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/admin/stats}" sec:authorize="isAuthenticated()" >Thống kê</a>
