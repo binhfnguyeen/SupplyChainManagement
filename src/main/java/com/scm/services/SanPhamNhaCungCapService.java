@@ -15,4 +15,8 @@ import java.util.List;
 public interface SanPhamNhaCungCapService {
     void addSanPhamToNhaCungCap(int idNhaCungCap, int idSanPham, BigDecimal gia);
     List<SanphamNhacungcap> getSanPhamCuaNhaCungCap(int idNhaCungCap);
+    List<SanphamNhacungcap> getAllSanPhamNhaCungCap();
+    SanphamNhacungcap getSPNCCById(int id);
+    void addOrUpdate(SanphamNhacungcap spcc);
+    void deleteSanPhamNhaCungCap(int id);
 }

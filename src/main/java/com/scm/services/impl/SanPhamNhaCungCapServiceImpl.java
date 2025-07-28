@@ -68,4 +68,24 @@ public class SanPhamNhaCungCapServiceImpl implements SanPhamNhaCungCapService {
         return spNCCRepository.findByIDNhaCungCap(idNhaCungCap);
     }
 
+    @Override
+    public List<SanphamNhacungcap> getAllSanPhamNhaCungCap() {
+        return this.spNCCRepository.getAllSanPhamNhaCungCap();
+    }
+
+    @Override
+    public SanphamNhacungcap getSPNCCById(int id) {
+        return this.spNCCRepository.getSPNCCById(id);
+    }
+
+    @Override
+    public void addOrUpdate(SanphamNhacungcap spcc) {
+        this.spNCCRepository.addOrUpdate(spcc);
+    }
+
+    @Override
+    public void deleteSanPhamNhaCungCap(int id) {
+        this.spNCCRepository.deleteSanPhamNhaCungCap(id);
+    }
+
 }

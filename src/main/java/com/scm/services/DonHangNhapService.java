@@ -6,6 +6,7 @@ package com.scm.services;
 
 import com.scm.dto.DonHangNhapRequest;
 import com.scm.dto.DonHangNhapResponse;
+import com.scm.pojo.Donhangnhap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +19,8 @@ public interface DonHangNhapService {
     void createDonHangNhap(DonHangNhapRequest request);
     List<DonHangNhapResponse> getAllDonHangNhap(Map<String, String> params);
     void updateDonHangNhap(DonHangNhapRequest request, int id);
+    List<Donhangnhap> getAllDonHangNhap();
+    Donhangnhap getDonHangNhapById(int id);
+    void addOrUpdateDonHangNhap(Donhangnhap dhn);
+    void deleteDonHangNhap(int id);
 }

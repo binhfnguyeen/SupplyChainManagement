@@ -4,7 +4,6 @@
  */
 package com.scm.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -24,6 +23,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -51,9 +51,11 @@ public class Donhangnhap implements Serializable {
     private String tinhTrang;
     @Column(name = "ThoiGianDuKien")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date thoiGianDuKien;
     @Column(name = "ThoiGianNhan")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date thoiGianNhan;
     @OneToMany(mappedBy = "iDDonHang")
     private Set<Chitietdonhangnhap> chitietdonhangnhapSet;

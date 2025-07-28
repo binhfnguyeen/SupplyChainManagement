@@ -109,4 +109,24 @@ public class HoaDonNhapServiceImpl implements HoaDonNhapService {
         return res;
     }
 
+    @Override
+    public void addOrUpdateHoaDonNhap(Hoadonnhap hdn) {
+        this.hoaDonNhapRepository.addOrUpdateHoaDonNhap(hdn);
+    }
+
+    @Override
+    public List<Hoadonnhap> getDsHoaDon(Map<String, String> params) {
+        return this.hoaDonNhapRepository.getAllHoaDonNhap(params);
+    }
+
+    @Override
+    public Hoadonnhap getHoaDonById(int id) {
+        return this.hoaDonNhapRepository.getHoaDonNhapById(id);
+    }
+
+    @Override
+    public void deleteHoaDonNhap(int id) {
+       this.hoaDonNhapRepository.deleteHoaDonNhap(id);
+    }
+
 }

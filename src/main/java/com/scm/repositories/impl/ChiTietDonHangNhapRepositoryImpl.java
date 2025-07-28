@@ -5,12 +5,13 @@
 package com.scm.repositories.impl;
 
 import com.scm.pojo.Chitietdonhangnhap;
-import com.scm.pojo.Donhangnhap;
 import com.scm.repositories.ChiTietDonHangNhapRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -48,6 +49,41 @@ public class ChiTietDonHangNhapRepositoryImpl implements ChiTietDonHangNhapRepos
         for (Chitietdonhangnhap ct: rsList){
             s.remove(ct);
         }
+    }
+
+    @Override
+    public List<Chitietdonhangnhap> getAllChiTiet() {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Chitietdonhangnhap> q = b.createQuery(Chitietdonhangnhap.class);
+        Root<Chitietdonhangnhap> root = q.from(Chitietdonhangnhap.class);
+        q.select(root);
+        Query query = s.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public Chitietdonhangnhap getChiTietById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        
+        return s.get(Chitietdonhangnhap.class, id);
+    }
+
+    @Override
+    public void updateChiTiet(Chitietdonhangnhap chitiet) {
+        Session s = this.factory.getObject().getCurrentSession();
+
+        if (chitiet.getId() != null) {
+            s.merge(chitiet);
+        }
+    }
+
+    @Override
+    public void deleteChiTiet(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        
+        Chitietdonhangnhap chitiet = this.getChiTietById(id);
+        s.remove(chitiet);
     }
 
 }

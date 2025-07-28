@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chi tiết Đơn hàng nhập</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="text-center text-primary mb-4">Danh sách Chi tiết Đơn hàng nhập</h2>
+        
+        <div class="d-flex justify-content-end gap-2 mb-3">
+             <a th:href="@{/admin/ds-chitiet-dhn/form}" class="btn btn-success d-flex align-items-center gap-1">
+                <i class="bi bi-plus-circle"></i> Thêm chi tiết đơn hàng
+            </a>
+           <a th:href="@{/admin/ds-donhangnhap}" class="btn btn-warning text-white d-flex align-items-center gap-1"> 
+               <i class="bi bi-arrow-return-left"></i> Quay lại </a>
+        </div>
+
+        <table class="table table-bordered table-hover">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Đơn hàng</th>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ct : ${chitiet}">
+                    <td th:text="${ct.id}"></td>
+                    <td th:text="${ct.iDDonHang != null ? ct.iDDonHang.id : '---'}"></td>
+                    <td th:text="${ct.iDSanPham != null ? ct.iDSanPham.ten : '---'}"></td>
+                    <td th:text="${ct.soLuong}"></td>
+                    <td class="text-center">
+                        <a th:href="@{/admin/ds-chitiet-dhn/update/{id}(id=${ct.id})}" class="btn btn-info btn-sm text-white me-1">
+                            <i class="bi bi-pencil-square"></i> Sửa
+                        </a>
+                        <a href="#" class="btn btn-danger btn-sm btn-delete"
+                           th:onclick="'deleteFunc(\'' + @{/admin/ds-chitiet-dhn/{id}(id=${ct.id})} + '\')'">
+                            <i class="bi bi-trash"></i> Xoá
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(chitiet)}">
+                    <td colspan="5" class="text-center text-muted">Không có chi tiết đơn hàng nào.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

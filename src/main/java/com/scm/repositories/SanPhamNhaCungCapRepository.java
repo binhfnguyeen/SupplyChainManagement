@@ -18,4 +18,8 @@ public interface SanPhamNhaCungCapRepository {
     void add(SanphamNhacungcap spncc);
     List<SanphamNhacungcap> findByIDNhaCungCap(int id);
     BigDecimal getGia(Sanpham s, Nhacungcap ncc);
+    List<SanphamNhacungcap> getAllSanPhamNhaCungCap();
+    SanphamNhacungcap getSPNCCById(int id);
+    void addOrUpdate(SanphamNhacungcap spcc);
+    void deleteSanPhamNhaCungCap(int id);
 }

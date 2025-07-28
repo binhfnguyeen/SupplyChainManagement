@@ -194,4 +194,28 @@ public class DonHangNhapServiceImpl implements DonHangNhapService {
         donHangNhapRepository.updateDonHangNhap(dhn);
     }
 
+    @Override
+    public List<Donhangnhap> getAllDonHangNhap() {
+        return this.donHangNhapRepository.getDonHangNhap(null);
+    }
+
+    @Override
+    public Donhangnhap getDonHangNhapById(int id) {
+       return this.donHangNhapRepository.getDonHangNhapById(id);
+    }
+
+    @Override
+    public void addOrUpdateDonHangNhap(Donhangnhap dhn) {
+        if (dhn.getId() == null){
+            this.donHangNhapRepository.addDonHangNhap(dhn);
+        } else {
+            this.donHangNhapRepository.updateDonHangNhap(dhn);
+        }
+    }
+
+    @Override
+    public void deleteDonHangNhap(int id) {
+       this.donHangNhapRepository.deleteDonHangNhap(id);
+    }
+
 }

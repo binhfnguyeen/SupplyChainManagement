@@ -4,13 +4,17 @@
  */
 package com.scm.services.impl;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.scm.pojo.Sanpham;
 import com.scm.repositories.SanPhamRepository;
 import com.scm.services.SanPhamService;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -21,6 +25,9 @@ public class SanPhamServiceImpl implements SanPhamService {
 
     @Autowired
     private SanPhamRepository spRepo;
+
+    @Autowired
+    private Cloudinary cloudinary;
 
     @Override
     public Sanpham getSanPhamById(int id) {
@@ -37,15 +44,16 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public void addOrUpdateSanpham(Sanpham sp) {
-        if (sp == null) {
-            throw new IllegalArgumentException("Thông tin sản phẩm không được null");
+    public void addOrUpdateSanpham(Sanpham sp, MultipartFile hinh) {
+        if (!hinh.isEmpty()) {
+            try {
+                Map res = cloudinary.uploader().upload(hinh.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
+                sp.setHinh(res.get("secure_url").toString());
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
         }
-
-        if (sp.getTen() == null || sp.getTen().isBlank()) {
-            throw new IllegalArgumentException("Tên sản phẩm không được để trống");
-        }
-        this.spRepo.addOrUpdateSanpham(sp);
+        spRepo.addOrUpdateSanpham(sp);
     }
 
     @Override

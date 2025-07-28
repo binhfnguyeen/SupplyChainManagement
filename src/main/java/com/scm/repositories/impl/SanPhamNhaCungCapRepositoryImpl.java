@@ -64,10 +64,48 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
 
         try {
             SanphamNhacungcap spncc = (SanphamNhacungcap) q.getSingleResult();
-            return spncc.getGia();  // giả sử trường này là kiểu int
+            return spncc.getGia();
         } catch (NoResultException ex) {
             System.err.println("Không tìm thấy giá sản phẩm cho nhà cung cấp này!");
-            return BigDecimal.ZERO; // hoặc -1 tùy bạn
+            return BigDecimal.ZERO;
         }
+    }
+
+    @Override
+    public List<SanphamNhacungcap> getAllSanPhamNhaCungCap() {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<SanphamNhacungcap> q = b.createQuery(SanphamNhacungcap.class);
+
+        Root root = q.from(SanphamNhacungcap.class);
+        q.select(root);
+
+        Query query = s.createQuery(q);
+        return query.getResultList();
+    }
+
+    @Override
+    public SanphamNhacungcap getSPNCCById(int id) {
+        Session s = this.factory.getObject().getCurrentSession();
+        return s.get(SanphamNhacungcap.class, id);
+    }
+
+    @Override
+    public void addOrUpdate(SanphamNhacungcap spcc) {
+        Session session = this.factory.getObject().getCurrentSession();
+        
+        if (spcc.getId() == null){
+            session.persist(spcc);
+        } else {
+            session.merge(spcc);
+        }
+    }
+
+    @Override
+    public void deleteSanPhamNhaCungCap(int id) {
+        Session session = this.factory.getObject().getCurrentSession();
+        
+        SanphamNhacungcap spncc = this.getSPNCCById(id);
+        session.remove(spncc);
     }
 }

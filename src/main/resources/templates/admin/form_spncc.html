@@ -1,0 +1,60 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+    <main class="container my-4">
+        <h2 class="text-center text-primary mb-4">
+            [[${spncc.id == null ? 'Thêm' : 'Cập nhật'}]] sản phẩm - nhà cung cấp
+        </h2>
+
+        <form th:action="@{/admin/ds-spncc/form}" method="post" th:object="${spncc}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-6">
+                <label for="sanPham" class="form-label">Sản phẩm</label>
+                <select th:field="*{iDSanPham.id}" class="form-select" id="sanPham" required>
+                    <option value="" disabled selected>-- Chọn sản phẩm --</option>
+                    <option th:each="sp : ${dsSanPham}" 
+                            th:value="${sp.id}" 
+                            th:text="${sp.ten}" 
+                            th:selected="${sp.id == spncc.iDSanPham?.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="nhaCungCap" class="form-label">Nhà cung cấp</label>
+                <select th:field="*{iDNhaCungCap.id}" class="form-select" id="nhaCungCap" required>
+                    <option value="" disabled selected>-- Chọn nhà cung cấp --</option>
+                    <option th:each="ncc : ${dsNCC}" 
+                            th:value="${ncc.id}" 
+                            th:text="${ncc.ten}" 
+                            th:selected="${ncc.id == spncc.iDNhaCungCap?.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label for="gia" class="form-label">Giá</label>
+                <input type="number" class="form-control" th:field="*{gia}" id="gia"
+                       placeholder="Nhập giá sản phẩm từ nhà cung cấp" step="1000" required />
+            </div>
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${spncc.id == null}">Thêm</span>
+                    <span th:if="${spncc.id != null}">Cập nhật</span>
+                </button>
+                <a th:href="@{/admin/ds-spncc}" class="btn btn-secondary ms-2">Quay lại</a>
+            </div>
+        </form>
+    </main>
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package com.scm.repositories;
+package com.scm.services;
 
 import com.scm.pojo.Chitietdonhangnhap;
 import java.util.List;
@@ -11,11 +11,9 @@ import java.util.List;
  *
  * @author Dell
  */
-public interface ChiTietDonHangNhapRepository {
-    void addChiTiet(Chitietdonhangnhap chitiet);
-    void deleteChiTietByDonHangId(int id);
+public interface ChiTietDonHangNhapService {
     List<Chitietdonhangnhap> getAllChiTiet();
     Chitietdonhangnhap getChiTietById(int id);
-    void updateChiTiet(Chitietdonhangnhap chitiet);
+    void addOrUpdateChiTiet(Chitietdonhangnhap chitiet);
     void deleteChiTiet(int id);
 }
