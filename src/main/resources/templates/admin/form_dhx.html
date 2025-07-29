@@ -10,7 +10,7 @@
 
     <main class="container my-4">
         <h2 class="text-center text-primary mb-4">
-            [[${donhangnhap.id == null ? 'Thêm' : 'Cập nhật'}]] đơn hàng nhập
+            [[${donhangxuat.id == null ? 'Thêm' : 'Cập nhật'}]] đơn hàng xuất
         </h2>
 
         <form th:action="@{/admin/ds-donhangxuat/form}" method="post" th:object="${donhangxuat}" class="row g-3">
@@ -29,8 +29,8 @@
             </div>
 
             <div class="col-md-6">
-                <label for="kho" class="form-label">Kho</label>
-                <select th:field="*{iDKhachHang.id}" class="form-select" id="kho" required>
+                <label for="khachhang" class="form-label">Khách hàng</label>
+                <select th:field="*{iDKhachHang.id}" class="form-select" id="khachhang" required>
                     <option value="" disabled selected>-- Chọn khách hàng --</option>
                     <option th:each="kh : ${dsKH}" 
                             th:value="${kh.id}" 
@@ -74,8 +74,8 @@
 
             <div class="col-12 text-center mt-4">
                 <button type="submit" class="btn btn-success">
-                    <span th:if="${donhangxuat.id == null}">Thêm đơn hàng nhập</span>
-                    <span th:if="${donhangxuat.id != null}">Cập nhật đơn hàng nhập</span>
+                    <span th:if="${donhangxuat.id == null}">Thêm đơn hàng xuất</span>
+                    <span th:if="${donhangxuat.id != null}">Cập nhật đơn hàng xuất</span>
                 </button>
                 <a th:href="@{/admin/ds-donhangxuat}" class="btn btn-secondary ms-2">Quay lại</a>
             </div>
