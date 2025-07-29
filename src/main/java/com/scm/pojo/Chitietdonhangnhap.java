@@ -111,5 +111,5 @@ public class Chitietdonhangnhap implements Serializable {
     public void getSoLuong(int soLuong) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

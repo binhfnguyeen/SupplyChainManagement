@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -14,6 +14,7 @@ import com.scm.pojo.Kho;
 import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Nhanvien;
 import com.scm.pojo.Sanpham;
+import com.scm.pojo.SanphamNhacungcap;
 import com.scm.pojo.Vanchuyen;
 import com.scm.repositories.ChiTietDonHangNhapRepository;
 import com.scm.repositories.DonHangNhapRepository;
@@ -201,12 +202,12 @@ public class DonHangNhapServiceImpl implements DonHangNhapService {
 
     @Override
     public Donhangnhap getDonHangNhapById(int id) {
-       return this.donHangNhapRepository.getDonHangNhapById(id);
+        return this.donHangNhapRepository.getDonHangNhapById(id);
     }
 
     @Override
     public void addOrUpdateDonHangNhap(Donhangnhap dhn) {
-        if (dhn.getId() == null){
+        if (dhn.getId() == null) {
             this.donHangNhapRepository.addDonHangNhap(dhn);
         } else {
             this.donHangNhapRepository.updateDonHangNhap(dhn);
@@ -215,7 +216,25 @@ public class DonHangNhapServiceImpl implements DonHangNhapService {
 
     @Override
     public void deleteDonHangNhap(int id) {
-       this.donHangNhapRepository.deleteDonHangNhap(id);
+        this.donHangNhapRepository.deleteDonHangNhap(id);
+    }
+
+    @Override
+    public void updateTongTienHang(int idDonHang) {
+        Donhangnhap dh = this.getDonHangNhapById(idDonHang);
+        List<Chitietdonhangnhap> dsChiTiet = chitietRepository.findByIdDonHang(idDonHang);
+        BigDecimal tongTien = BigDecimal.ZERO;
+
+        for (Chitietdonhangnhap ct : dsChiTiet) {
+            Sanpham sp = this.sanPhamRepository.getSanPhamById(ct.getIDSanPham().getId());
+            SanphamNhacungcap spncc = this.spnccRepository.findBySanpham(sp);
+            BigDecimal gia = spncc.getGia();
+            BigDecimal thanhTien = gia.multiply(BigDecimal.valueOf(ct.getSoLuong()));
+            tongTien = tongTien.add(thanhTien);
+        }
+
+        dh.setTongTien(tongTien);
+        this.donHangNhapRepository.updateDonHangNhap(dh);
     }
 
 }

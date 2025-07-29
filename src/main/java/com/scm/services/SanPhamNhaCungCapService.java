@@ -4,6 +4,8 @@
  */
 package com.scm.services;
 
+import com.scm.pojo.Nhacungcap;
+import com.scm.pojo.Sanpham;
 import com.scm.pojo.SanphamNhacungcap;
 import java.math.BigDecimal;
 import java.util.List;
@@ -19,4 +21,5 @@ public interface SanPhamNhaCungCapService {
     SanphamNhacungcap getSPNCCById(int id);
     void addOrUpdate(SanphamNhacungcap spcc);
     void deleteSanPhamNhaCungCap(int id);
+    BigDecimal getGia(Sanpham s, Nhacungcap ncc);
 }

@@ -4,12 +4,17 @@
  */
 package com.scm.repositories.impl;
 
+import com.scm.pojo.Chitietdonhangnhap;
 import com.scm.pojo.Donhangnhap;
+import com.scm.pojo.Nhacungcap;
+import com.scm.pojo.Sanpham;
 import com.scm.repositories.DonHangNhapRepository;
+import com.scm.repositories.SanPhamNhaCungCapRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
@@ -28,6 +33,9 @@ public class DonHangNhapRepositoryImpl implements DonHangNhapRepository {
 
     @Autowired
     private LocalSessionFactoryBean factory;
+    
+    @Autowired
+    private SanPhamNhaCungCapRepository spnccRepo;
 
     @Override
     public void addDonHangNhap(Donhangnhap dhn) {
@@ -80,5 +88,4 @@ public class DonHangNhapRepositoryImpl implements DonHangNhapRepository {
 
         s.remove(dhn);
     }
-
 }

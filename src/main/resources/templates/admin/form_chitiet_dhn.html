@@ -29,17 +29,25 @@
             </div>
 
             <div class="col-md-6">
-                <label for="sanPham" class="form-label">Sản phẩm</label>
-                <select th:field="*{iDSanPham.id}" class="form-select" id="sanPham" required>
-                    <option value="" disabled selected>-- Chọn sản phẩm --</option>
-                    <option th:each="sp : ${dsSanPham}" 
-                            th:value="${sp.id}" 
-                            th:text="${sp.ten}" 
-                            th:selected="${sp.id == chitiet.iDSanPham?.id}">
-                    </option>
+                <label for="nhaCungCap" class="form-label">Nhà cung cấp</label>
+                <select id="nhaCungCap" class="form-select" onchange="loadSanPhamOptions()" required>
+                    <option value="">-- Chọn nhà cung cấp --</option>
+                    <option th:each="ncc : ${dsNhaCungCap}" th:value="${ncc.id}" th:text="${ncc.ten}"></option>
                 </select>
             </div>
-            
+
+            <div class="col-md-6">
+                <label for="sanPham" class="form-label">Sản phẩm</label>
+                <select th:field="*{iDSanPham.id}" id="sanPham" class="form-select" onchange="loadGia()" required>
+                    <option value="">-- Chọn sản phẩm --</option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="gia" class="form-label">Giá</label>
+                <input type="text" id="gia" name="gia" class="form-control" readonly />
+            </div>
+
             <div class="col-md-6">
                 <label for="soLuong" class="form-label">Số lượng</label>
                 <input type="number" th:field="*{soLuong}" class="form-control" id="soLuong" min="1" required />
@@ -56,6 +64,49 @@
     </main>
 
     <div th:replace="admin/base :: footer"></div>
+    <script>
+        let sanPhamData = [];
+        
+        function loadSanPhamOptions() {
+            const nccId = document.getElementById("nhaCungCap").value;
+            const spSelect = document.getElementById("sanPham");
+            const giaInput = document.getElementById("gia");
+
+            giaInput.value = "";
+            spSelect.innerHTML = '<option value="">-- Chọn sản phẩm --</option>';
+            if (!nccId)
+                return;
+
+            fetch(`/SupplyChainManagement/api/nhacungcap/${nccId}/sanpham`)
+                    .then(res => res.json())
+                    .then(data => {
+                        sanPhamData = data;
+                        data.forEach(item => {
+                            const sp = item.idsanPham;
+                            const option = document.createElement("option");
+                            option.value = sp.id;
+                            option.text = sp.ten;
+                            option.setAttribute("data-gia", item.gia);
+                            spSelect.appendChild(option);
+                        });
+                    })
+                    .catch(err => {
+                        console.error("Lỗi lấy sản phẩm của nhà cung cấp:", err);
+                    });
+        }
+
+        function loadGia() {
+            const spId = document.getElementById("sanPham").value;
+            const giaInput = document.getElementById("gia");
+
+            const spItem = sanPhamData.find(item => item.idsanPham.id == spId);
+            if (spItem) {
+                giaInput.value = spItem.gia.toLocaleString("vi-VN") + " VNĐ";
+            } else {
+                giaInput.value = "";
+            }
+        }
+    </script>
     <script th:src="@{/js/main.js}"></script>
 </body>
 </html>

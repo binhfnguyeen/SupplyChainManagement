@@ -14,6 +14,7 @@ import java.util.List;
  *
  * @author Dell
  */
+
 public interface SanPhamNhaCungCapRepository {
     void add(SanphamNhacungcap spncc);
     List<SanphamNhacungcap> findByIDNhaCungCap(int id);
@@ -22,4 +23,5 @@ public interface SanPhamNhaCungCapRepository {
     SanphamNhacungcap getSPNCCById(int id);
     void addOrUpdate(SanphamNhacungcap spcc);
     void deleteSanPhamNhaCungCap(int id);
+    SanphamNhacungcap findBySanpham(Sanpham sp);
 }

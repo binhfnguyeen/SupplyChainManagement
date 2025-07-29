@@ -60,9 +60,9 @@ public class SanPhamNhaCungCapServiceImpl implements SanPhamNhaCungCapService {
     @Override
     public List<SanphamNhacungcap> getSanPhamCuaNhaCungCap(int idNhaCungCap) {
         Nhacungcap ncc = nhaCungCapRepository.getNCCById(idNhaCungCap);
-        
+
         if (ncc == null) {
-           throw new IllegalArgumentException("Nhà cung cấp không tồn tại");
+            throw new IllegalArgumentException("Nhà cung cấp không tồn tại");
         }
 
         return spNCCRepository.findByIDNhaCungCap(idNhaCungCap);
@@ -88,4 +88,8 @@ public class SanPhamNhaCungCapServiceImpl implements SanPhamNhaCungCapService {
         this.spNCCRepository.deleteSanPhamNhaCungCap(id);
     }
 
+    @Override
+    public BigDecimal getGia(Sanpham s, Nhacungcap ncc) {
+        return this.spNCCRepository.getGia(s, ncc);
+    }
 }

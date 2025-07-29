@@ -86,4 +86,15 @@ public class ChiTietDonHangNhapRepositoryImpl implements ChiTietDonHangNhapRepos
         s.remove(chitiet);
     }
 
+    @Override
+    public List<Chitietdonhangnhap> findByIdDonHang(int idDonHang) {
+        Session s = this.factory.getObject().getCurrentSession();
+        CriteriaBuilder b = s.getCriteriaBuilder();
+        CriteriaQuery<Chitietdonhangnhap> q = b.createQuery(Chitietdonhangnhap.class);
+        Root<Chitietdonhangnhap> root = q.from(Chitietdonhangnhap.class);
+        q.select(root).where(b.equal(root.get("iDDonHang").get("id"), idDonHang));
+        Query query = s.createQuery(q);
+        return query.getResultList();
+    }
+
 }

@@ -23,4 +23,5 @@ public interface DonHangNhapService {
     Donhangnhap getDonHangNhapById(int id);
     void addOrUpdateDonHangNhap(Donhangnhap dhn);
     void deleteDonHangNhap(int id);
+    void updateTongTienHang(int idDonHang);
 }
