@@ -1,0 +1,43 @@
+
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container">
+        <h1 class="text-center text-info mt-2">QUẢN LÝ ĐỐI TÁC VẬN CHUYỂN</h1>
+        <form th:action="@{/admin/doitacvanchuyen/form}" method="post" enctype="multipart/form-data" th:object="${doitacvanchuyen}">
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{ten}" class="form-control" placeholder="Họ tên" required />
+                <label for="ten">Tên đối tác vận chuyển</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{hieuSuat}" class="form-control" placeholder="Địa chỉ" required />
+                <label for="hieuSuat">Hiệu suất</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{dieuKienHopTac}" class="form-control" placeholder="Số điện thoại" required />
+                <label for="dieuKienHopTac">Điều kiện hợp tác</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+<!--                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{userID.id}" />
+                <input type="hidden" th:field="*{userID.avatar}" />-->
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${doitacvanchuyen.id == null}">Thêm đối tác vận chuyển</span>
+                    <span th:if="${doitacvanchuyen.id != null}">Cập nhật đối tác vận chuyển</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+

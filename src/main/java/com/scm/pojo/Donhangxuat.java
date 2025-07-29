@@ -44,7 +44,7 @@ public class Donhangxuat implements Serializable {
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "TongTien")
-    private BigDecimal tongTien;
+    private BigDecimal tongTien=BigDecimal.ZERO;
     @Column(name = "TinhTrang")
     private String tinhTrang;
     @JoinColumn(name = "IDKhachHang", referencedColumnName = "ID")

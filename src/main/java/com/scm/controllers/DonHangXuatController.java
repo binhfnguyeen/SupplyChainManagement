@@ -74,7 +74,7 @@ public class DonHangXuatController {
     
      @PostMapping("/ds-donhangxuat/form")
     public String addOrUpdateVanChuyen(@ModelAttribute("donhangxuat") Donhangxuat dhx) {
-        this.dhxService.UpdateDonhangxuat(dhx);
+        this.dhxService.addOrUpdateDonHangXuat(dhx);
         return "redirect:/admin/ds-donhangxuat";
     }
     

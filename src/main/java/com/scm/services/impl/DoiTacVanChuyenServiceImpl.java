@@ -36,5 +36,15 @@ public class DoiTacVanChuyenServiceImpl implements DoiTacVanChuyenService{
     public Doitacvanchuyen getDoitacvanchuyenById(int id) {
         return this.dtvcRepo.getDoitacvanchuyenById(id);
     }
+
+    @Override
+    public void addOrUpdateDtvc(Doitacvanchuyen dtvc) {
+        this.dtvcRepo.addOrUpdateDtvc(dtvc);
+    }
+
+    @Override
+    public void deleteDtvc(int id) {
+        this.dtvcRepo.deleteDtvc(id);
+    }
     
 }

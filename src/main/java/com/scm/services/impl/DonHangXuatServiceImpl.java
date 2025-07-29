@@ -29,10 +29,10 @@ public class DonHangXuatServiceImpl implements DonHangXuatService{
     private UserRepository userRepo;
 
     @Override
-    public void addExportInvoice(DonHangXuatRequest dhxr,String username) {
+    public void addDonHangXuatWithUser(DonHangXuatRequest dhxr,String username) {
         
        User u=this.userRepo.getUserByUsername(username);
-       this.dhxRepo.addDonHangXuat(dhxr,u);
+       this.dhxRepo.addDonHangXuatWithUser(dhxr,u);
     }
 
     @Override
@@ -53,6 +53,15 @@ public class DonHangXuatServiceImpl implements DonHangXuatService{
     @Override
     public void deleteDonhangxuat(int id) {
         this.dhxRepo.deleteDonHangXuat(id);
+    }
+
+    @Override
+    public void addOrUpdateDonHangXuat(Donhangxuat dhx) {
+        if (dhx.getId() == null){
+            this.dhxRepo.addDonHangXuat(dhx);
+        } else {
+            this.dhxRepo.UpdateDonHangXuat(dhx);
+        }
     }
 
     

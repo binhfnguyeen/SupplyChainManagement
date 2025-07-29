@@ -1,0 +1,52 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="text-center text-primary mb-4">Danh sách Hóa đơn xuất</h2>
+        <div class="d-flex justify-content-end gap-2 mb-3">
+            <a th:href="@{/admin/ds-hoadonxuat/form}" class="btn btn-success d-flex align-items-center gap-1">
+                <i class="bi bi-plus-circle"></i> Thêm hóa đơn nhập
+            </a>
+            <a th:href="@{/admin/ds-donhangxuat}" class="btn btn-warning text-white d-flex align-items-center gap-1"> 
+                <i class="bi bi-arrow-return-left"></i> Quay lại </a>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Đơn hàng nhập</th>
+                    <th>Tổng chi phí</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="hdx : ${hoadonxuat}">
+                    <td th:text="${hdx.id}"></td>
+                    <td th:text="${hdx.iDDonHang != null ? hdx.iDDonHang.id : '---'}"></td>
+                    <td th:text="${#numbers.formatDecimal(hdx.tongChiPhi, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
+                    <td class="text-center">
+                        <a href="#" class="btn btn-sm btn-danger btn-delete"
+                           th:onclick="'deleteFunc(\'' + @{/admin/ds-hoadonxuat/{id}(id=${hdx.id})} + '\')'">
+                            <i class="bi bi-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(hoadonxuat)}">
+                    <td colspan="4" class="text-center text-muted">Không có hóa đơn xuất nào.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

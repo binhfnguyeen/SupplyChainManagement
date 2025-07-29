@@ -39,7 +39,7 @@ public class ApiDonHangXuatController {
     @PreAuthorize("hasAnyRole('ADMIN','NHANVIEN')")
     @ResponseStatus(HttpStatus.CREATED)
     public void addToCart(@RequestBody DonHangXuatRequest dhxr,Principal principal) {
-        this.dhxService.addExportInvoice(dhxr,principal.getName());
+        this.dhxService.addDonHangXuatWithUser(dhxr,principal.getName());
     }
     
     

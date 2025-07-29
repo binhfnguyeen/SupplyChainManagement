@@ -54,9 +54,16 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
     @Autowired
     private SanPhamNhaCungCapRepository sp_nccRepo;
     
+    @Override
+    public void addDonHangXuat(Donhangxuat dhx) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (dhx.getId() == null) {
+            s.persist(dhx);
+        }
+    }
     
     @Override
-    public void addDonHangXuat(DonHangXuatRequest dhxr,User u) {
+    public void addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u) {
         if (dhxr != null) {
             Session s = this.factory.getObject().getCurrentSession();
             Donhangxuat dhx = new Donhangxuat();

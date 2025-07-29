@@ -32,10 +32,10 @@
                 <label for="khachhang" class="form-label">Khách hàng</label>
                 <select th:field="*{iDKhachHang.id}" class="form-select" id="khachhang" required>
                     <option value="" disabled selected>-- Chọn khách hàng --</option>
-                    <option th:each="kh : ${dsKH}" 
+                    <option th:each="kh : ${dsKhachHang}" 
                             th:value="${kh.id}" 
                             th:text="${kh.ten}" 
-                            th:selected="${kh.id == donhangxuat.iDKho?.id}">
+                            th:selected="${kh.id == donhangxuat.iDKhachHang?.id}">
                     </option>
                 </select>
             </div>
@@ -62,15 +62,6 @@
                 </select>
             </div>
 
-<!--            <div class="col-md-6">
-                <label for="thoiGianDuKien" class="form-label">Thời gian dự kiến</label>
-                <input type="date" th:field="*{thoiGianDuKien}" class="form-control" id="thoiGianDuKien" required />
-            </div>
-
-            <div class="col-md-6">
-                <label for="thoiGianNhan" class="form-label">Thời gian nhận</label>
-                <input type="date" th:field="*{thoiGianNhan}" class="form-control" id="thoiGianNhan" />-->
-            <!--</div>-->
 
             <div class="col-12 text-center mt-4">
                 <button type="submit" class="btn btn-success">

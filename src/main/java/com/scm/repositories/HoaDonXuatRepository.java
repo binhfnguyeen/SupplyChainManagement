@@ -5,6 +5,9 @@
 package com.scm.repositories;
 
 import com.scm.pojo.Donhangxuat;
+import com.scm.pojo.Hoadonxuat;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -12,4 +15,6 @@ import com.scm.pojo.Donhangxuat;
  */
 public interface HoaDonXuatRepository {
     void addHoaDonXuat(Donhangxuat dhx);
+    void addOrUpdateHoaDonNhap(Hoadonxuat hdx);
+    List<Hoadonxuat> getAllHoaDonXuat(Map<String, String> params);
 }
