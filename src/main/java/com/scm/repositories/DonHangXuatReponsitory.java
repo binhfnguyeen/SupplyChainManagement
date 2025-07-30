@@ -4,9 +4,10 @@
  */
 package com.scm.repositories;
 
-import com.scm.pojo.Cart;
+
 import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
+import com.scm.pojo.User;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,8 @@ import java.util.Map;
  * @author Admin
  */
 public interface DonHangXuatReponsitory {
-    void addDonHangXuat(DonHangXuatRequest dhxr);
+    void addDonHangXuat(Donhangxuat dhx);
+    void addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u);
     List<Donhangxuat> getDonhangxuat(Map<String,String>params);
     Donhangxuat getDonhangxuatById(int id);
     void UpdateDonHangXuat(Donhangxuat dhx);

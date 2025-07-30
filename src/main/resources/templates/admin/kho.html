@@ -1,0 +1,48 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+    <main class="container my-4">
+        <h2 class="mb-4 text-center text-primary">Danh sách nhà kho</h2>
+
+        <div class="mt-2 mb-2">
+            <a th:href="@{/admin/kho/form}" class="btn btn-success">Thêm kho</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">DiaChi</th>
+                        <th scope="col">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="k: ${kho}">
+                        <td th:text="${k.id}">1</td>
+                        <td ><a th:href="@{/admin/kho/{id}(id=${k.id})}" class="btn btn-sm btn-info text-white me-1">
+                                <div th:text="${k.diaChi}"></div>
+                            </a></td>
+                        <td>
+                            <a th:href="@{/admin/kho/update/{id}(id=${k.id})}" class="btn btn-sm btn-info text-white me-1">
+                                <i class="bi bi-pencil-square"></i> Cập nhật
+                            </a>
+                            <a class="btn btn-sm btn-danger" th:onclick="'deleteFunc(\'' + @{/admin/kho/{id}(id=${k.id})} + '\')'">
+                                <i class="bi bi-trash"></i> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+

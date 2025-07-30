@@ -8,6 +8,8 @@ import com.scm.pojo.Donhangxuat;
 import com.scm.pojo.Hoadonxuat;
 import com.scm.repositories.HoaDonXuatRepository;
 import com.scm.services.HoaDonXuatService;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,26 @@ public class HoaDonXuatServiceImpl implements HoaDonXuatService{
     @Override
     public Hoadonxuat getHoaDonXuatById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void xuatHoaDonXuat(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Hoadonxuat> getAllHoaDonXuat(Map<String, String> params) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void addOrUpdateHoaDonXuat(Hoadonxuat hdx) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Hoadonxuat> getDsHoaDon(Map<String, String> params) {
+        return this.hdxRepo.getAllHoaDonXuat(null);
     }
     
 }

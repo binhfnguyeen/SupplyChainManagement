@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="text-center text-primary mb-4">
+            [[${donhangxuat.id == null ? 'Thêm' : 'Cập nhật'}]] đơn hàng xuất
+        </h2>
+
+        <form th:action="@{/admin/ds-donhangxuat/form}" method="post" th:object="${donhangxuat}" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="col-md-6">
+                <label for="nhanVien" class="form-label">Nhân viên</label>
+                <select th:field="*{iDNhanVien.id}" class="form-select" id="nhanVien" required>
+                    <option value="" disabled selected>-- Chọn nhân viên --</option>
+                    <option th:each="nv : ${dsNhanVien}" 
+                            th:value="${nv.id}" 
+                            th:text="${nv.hoTen}" 
+                            th:selected="${nv.id == donhangxuat.iDNhanVien?.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="khachhang" class="form-label">Khách hàng</label>
+                <select th:field="*{iDKhachHang.id}" class="form-select" id="khachhang" required>
+                    <option value="" disabled selected>-- Chọn khách hàng --</option>
+                    <option th:each="kh : ${dsKhachHang}" 
+                            th:value="${kh.id}" 
+                            th:text="${kh.ten}" 
+                            th:selected="${kh.id == donhangxuat.iDKhachHang?.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="vanChuyen" class="form-label">Vận chuyển</label>
+                <select th:field="*{iDVanChuyen.id}" class="form-select" id="vanChuyen" required>
+                    <option value="" disabled selected>-- Chọn vận chuyển --</option>
+                    <option th:each="vc : ${dsVanChuyen}" 
+                            th:value="${vc.id}" 
+                            th:text="${vc.tinhTrang}" 
+                            th:selected="${vc.id == donhangxuat.iDVanChuyen?.id}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-6">
+                <label for="tinhTrang" class="form-label">Trạng thái</label>
+                <select th:field="*{tinhTrang}" class="form-select" id="tinhTrang" required>
+                    <option value="" disabled>-- Chọn trạng thái --</option>
+                    <option value="Đang xử lý">Đang xử lý</option>
+                    <option value="Hoàn tất">Hoàn tất</option>
+                    <option value="Đã huỷ">Đã huỷ</option>
+                </select>
+            </div>
+
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${donhangxuat.id == null}">Thêm đơn hàng xuất</span>
+                    <span th:if="${donhangxuat.id != null}">Cập nhật đơn hàng xuất</span>
+                </button>
+                <a th:href="@{/admin/ds-donhangxuat}" class="btn btn-secondary ms-2">Quay lại</a>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+

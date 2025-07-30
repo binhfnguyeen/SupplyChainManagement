@@ -9,6 +9,7 @@ import com.scm.pojo.Donhangxuat;
 import com.scm.services.HoaDonXuatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +28,8 @@ public class ApiHoaDonXuatController {
     @Autowired
     private HoaDonXuatService hdxService;
     
-    @PostMapping("/HoaDonXuat")
+    @PostMapping("/secure/HoaDonXuat")
+    @PreAuthorize("hasAnyRole('ADMIN','NHANVIEN')")
     @ResponseStatus(HttpStatus.CREATED)
     public void addHoaDonXuat(@RequestBody Donhangxuat dhx) {
         this.hdxService.addHoaDonXuat(dhx);

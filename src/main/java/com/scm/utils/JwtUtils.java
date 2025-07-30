@@ -4,6 +4,7 @@
  */
 package com.scm.utils;
 
+import com.google.protobuf.TextFormat.ParseException;
 import com.nimbusds.jose.JWSAlgorithm;
 import com.nimbusds.jose.JWSHeader;
 import com.nimbusds.jose.JWSSigner;
@@ -15,6 +16,7 @@ import com.nimbusds.jwt.SignedJWT;
 import com.scm.pojo.User;
 import com.scm.repositories.UserRepository;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +40,7 @@ public class JwtUtils {
                 .subject(username)
                 .expirationTime(new Date(System.currentTimeMillis() + EXPIRATION_MS))
                 .issueTime(new Date())
-                .claim("scope", "ROLE_"+u.getRole())
+                .claim("roles", List.of("ROLE_" + u.getRole()))
                 .build();
         
         SignedJWT signedJWT = new SignedJWT(

@@ -65,5 +65,22 @@ public class DoiTacVanChuyenRepositoyImpl implements DoiTacVanChuyenRepositoy{
         q.setParameter("id", id);
         return (Doitacvanchuyen) q.getSingleResult();
     }
+
+    @Override
+    public void addOrUpdateDtvc(Doitacvanchuyen dtvc) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (dtvc.getId() == null){
+            s.persist(dtvc);
+        } else {
+            s.merge(dtvc);
+        }
+    }
+
+    @Override
+    public void deleteDtvc(int id) {
+       Session s = this.factory.getObject().getCurrentSession();
+       Doitacvanchuyen dtvc=this.getDoitacvanchuyenById(id);
+       s.remove(dtvc);
+    }
     
 }

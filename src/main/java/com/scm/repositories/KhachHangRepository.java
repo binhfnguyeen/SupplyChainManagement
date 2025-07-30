@@ -5,6 +5,8 @@
 package com.scm.repositories;
 
 import com.scm.pojo.Khachhang;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -13,5 +15,9 @@ import com.scm.pojo.Khachhang;
 public interface KhachHangRepository {
     Khachhang add(Khachhang kh);
     int soKhachHang();
+    List<Khachhang> getDsKhachHang(Map<String, String> params);
+    void deleteKhachHang(Integer id);
+    Khachhang getKhachHangById(int id);
+    void addOrUpdateKhachHangWithUser(Khachhang nv);
     Khachhang getKhachHangByKhachHangName(String name);
 }

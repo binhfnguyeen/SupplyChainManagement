@@ -7,6 +7,7 @@ package com.scm.repositories.impl;
 import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
+import com.scm.pojo.User;
 import com.scm.repositories.DonHangXuatReponsitory;
 import com.scm.repositories.KhachHangRepository;
 import com.scm.repositories.NhaCungCapRepository;
@@ -44,8 +45,8 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
     @Autowired
     private SanPhamRepository spRepo;
     
-    @Autowired
-    private NhanVienRepository nvRepo;
+//    @Autowired
+//    private NhanVienRepository nvRepo;
     
     @Autowired
     private NhaCungCapRepository nccRepo;
@@ -53,14 +54,21 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
     @Autowired
     private SanPhamNhaCungCapRepository sp_nccRepo;
     
+    @Override
+    public void addDonHangXuat(Donhangxuat dhx) {
+        Session s = this.factory.getObject().getCurrentSession();
+        if (dhx.getId() == null) {
+            s.persist(dhx);
+        }
+    }
     
     @Override
-    public void addDonHangXuat(DonHangXuatRequest dhxr) {
+    public void addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u) {
         if (dhxr != null) {
             Session s = this.factory.getObject().getCurrentSession();
             Donhangxuat dhx = new Donhangxuat();
             dhx.setIDKhachHang(this.khRepo.getKhachHangByKhachHangName("Công ty TNHH A"));
-            dhx.setIDNhanVien(this.nvRepo.getNhanvienById(dhxr.getIdNhanVien()));
+            dhx.setIDNhanVien(u.getNhanvien());
             s.persist(dhx);
             
             BigDecimal total=BigDecimal.ZERO;

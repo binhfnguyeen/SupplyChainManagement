@@ -4,8 +4,11 @@
  */
 package com.scm.services.impl;
 
+import com.scm.pojo.Khachhang;
 import com.scm.repositories.KhachHangRepository;
 import com.scm.services.KhachHangService;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +25,27 @@ public class KhachHangServiceImpl implements KhachHangService{
     @Override
     public int soKhachHang() {
         return this.khRepository.soKhachHang();
+    }
+
+
+    @Override
+    public List<Khachhang> getDsKhachHang(Map<String, String> params) {
+        return this.khRepository.getDsKhachHang(params);
+    }
+
+    @Override
+    public void deleteKhachHang(Integer id) {
+        this.khRepository.deleteKhachHang(id);
+    }
+
+    @Override
+    public void addOrUpdateKhachHangWithUser(Khachhang kh) {
+        this.khRepository.addOrUpdateKhachHangWithUser(kh);
+    }
+
+    @Override
+    public Khachhang getKhachHangById(int id) {
+        return this.khRepository.getKhachHangById(id);
     }
     
 }

@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container">
+        <h1 class="text-center text-info mt-2">QUẢN LÝ KHÁCH HÀNG</h1>
+        <form th:action="@{/admin/employees/form}" method="post" enctype="multipart/form-data" th:object="${khachhang}">
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{ten}" class="form-control" placeholder="Họ tên" required />
+                <label for="hoTen">Họ tên</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{diaChi}" class="form-control" placeholder="Họ tên" required />
+                <label for="diaChi">Địa chỉ</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{sdt}" class="form-control" placeholder="Họ tên" required />
+                <label for="sdt">Số điện thoại</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{thongTinLienHe}" class="form-control" placeholder="Họ tên" required />
+                <label for="thongTinLienHe">Thông tin liên hệ</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{userID.username}" class="form-control" placeholder="Username" required />
+                <label for="username">Username</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password"
+                       th:field="*{userID.password}"
+                       th:if="${khachhang.userID.id} == null"
+                       required class="form-control" placeholder="Password" />
+
+                <input type="password"
+                       th:field="*{userID.password}"
+                       th:if="${khachhang.userID.id != null}"
+                       class="form-control" placeholder="Password" />
+                <label for="password">Password</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="file" class="form-control" th:field="*{userID.file}" />
+                <label>Avatar</label>
+            </div>
+            <div th:if="*{userID.avatar != null}">
+                <img th:src="${khachhang.userID.avatar}" width="150" />
+            </div>
+
+            <div class="form-floating mb-3 mt-3">
+                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{userID.id}" />
+                <input type="hidden" th:field="*{userID.avatar}" />
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${khachhang.id == null}">Thêm nhân viên</span>
+                    <span th:if="${khachhang.id != null}">Cập nhật nhân viên</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+

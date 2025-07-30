@@ -11,6 +11,7 @@ import com.scm.repositories.SanPhamNhaCungCapRepository;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.List;
@@ -93,8 +94,8 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
     @Override
     public void addOrUpdate(SanphamNhacungcap spcc) {
         Session session = this.factory.getObject().getCurrentSession();
-        
-        if (spcc.getId() == null){
+
+        if (spcc.getId() == null) {
             session.persist(spcc);
         } else {
             session.merge(spcc);
@@ -104,8 +105,19 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
     @Override
     public void deleteSanPhamNhaCungCap(int id) {
         Session session = this.factory.getObject().getCurrentSession();
-        
+
         SanphamNhacungcap spncc = this.getSPNCCById(id);
         session.remove(spncc);
+    }
+
+    @Override
+    public SanphamNhacungcap findBySanpham(Sanpham sp) {
+        Session session = this.factory.getObject().getCurrentSession();
+        Query<SanphamNhacungcap> query = session.createQuery(
+                "FROM SanphamNhacungcap s WHERE s.iDSanPham.id = :spId",
+                SanphamNhacungcap.class
+        );
+        query.setParameter("spId", sp.getId());
+        return query.getResultStream().findFirst().orElse(null);
     }
 }

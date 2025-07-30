@@ -7,11 +7,13 @@ package com.scm.controllers;
 import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
 import com.scm.services.DonHangXuatService;
+import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,10 +35,11 @@ public class ApiDonHangXuatController {
     private DonHangXuatService dhxService;
     
     
-    @PostMapping("/DonHangXuat")
+    @PostMapping("/secure/DonHangXuat")
+    @PreAuthorize("hasAnyRole('ADMIN','NHANVIEN')")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addToCart(@RequestBody DonHangXuatRequest dhxr) {
-        this.dhxService.addExportInvoice(dhxr);
+    public void addToCart(@RequestBody DonHangXuatRequest dhxr,Principal principal) {
+        this.dhxService.addDonHangXuatWithUser(dhxr,principal.getName());
     }
     
     

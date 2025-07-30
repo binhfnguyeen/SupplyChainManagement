@@ -1,0 +1,41 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+    <h2 class="text-center text-primary mb-4">
+        Xuất hóa đơn xuất
+    </h2>
+    <form method="post" th:action="@{/admin/ds-hoadonxuat/form}" th:object="${hoadonxuat}" class="container row g-3">
+        <input type="hidden" th:field="*{id}" />
+        <input type="hidden" th:field="*{tongChiPhi}" />
+        
+        <div class="col-12 text-center mt-4">
+            <label for="donHangXuat" class="form-label">Đơn hàng xuất:</label>
+            <select th:field="*{iDDonHang.id}" class="form-select" id="donHangXuat" required>
+                <option value="" disabled selected>-- Chọn đơn hàng xuất --</option>
+                <option th:each="dhx : ${dsDonHangXuat}" 
+                        th:value="${dhx.id}" 
+                        th:text="${dhx.id}" 
+                        th:selected="${dhx.id == hoadonxuat.iDDonHang?.id}">
+                </option>
+            </select>
+        </div>
+
+        <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-success">
+                <span>Xuất hóa đơn</span>
+            </button>
+            <a th:href="@{/admin/ds-hoadonxuat}" class="btn btn-secondary ms-2">Quay lại</a>
+        </div>
+    </form>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+

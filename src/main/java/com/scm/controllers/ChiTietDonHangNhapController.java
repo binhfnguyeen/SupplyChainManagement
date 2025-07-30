@@ -6,9 +6,12 @@ package com.scm.controllers;
 
 import com.scm.pojo.Chitietdonhangnhap;
 import com.scm.pojo.Donhangnhap;
+import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Sanpham;
 import com.scm.services.ChiTietDonHangNhapService;
 import com.scm.services.DonHangNhapService;
+import com.scm.services.NhaCungCapService;
+import com.scm.services.SanPhamNhaCungCapService;
 import com.scm.services.SanPhamService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,26 +33,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 @RequestMapping("/admin")
 public class ChiTietDonHangNhapController {
-    
+
     @Autowired
     private ChiTietDonHangNhapService chitietService;
-    
+
     @Autowired
     private DonHangNhapService dhnService;
-    
+
     @Autowired
-    private SanPhamService spService;
-    
+    private NhaCungCapService nccService;
+
     @ModelAttribute("dsDonHangNhap")
     public List<Donhangnhap> getNhanVien() {
         return this.dhnService.getAllDonHangNhap();
     }
-    
-    @ModelAttribute("dsSanPham")
-    public List<Sanpham> getSanPham() {
-        return this.spService.getAllSanpham(null);
+
+    @ModelAttribute("dsNhaCungCap")
+    public List<Nhacungcap> getNhacungcap() {
+        return this.nccService.getDsNhaCungCap(null);
     }
-    
+
     @RequestMapping("/ds-chitiet-dhn")
     public String list(Model model) {
         model.addAttribute("chitiet", this.chitietService.getAllChiTiet());
@@ -66,6 +69,7 @@ public class ChiTietDonHangNhapController {
     @PostMapping("/ds-chitiet-dhn/form")
     public String addOrUpdateChiTiet(@ModelAttribute("chitiet") Chitietdonhangnhap chitiet) {
         this.chitietService.addOrUpdateChiTiet(chitiet);
+        this.dhnService.updateTongTienHang(chitiet.getIDDonHang().getId());
         return "redirect:/admin/ds-chitiet-dhn";
     }
 
@@ -79,6 +83,8 @@ public class ChiTietDonHangNhapController {
     @DeleteMapping("/ds-chitiet-dhn/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteChiTiet(@PathVariable(value = "id") int id) {
+        Chitietdonhangnhap chitiet = this.chitietService.getChiTietById(id);
         this.chitietService.deleteChiTiet(id);
+        this.dhnService.updateTongTienHang(chitiet.getIDDonHang().getId());
     }
 }

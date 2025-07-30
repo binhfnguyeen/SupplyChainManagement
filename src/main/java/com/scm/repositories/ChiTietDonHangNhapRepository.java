@@ -18,4 +18,5 @@ public interface ChiTietDonHangNhapRepository {
     Chitietdonhangnhap getChiTietById(int id);
     void updateChiTiet(Chitietdonhangnhap chitiet);
     void deleteChiTiet(int id);
+    List<Chitietdonhangnhap> findByIdDonHang(int idDonHang);
 }

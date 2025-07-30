@@ -1,0 +1,70 @@
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container my-4">
+        <h2 class="text-center text-primary mb-4">Danh sách Đơn hàng xuất</h2>
+
+        <div class="d-flex justify-content-end gap-2 mb-3">
+            <a th:href="@{/admin/ds-donhangxuat/form}" class="btn btn-success d-flex align-items-center gap-1">
+                <i class="bi bi-plus-circle"></i> Thêm đơn hàng xuất
+            </a>
+            <a th:href="@{/admin/ds-chitiet-dhx}" class="btn btn-primary d-flex align-items-center gap-1">
+                <i class="bi bi-file-earmark-plus"></i> Thêm chi tiết
+            </a>
+            <a th:href="@{/admin/ds-hoadonxuat}" class="btn btn-warning text-white d-flex align-items-center gap-1">
+                <i class="bi bi-file-earmark-arrow-down"></i> Xuất hóa đơn
+            </a>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-light text-center">
+                <tr>
+                    <th>ID</th>
+                    <th>Nhân viên</th>
+                    <th>Khách hàng</th>
+                    <th>Vận chuyển</th>
+                    <th>Trạng thái</th>
+<!--                    <th>Thời gian dự kiến</th>
+                    <th>Thời gian nhận</th>-->
+                    <th>Tổng tiền</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="dhx : ${donhangxuat}">
+                    <td th:text="${dhx.id}"></td>
+                    <td th:text="${dhx.iDNhanVien != null ? dhx.iDNhanVien.hoTen : '---'}"></td>
+                    <td th:text="${dhx.iDKhachHang != null ? dhx.iDKhachHang.ten : '---'}"></td>
+                    <td th:text="${dhx.iDVanChuyen != null ? dhx.iDVanChuyen.tinhTrang : '---'}"></td>
+                    <td th:text="${dhx.tinhTrang}"></td>
+<!--                    <td th:text="${#dates.format(dhn.thoiGianDuKien, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(dhn.thoiGianNhan, 'dd/MM/yyyy')}"></td>-->
+                    <td th:text="${#numbers.formatDecimal(dhx.tongTien, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'"></td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-info text-white me-1" th:href="@{/admin/ds-donhangxuat/update/{id}(id=${dhx.id})}">
+                            <i class="bi bi-pencil-square"></i> Sửa
+                        </a>
+                        <a href="#" class="btn btn-sm btn-danger btn-delete" th:onclick="'deleteFunc(\'' + @{/admin/ds-donhangxuat/{id}(id=${dhx.id})} + '\')'">
+                            <i class="bi bi-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(donhangxuat)}">
+                    <td colspan="9" class="text-center text-muted">Không có đơn hàng xuất nào.</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+

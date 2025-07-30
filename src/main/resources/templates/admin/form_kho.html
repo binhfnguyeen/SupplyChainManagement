@@ -1,0 +1,35 @@
+
+<!doctype html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Trang chủ</title>
+    <th:context th:replace="admin/base :: resources"></th:context>
+</head>
+<body>
+    <div th:replace="admin/base :: header"></div>
+
+    <main class="container">
+        <h1 class="text-center text-info mt-2">QUẢN LÝ NHÀ KHO</h1>
+        <form th:action="@{/admin/kho/form}" method="post" enctype="multipart/form-data" th:object="${kho}">
+            <div class="form-floating mb-3">
+                <input type="text" th:field="*{diaChi}" class="form-control" placeholder="Địa chỉ" required />
+                <label for="diaChi">Địa chỉ</label>
+            </div>
+            <div class="form-floating mb-3 mt-3">
+<!--                <input type="hidden" th:field="*{id}" />
+                <input type="hidden" th:field="*{userID.id}" />
+                <input type="hidden" th:field="*{userID.avatar}" />-->
+                <button type="submit" class="btn btn-success">
+                    <span th:if="${kho.id == null}">Thêm nhà kho</span>
+                    <span th:if="${kho.id != null}">Cập nhật nhà kho</span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <div th:replace="admin/base :: footer"></div>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
+
