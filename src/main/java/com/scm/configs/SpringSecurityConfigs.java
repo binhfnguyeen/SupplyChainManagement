@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -63,11 +65,14 @@ public class SpringSecurityConfigs {
         http.cors(cors->cors.configurationSource(corsConfigurationSource()))
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").authenticated()
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/secure/DoiTacVanChuyen").hasAuthority("ROLE_ADMIN")
                         .anyRequest().permitAll()
-                ).formLogin(form->form.loginPage("/admin/login")
+                )
+                .formLogin(form->form.loginPage("/admin/login")
                 .loginProcessingUrl("/admin/login").defaultSuccessUrl("/admin/", true).failureUrl("/admin/login?error=true").permitAll())
-                .logout(logout -> logout.logoutSuccessUrl("/admin/login").permitAll());
+                .logout(logout -> logout.logoutSuccessUrl("/admin/login").permitAll())
+                ;
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

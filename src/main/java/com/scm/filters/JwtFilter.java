@@ -13,8 +13,10 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +26,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class JwtFilter implements Filter {
-    
+
     @Autowired
     private JwtUtils jwtUtils;
 
@@ -34,7 +36,7 @@ public class JwtFilter implements Filter {
 
         if (httpRequest.getRequestURI().startsWith(String.format("%s/api/secure", httpRequest.getContextPath())) == true) {
             String header = httpRequest.getHeader("Authorization");
-            
+
             System.err.println(header);
 
             if (header == null || !header.startsWith("Bearer ")) {
@@ -45,11 +47,16 @@ public class JwtFilter implements Filter {
                 String token = header.substring(7);
                 try {
                     String username = this.jwtUtils.validateTokenAndGetUsername(token);
+                    List<String> roles = jwtUtils.getRolesFromToken(token);
+                    List<SimpleGrantedAuthority> authorities = roles.stream()
+                            .map(SimpleGrantedAuthority::new)
+                            .toList();
                     System.err.println(username);
                     if (username != null) {
                         httpRequest.setAttribute("username", username);
-                        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, null);
+                        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
                         SecurityContextHolder.getContext().setAuthentication(authentication);
+                        System.err.println("Authentication set: " + SecurityContextHolder.getContext().getAuthentication());
 
                         chain.doFilter(request, response);
                         return;
