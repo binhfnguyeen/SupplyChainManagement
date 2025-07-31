@@ -43,7 +43,7 @@ public class ApiDonHangXuatController {
     }
     
     
-    @GetMapping("/DonHangXuat")
+    @GetMapping("secure/DonHangXuat")
     public ResponseEntity<List<Donhangxuat>> list(@RequestParam Map<String, String> params){
         return new ResponseEntity<>(this.dhxService.getDonhangxuat(params),HttpStatus.OK);
     }
@@ -53,14 +53,14 @@ public class ApiDonHangXuatController {
         return new ResponseEntity<>(this.dhxService.getDonhangxuatById(id), HttpStatus.OK);
     }
     
-    @PostMapping("/updateDonHangXuat")
+    @PostMapping("secure/updateDonHangXuat")
     @ResponseStatus(HttpStatus.CREATED)
     public void updateDonHangXuat(@RequestBody Donhangxuat dhx){
 
         this.dhxService.UpdateDonhangxuat(dhx);
     }
     
-    @DeleteMapping("/DonHangXuat/{dhID}")
+    @DeleteMapping("secure/DonHangXuat/{dhID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteDonHangXuat(@PathVariable(value = "dhID") int id){
         this.dhxService.deleteDonhangxuat(id);
