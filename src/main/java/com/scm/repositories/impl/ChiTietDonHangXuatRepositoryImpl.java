@@ -8,6 +8,7 @@ import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.pojo.Donhangxuat;
 import com.scm.repositories.ChiTietDonHangXuatRepository;
 import com.scm.repositories.DonHangXuatReponsitory;
+import com.scm.repositories.NhaCungCapRepository;
 import com.scm.repositories.SanPhamNhaCungCapRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -38,6 +39,9 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
     @Autowired
     private DonHangXuatReponsitory dhxRepo;
     
+    @Autowired
+    private NhaCungCapRepository nccRepo;
+    
     
     
     @Override
@@ -47,6 +51,9 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
     if (chitiet.getId() == null) {
         // Lấy đối tượng đơn hàng xuất
         Donhangxuat dhx = chitiet.getIDDonHang();
+        
+        System.out.println(chitiet.getIDNhaCungCap());
+        
 
         if (dhx == null || dhx.getId() == null) {
             throw new IllegalArgumentException("Đơn hàng xuất không hợp lệ.");
@@ -61,7 +68,10 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
         // Tính tổng tiền mới
         BigDecimal tongCu = fullDhx.getTongTien() != null ? fullDhx.getTongTien() : BigDecimal.ZERO;
         BigDecimal gia = this.sp_nccRepo.getGia(chitiet.getIDSanPham(), chitiet.getIDNhaCungCap());
-
+        
+        System.out.println(chitiet.getIDNhaCungCap());
+        System.out.println(gia);
+        
         if (gia == null) {
             throw new IllegalArgumentException("Không tìm thấy giá của sản phẩm với nhà cung cấp.");
         }

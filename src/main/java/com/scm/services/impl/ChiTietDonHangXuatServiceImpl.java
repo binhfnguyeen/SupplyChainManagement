@@ -6,6 +6,7 @@ package com.scm.services.impl;
 
 import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.repositories.ChiTietDonHangXuatRepository;
+import com.scm.repositories.SanPhamRepository;
 import com.scm.services.ChiTietDonHangXuatService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ChiTietDonHangXuatServiceImpl implements ChiTietDonHangXuatService{
     
     @Autowired
     private ChiTietDonHangXuatRepository chitietRepository;
+    
+    @Autowired
+    private SanPhamRepository spRepository;
     
     @Override
     public List<Chitietdonhangxuat> getAllChiTiet() {
