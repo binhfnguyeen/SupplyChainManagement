@@ -70,4 +70,6 @@ public class JwtUtils {
         System.out.println(">>token: " + signedJWT.getJWTClaimsSet().getClaim("roles"));
         return (List<String>) signedJWT.getJWTClaimsSet().getClaim("roles");
     }
+
 }
+

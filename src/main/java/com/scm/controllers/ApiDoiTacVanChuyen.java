@@ -40,11 +40,11 @@ public class ApiDoiTacVanChuyen {
     public void addDoiTacVanChuyen(@RequestBody Doitacvanchuyen dtvc) {
         this.dtvcService.addDoiTacVanChuyen(dtvc);
     }
-
+    
+    
     @GetMapping("/secure/DoiTacVanChuyen")
-    public ResponseEntity<List<Doitacvanchuyen>> list(@RequestParam Map<String, String> params, Principal principal) {
-        System.out.println("User: " + principal.getName());
-        return new ResponseEntity<>(this.dtvcService.getDoiTacVanChuyen(params), HttpStatus.OK);
+    public ResponseEntity<List<Doitacvanchuyen>> list(@RequestParam Map<String,String>params){
+        return new ResponseEntity<>(this.dtvcService.getDoiTacVanChuyen(params),HttpStatus.OK);
     }
 
     @GetMapping("/secure/test")
