@@ -15,7 +15,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -67,7 +66,8 @@ public class SpringSecurityConfigs {
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/secure/DoiTacVanChuyen").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers(HttpMethod.GET, "api/secure/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NHANVIEN")
+                        .requestMatchers(HttpMethod.POST, "/api/secure/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NHANVIEN")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form->form.loginPage("/admin/login")

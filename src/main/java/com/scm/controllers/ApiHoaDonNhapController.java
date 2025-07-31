@@ -31,7 +31,7 @@ public class ApiHoaDonNhapController {
     @Autowired
     private HoaDonNhapService hoaDonNhapService;
 
-    @PostMapping("/donhangnhap/{dhID}/xuat-hoadon")
+    @PostMapping("/secure/donhangnhap/{dhID}/xuat-hoadon")
     public ResponseEntity<?> create(@PathVariable(value = "dhID") int id) {
         try {
             this.hoaDonNhapService.xuatHoaDonNhap(id);
@@ -44,13 +44,13 @@ public class ApiHoaDonNhapController {
         }
     }
 
-    @GetMapping("/ds-hoadonnhap")
+    @GetMapping("/secure/ds-hoadonnhap")
     public ResponseEntity<List<HoaDonNhapResponse>> list(@RequestParam Map<String, String> params) {
         List<HoaDonNhapResponse> ds = hoaDonNhapService.getAllHoaDonNhap(params);
         return ResponseEntity.ok(ds);
     }
 
-    @GetMapping("/ds-hoadonnhap/{hdID}")
+    @GetMapping("/secure/ds-hoadonnhap/{hdID}")
     public ResponseEntity<HoaDonNhapResponse> retrieve(@PathVariable(value = "hdID") int id) {
         HoaDonNhapResponse res = hoaDonNhapService.getHoaDonNhapById(id);
         return ResponseEntity.ok(res);

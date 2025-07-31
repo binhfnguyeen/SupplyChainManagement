@@ -30,7 +30,7 @@ public class ApiQuanLyKhoController {
     @Autowired
     private QuanLyKhoService qlKhoService;
     
-    @PostMapping("/kho/them-sanpham")
+    @PostMapping("/secure/kho/them-sanpham")
     public ResponseEntity<?> addSanPhamToKho(@RequestBody KhoSanphamRequest data) {
         try {
             qlKhoService.addSanPhamToKho(data.getIdKho(), data.getIdSanPham(), data.getSoLuong(), data.getHanSuDung());
@@ -42,7 +42,7 @@ public class ApiQuanLyKhoController {
         }
     }
     
-    @GetMapping("kho/{khoId}/sanpham")
+    @GetMapping("/secure/kho/{khoId}/sanpham")
     public ResponseEntity<?> getSanPhamTrongKho(@PathVariable("khoId") int khoId) {
         try {
             List<KhoSanpham> result = qlKhoService.getSanPhamTrongKho(khoId);
