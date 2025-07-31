@@ -29,7 +29,6 @@ public class ApiHoaDonXuatController {
     private HoaDonXuatService hdxService;
     
     @PostMapping("/secure/HoaDonXuat")
-    @PreAuthorize("hasAnyRole('ADMIN','NHANVIEN')")
     @ResponseStatus(HttpStatus.CREATED)
     public void addHoaDonXuat(@RequestBody Donhangxuat dhx) {
         this.hdxService.addHoaDonXuat(dhx);

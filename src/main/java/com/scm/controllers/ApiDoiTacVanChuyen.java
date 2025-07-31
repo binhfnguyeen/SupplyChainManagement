@@ -35,7 +35,7 @@ public class ApiDoiTacVanChuyen {
     @Autowired
     private DoiTacVanChuyenService dtvcService;
 
-    @PostMapping("/DoiTacVanChuyen")
+    @PostMapping("/secure/DoiTacVanChuyen")
     @ResponseStatus(HttpStatus.CREATED)
     public void addDoiTacVanChuyen(@RequestBody Doitacvanchuyen dtvc) {
         this.dtvcService.addDoiTacVanChuyen(dtvc);

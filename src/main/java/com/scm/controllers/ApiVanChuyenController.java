@@ -34,23 +34,23 @@ public class ApiVanChuyenController {
     @Autowired
     private VanChuyenService vcService;
 
-    @PostMapping("/ds-vanchuyen")
+    @PostMapping("/secure/ds-vanchuyen")
     @ResponseStatus(HttpStatus.CREATED)
     public void addOrUpdateVanChuyen(@RequestBody Vanchuyen vc) {
         this.vcService.addOrUpdateVanChuyen(vc);
     }
 
-    @GetMapping("/ds-vanchuyen")
+    @GetMapping("/secure/ds-vanchuyen")
     public ResponseEntity<List<Vanchuyen>> list(@RequestParam Map<String, String> params) {
         return new ResponseEntity<>(this.vcService.getAllVanChuyen(params), HttpStatus.OK);
     }
 
-    @GetMapping("/ds-vanchuyen/{vcID}")
+    @GetMapping("/secure/ds-vanchuyen/{vcID}")
     public ResponseEntity<Vanchuyen> retrieve(@PathVariable(value = "vcID") int id) {
         return new ResponseEntity<>(this.vcService.getVanChuyenById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/ds-vanchuyen/{vcID}")
+    @DeleteMapping("/secure/ds-vanchuyen/{vcID}")
     public ResponseEntity<?> delete(@PathVariable(value = "vcID") int id) {
         this.vcService.deleteVanChuyen(id);
         return ResponseEntity.ok("Đã xóa vận chuyển có ID: " + id);

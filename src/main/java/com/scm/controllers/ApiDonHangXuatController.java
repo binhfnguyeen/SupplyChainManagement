@@ -6,7 +6,9 @@ package com.scm.controllers;
 
 import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
+import com.scm.pojo.User;
 import com.scm.services.DonHangXuatService;
+import com.scm.services.UserService;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +36,10 @@ public class ApiDonHangXuatController {
     @Autowired
     private DonHangXuatService dhxService;
     
+    private UserService userService;
+    
     
     @PostMapping("/secure/DonHangXuat")
-    @PreAuthorize("hasAnyRole('ADMIN','NHANVIEN')")
     @ResponseStatus(HttpStatus.CREATED)
     public void addToCart(@RequestBody DonHangXuatRequest dhxr,Principal principal) {
         this.dhxService.addDonHangXuatWithUser(dhxr,principal.getName());
@@ -44,11 +47,19 @@ public class ApiDonHangXuatController {
     
     
     @GetMapping("secure/DonHangXuat")
-    public ResponseEntity<List<Donhangxuat>> list(@RequestParam Map<String, String> params){
+    public ResponseEntity<List<Donhangxuat>> list(@RequestParam Map<String, String> params,Principal principal){
+        User u=this.userService.getUserByUsername(principal.getName());
+        if(u.getRole().equals("KHACHHANG")){
+            params.put("user", u.getUsername());
+        }
+        
+        
         return new ResponseEntity<>(this.dhxService.getDonhangxuat(params),HttpStatus.OK);
     }
     
-    @GetMapping("/DonHangXuat/{dhID}")
+    
+    
+    @GetMapping("secure/DonHangXuat/{dhID}")
     public ResponseEntity<Donhangxuat> retrieve(@PathVariable(value = "dhID") int id) {
         return new ResponseEntity<>(this.dhxService.getDonhangxuatById(id), HttpStatus.OK);
     }

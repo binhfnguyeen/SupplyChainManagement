@@ -45,7 +45,7 @@ public class ApiSanPhamController {
         return new ResponseEntity<>(this.spService.getSanPhamById(id), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/ds-sanpham", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/secure/ds-sanpham", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<String> addOrUpdateSanpham(@RequestParam(value = "id", required = false) Integer id,
             @RequestParam("ten") String ten,
@@ -67,7 +67,7 @@ public class ApiSanPhamController {
         }
     }
 
-    @DeleteMapping("/ds-sanpham/{spID}")
+    @DeleteMapping("/secure/ds-sanpham/{spID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSanPham(@PathVariable(value = "spID") int id
     ) {

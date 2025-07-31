@@ -31,7 +31,7 @@ public class ApiSanPhamNCCController {
     @Autowired
     private SanPhamNhaCungCapService spnccService;
     
-    @PostMapping("/nhacungcap/sanpham")
+    @PostMapping("/secure/nhacungcap/sanpham")
     public ResponseEntity<?> addSanPhamToNhaCungCap(@RequestBody SanphamNhacungcapRequest data) {
         try {
             spnccService.addSanPhamToNhaCungCap(data.getIdNhaCungCap(), data.getIdSanPham(), data.getGia());

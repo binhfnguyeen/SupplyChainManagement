@@ -33,7 +33,7 @@ public class ApiDonHangNhapController {
     @Autowired
     private DonHangNhapService dhnService;
     
-    @PostMapping("/donhangnhap")
+    @PostMapping("/secure/donhangnhap")
     public ResponseEntity<?> create(@RequestBody DonHangNhapRequest request){
         try {
             this.dhnService.createDonHangNhap(request);
@@ -45,12 +45,12 @@ public class ApiDonHangNhapController {
         }
     }
     
-    @GetMapping("/ds-donhangnhap")
+    @GetMapping("/secure/ds-donhangnhap")
     public ResponseEntity<List<DonHangNhapResponse>> list(Map<String, String> params){
         return new ResponseEntity<>(this.dhnService.getAllDonHangNhap(params),HttpStatus.OK);
     }
     
-    @PutMapping("/donhangnhap/{dhID}")
+    @PutMapping("/secure/donhangnhap/{dhID}")
     public ResponseEntity<?> update(@RequestBody DonHangNhapRequest request, @PathVariable(value = "dhID") int id){
         try {
             this.dhnService.updateDonHangNhap(request, id);

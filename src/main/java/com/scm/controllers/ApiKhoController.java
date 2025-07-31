@@ -43,13 +43,13 @@ public class ApiKhoController {
         return new ResponseEntity<>(this.khoService.getKhoById(id), HttpStatus.OK);
     }
     
-    @PostMapping("/ds-kho")
+    @PostMapping("/secure/ds-kho")
     @ResponseStatus(HttpStatus.CREATED)
     public void addOrUpdateSanpham(@RequestBody Kho kho){
         this.khoService.addOrUpdateKho(kho);
     }
     
-    @DeleteMapping("/ds-kho/{khoID}")
+    @DeleteMapping("/secure/ds-kho/{khoID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteKho(@PathVariable(value = "khoID") int id){
         this.khoService.deleteKho(id);
