@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -46,20 +46,25 @@ public class ApiDonHangNhapController {
     }
     
     @GetMapping("/secure/ds-donhangnhap")
-    public ResponseEntity<List<DonHangNhapResponse>> list(Map<String, String> params){
+    public ResponseEntity<List<DonHangNhapResponse>> list(@RequestParam Map<String, String> params){
         return new ResponseEntity<>(this.dhnService.getAllDonHangNhap(params),HttpStatus.OK);
     }
     
-    @PutMapping("/secure/donhangnhap/{dhID}")
-    public ResponseEntity<?> update(@RequestBody DonHangNhapRequest request, @PathVariable(value = "dhID") int id){
-        try {
-            this.dhnService.updateDonHangNhap(request, id);
-            return ResponseEntity.status(HttpStatus.OK).body("Cập nhật đơn hàng nhập thành công");
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body("Lỗi: " + ex.getMessage());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return ResponseEntity.internalServerError().body("Lỗi hệ thống");
-        }
+    @GetMapping("/secure/ds-donhangnhap/{id}")
+    public DonHangNhapResponse retrieve(@PathVariable("id") int id){
+        return this.dhnService.getDHNById(id);
     }
+    
+//    @PutMapping("/secure/donhangnhap/{dhID}")
+//    public ResponseEntity<?> update(@RequestBody DonHangNhapRequest request, @PathVariable(value = "dhID") int id){
+//        try {
+//            this.dhnService.updateDonHangNhap(request, id);
+//            return ResponseEntity.status(HttpStatus.OK).body("Cập nhật đơn hàng nhập thành công");
+//        } catch (IllegalArgumentException ex) {
+//            return ResponseEntity.badRequest().body("Lỗi: " + ex.getMessage());
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            return ResponseEntity.internalServerError().body("Lỗi hệ thống");
+//        }
+//    }
 }

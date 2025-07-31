@@ -40,12 +40,12 @@ public class ApiVanChuyenController {
         this.vcService.addOrUpdateVanChuyen(vc);
     }
 
-    @GetMapping("/secure/ds-vanchuyen")
+    @GetMapping("/ds-vanchuyen")
     public ResponseEntity<List<Vanchuyen>> list(@RequestParam Map<String, String> params) {
         return new ResponseEntity<>(this.vcService.getAllVanChuyen(params), HttpStatus.OK);
     }
 
-    @GetMapping("/secure/ds-vanchuyen/{vcID}")
+    @GetMapping("/ds-vanchuyen/{vcID}")
     public ResponseEntity<Vanchuyen> retrieve(@PathVariable(value = "vcID") int id) {
         return new ResponseEntity<>(this.vcService.getVanChuyenById(id), HttpStatus.OK);
     }
