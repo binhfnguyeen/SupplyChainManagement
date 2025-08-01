@@ -13,7 +13,6 @@ import java.util.Map;
  * @author Admin
  */
 public interface DoiTacVanChuyenService {
-    void addDoiTacVanChuyen(Doitacvanchuyen dtvc);
     List<Doitacvanchuyen> getDoiTacVanChuyen(Map<String,String>params);
     Doitacvanchuyen getDoitacvanchuyenById(int id);
     void addOrUpdateDtvc(Doitacvanchuyen dtvc);

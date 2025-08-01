@@ -18,7 +18,6 @@ public interface DonHangNhapService {
     void createDonHangNhap(DonHangNhapRequest request);
     List<DonHangNhapResponse> getAllDonHangNhap(Map<String, String> params);
     DonHangNhapResponse getDHNById(int id);
-//    void updateDonHangNhap(DonHangNhapRequest request, int id);
     List<Donhangnhap> getAllDonHangNhap();
     Donhangnhap getDonHangNhapById(int id);
     void addOrUpdateDonHangNhap(Donhangnhap dhn);

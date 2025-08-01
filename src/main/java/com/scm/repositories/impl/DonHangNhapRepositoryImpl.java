@@ -61,13 +61,15 @@ public class DonHangNhapRepositoryImpl implements DonHangNhapRepository {
         root.fetch("iDVanChuyen", JoinType.LEFT);
 
         q.select(root).distinct(true);
-        
-        if(params != null){
+
+        if (params != null) {
             List<Predicate> predicates = new ArrayList<>();
             String kho = params.get("kho");
             if (kho != null && !kho.isEmpty()) {
                 predicates.add(b.like(root.get("iDKho").get("diaChi"), String.format("%%%s%%", kho)));
             }
+            
+            q.where(predicates.toArray(Predicate[]::new));
         }
 
         Query<Donhangnhap> query = s.createQuery(q);

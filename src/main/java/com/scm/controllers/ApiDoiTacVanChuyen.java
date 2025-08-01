@@ -6,13 +6,11 @@ package com.scm.controllers;
 
 import com.scm.pojo.Doitacvanchuyen;
 import com.scm.services.DoiTacVanChuyenService;
-import java.security.Principal;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,20 +35,13 @@ public class ApiDoiTacVanChuyen {
 
     @PostMapping("/secure/DoiTacVanChuyen")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDoiTacVanChuyen(@RequestBody Doitacvanchuyen dtvc) {
-        this.dtvcService.addDoiTacVanChuyen(dtvc);
+    public void addOrUpdateDoiTacVanChuyen(@RequestBody Doitacvanchuyen dtvc) {
+        this.dtvcService.addOrUpdateDtvc(dtvc);
     }
-    
     
     @GetMapping("/secure/DoiTacVanChuyen")
     public ResponseEntity<List<Doitacvanchuyen>> list(@RequestParam Map<String,String>params){
         return new ResponseEntity<>(this.dtvcService.getDoiTacVanChuyen(params),HttpStatus.OK);
-    }
-
-    @GetMapping("/secure/test")
-    @PreAuthorize("hasRole('NHANVIEN')")
-    public String test() {
-        return "Đã chặn đúng";
     }
 
     @GetMapping("/DoiTacVanChuyen/{dtID}")

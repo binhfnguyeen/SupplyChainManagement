@@ -54,17 +54,4 @@ public class ApiDonHangNhapController {
     public DonHangNhapResponse retrieve(@PathVariable("id") int id){
         return this.dhnService.getDHNById(id);
     }
-    
-//    @PutMapping("/secure/donhangnhap/{dhID}")
-//    public ResponseEntity<?> update(@RequestBody DonHangNhapRequest request, @PathVariable(value = "dhID") int id){
-//        try {
-//            this.dhnService.updateDonHangNhap(request, id);
-//            return ResponseEntity.status(HttpStatus.OK).body("Cập nhật đơn hàng nhập thành công");
-//        } catch (IllegalArgumentException ex) {
-//            return ResponseEntity.badRequest().body("Lỗi: " + ex.getMessage());
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//            return ResponseEntity.internalServerError().body("Lỗi hệ thống");
-//        }
-//    }
 }
