@@ -4,9 +4,11 @@
  */
 package com.scm.controllers;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
 import com.scm.dto.DonHangXuatRequest;
 import com.scm.pojo.Donhangxuat;
 import com.scm.pojo.User;
+import com.scm.services.ChiTietDonHangXuatService;
 import com.scm.services.DonHangXuatService;
 import com.scm.services.UserService;
 import java.security.Principal;
@@ -38,6 +40,9 @@ public class ApiDonHangXuatController {
     
     private UserService userService;
     
+    @Autowired
+    private ChiTietDonHangXuatService ctdhxRepo;
+    
     
     @PostMapping("/secure/DonHangXuat")
     @ResponseStatus(HttpStatus.CREATED)
@@ -47,17 +52,22 @@ public class ApiDonHangXuatController {
     
     
     @GetMapping("secure/DonHangXuat")
-    public ResponseEntity<List<Donhangxuat>> list(@RequestParam Map<String, String> params,Principal principal){
-        User u=this.userService.getUserByUsername(principal.getName());
-        if(u.getRole().equals("KHACHHANG")){
-            params.put("user", u.getUsername());
-        }
+    public ResponseEntity<List<Donhangxuat>> list(@RequestParam Map<String, String> params){
+//        User u=this.userService.getUserByUsername(principal.getName());
+//        if(u.getRole().equals("KHACHHANG")){
+//            params.put("user", u.getUsername());
+//        }
         
         
         return new ResponseEntity<>(this.dhxService.getDonhangxuat(params),HttpStatus.OK);
     }
     
     
+    
+    @GetMapping("secure/SpDonHangXuat/{dhID}")
+    public ResponseEntity<List<ChiTietDonHangXuatResponse>> getspofdh(@PathVariable(value = "dhID") int id) {
+        return new ResponseEntity<>(this.ctdhxRepo.getDsSanPham(id), HttpStatus.OK);
+    }
     
     @GetMapping("secure/DonHangXuat/{dhID}")
     public ResponseEntity<Donhangxuat> retrieve(@PathVariable(value = "dhID") int id) {

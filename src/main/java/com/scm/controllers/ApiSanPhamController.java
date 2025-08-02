@@ -4,7 +4,9 @@
  */
 package com.scm.controllers;
 
+import com.scm.dto.SanphamNccDTO;
 import com.scm.pojo.Sanpham;
+import com.scm.services.SanPhamNhaCungCapService;
 import com.scm.services.SanPhamService;
 import java.util.List;
 import java.util.Map;
@@ -34,10 +36,13 @@ public class ApiSanPhamController {
 
     @Autowired
     private SanPhamService spService;
+    
+    @Autowired
+    private SanPhamNhaCungCapService spnccService;
 
     @GetMapping("/ds-sanpham")
-    public ResponseEntity<List<Sanpham>> list(@RequestParam Map<String, String> params) {
-        return new ResponseEntity<>(this.spService.getAllSanpham(params), HttpStatus.OK);
+    public ResponseEntity<List<SanphamNccDTO>> list(@RequestParam Map<String, String> params) {
+        return new ResponseEntity<>(this.spnccService.getAllSanPhamNhaCungCap(), HttpStatus.OK);
     }
 
     @GetMapping("/ds-sanpham/{spID}")

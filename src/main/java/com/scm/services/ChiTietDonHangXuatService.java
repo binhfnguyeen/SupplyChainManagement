@@ -4,6 +4,7 @@
  */
 package com.scm.services;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
 import com.scm.pojo.Chitietdonhangxuat;
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface ChiTietDonHangXuatService {
     Chitietdonhangxuat getChiTietById(int id);
     void addOrUpdateChiTiet(Chitietdonhangxuat chitiet);
     void deleteChiTiet(int id);
+    List<ChiTietDonHangXuatResponse> getDsSanPham(int id);
 }

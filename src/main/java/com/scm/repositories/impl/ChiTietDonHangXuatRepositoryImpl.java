@@ -4,6 +4,7 @@
  */
 package com.scm.repositories.impl;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
 import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.pojo.Donhangxuat;
 import com.scm.repositories.ChiTietDonHangXuatRepository;
@@ -136,6 +137,17 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
         
         Chitietdonhangxuat chitiet = this.getChiTietById(id);
         s.remove(chitiet);
+    }
+    
+     @Override
+     public List<ChiTietDonHangXuatResponse> getDsSanPham(int id){
+        Session s =this.factory.getObject().getCurrentSession();
+        String hql="SELECT new com.scm.dto.ChiTietDonHangXuatResponse(s.iDSanPham.id,s.iDSanPham.ten,s.soLuong) "
+                +"FROM Chitietdonhangxuat s "
+                +"WHERE s.iDDonHang.id = :id";
+        Query<ChiTietDonHangXuatResponse> query= s.createQuery(hql,ChiTietDonHangXuatResponse.class);
+        query.setParameter("id", id);
+        return query.getResultList();
     }
     
 }

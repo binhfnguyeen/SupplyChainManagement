@@ -4,6 +4,8 @@
  */
 package com.scm.repositories.impl;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
+import com.scm.dto.SanphamNccDTO;
 import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Sanpham;
 import com.scm.pojo.SanphamNhacungcap;
@@ -72,16 +74,29 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
         }
     }
 
+//    @Override
+//    public List<SanphamNhacungcap> getAllSanPhamNhaCungCap() {
+//        Session s = this.factory.getObject().getCurrentSession();
+//        String hql = "SELECT s.iDSanPham.tenSanPham, s.iDNhaCungCap.tenNhaCungCap, s.gia "
+//               + "FROM SanphamNhacungcap s";
+//    
+//        Query query = s.createQuery(hql);
+//
+////        Query query = s.createQuery(q);
+//        return query.getResultList();
+//    }
+    
+   
+    
     @Override
-    public List<SanphamNhacungcap> getAllSanPhamNhaCungCap() {
+    public List<SanphamNccDTO> getAllSanPhamNhaCungCap() {
         Session s = this.factory.getObject().getCurrentSession();
-        CriteriaBuilder b = s.getCriteriaBuilder();
-        CriteriaQuery<SanphamNhacungcap> q = b.createQuery(SanphamNhacungcap.class);
+        String hql = "SELECT new com.scm.dto.SanphamNccDTO(s.iDSanPham.ten, s.iDNhaCungCap.ten, s.gia,s.iDSanPham.id,s.iDNhaCungCap.id,s.id,s.iDSanPham.hinh) "
+               + "FROM SanphamNhacungcap s";
+    
+        Query<SanphamNccDTO> query = s.createQuery(hql, SanphamNccDTO.class);
 
-        Root root = q.from(SanphamNhacungcap.class);
-        q.select(root);
-
-        Query query = s.createQuery(q);
+//        Query query = s.createQuery(q);
         return query.getResultList();
     }
 

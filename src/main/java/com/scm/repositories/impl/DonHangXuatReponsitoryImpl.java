@@ -39,6 +39,8 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
     @Autowired
     private LocalSessionFactoryBean factory;
     
+    private static final int PAGE_SIZE = 6;
+    
     @Autowired
     private KhachHangRepository khRepo;
     
@@ -115,6 +117,13 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
          
          
          Query query=s.createQuery(q);
+         
+        if (params != null && params.containsKey("page")) {
+            int page = Integer.parseInt(params.get("page"));
+            int start = (page - 1) * PAGE_SIZE;
+            query.setFirstResult(start);
+            query.setMaxResults(PAGE_SIZE);
+        }
          
          return query.getResultList();
          

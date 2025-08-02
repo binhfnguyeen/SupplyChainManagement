@@ -4,6 +4,7 @@
  */
 package com.scm.services;
 
+import com.scm.dto.SanphamNccDTO;
 import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Sanpham;
 import com.scm.pojo.SanphamNhacungcap;
@@ -17,7 +18,7 @@ import java.util.List;
 public interface SanPhamNhaCungCapService {
     void addSanPhamToNhaCungCap(int idNhaCungCap, int idSanPham, BigDecimal gia);
     List<SanphamNhacungcap> getSanPhamCuaNhaCungCap(int idNhaCungCap);
-    List<SanphamNhacungcap> getAllSanPhamNhaCungCap();
+    List<SanphamNccDTO> getAllSanPhamNhaCungCap();
     SanphamNhacungcap getSPNCCById(int id);
     void addOrUpdate(SanphamNhacungcap spcc);
     void deleteSanPhamNhaCungCap(int id);

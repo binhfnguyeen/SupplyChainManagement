@@ -4,6 +4,7 @@
  */
 package com.scm.services.impl;
 
+import com.scm.dto.SanphamNccDTO;
 import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Sanpham;
 import com.scm.pojo.SanphamNhacungcap;
@@ -69,7 +70,7 @@ public class SanPhamNhaCungCapServiceImpl implements SanPhamNhaCungCapService {
     }
 
     @Override
-    public List<SanphamNhacungcap> getAllSanPhamNhaCungCap() {
+    public List<SanphamNccDTO> getAllSanPhamNhaCungCap() {
         return this.spNCCRepository.getAllSanPhamNhaCungCap();
     }
 

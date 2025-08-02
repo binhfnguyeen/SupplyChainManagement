@@ -4,6 +4,7 @@
  */
 package com.scm.repositories;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
 import com.scm.pojo.Chitietdonhangxuat;
 import java.util.List;
 
@@ -18,4 +19,5 @@ public interface ChiTietDonHangXuatRepository {
     Chitietdonhangxuat getChiTietById(int id);
     void updateChiTiet(Chitietdonhangxuat chitiet);
     void deleteChiTiet(int id);
+    List<ChiTietDonHangXuatResponse> getDsSanPham(int id);
 }

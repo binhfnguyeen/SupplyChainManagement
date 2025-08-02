@@ -21,7 +21,10 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -47,6 +50,14 @@ public class Donhangxuat implements Serializable {
     private BigDecimal tongTien=BigDecimal.ZERO;
     @Column(name = "TinhTrang")
     private String tinhTrang;
+    @Column(name = "ThoiGianDuKien")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date thoiGianDuKien;
+    @Column(name = "ThoiGianNhan")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date thoiGianNhan;
     @JoinColumn(name = "IDKhachHang", referencedColumnName = "ID")
     @ManyToOne
     private Khachhang iDKhachHang;

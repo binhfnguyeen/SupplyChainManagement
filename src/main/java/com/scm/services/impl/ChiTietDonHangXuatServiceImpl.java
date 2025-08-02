@@ -4,6 +4,7 @@
  */
 package com.scm.services.impl;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
 import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.repositories.ChiTietDonHangXuatRepository;
 import com.scm.repositories.SanPhamRepository;
@@ -47,6 +48,11 @@ public class ChiTietDonHangXuatServiceImpl implements ChiTietDonHangXuatService{
     @Override
     public void deleteChiTiet(int id) {
         this.chitietRepository.deleteChiTiet(id);
+    }
+
+    @Override
+    public List<ChiTietDonHangXuatResponse> getDsSanPham(int id) {
+        return this.chitietRepository.getDsSanPham(id);
     }
     
 }
