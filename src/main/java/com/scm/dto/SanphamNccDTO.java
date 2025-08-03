@@ -61,5 +61,12 @@ public class SanphamNccDTO {
     public int getIdSpNcc() {
         return idSpNcc;
     }
+
+    /**
+     * @return the hinh
+     */
+    public String getHinh() {
+        return hinh;
+    }
 }
 
