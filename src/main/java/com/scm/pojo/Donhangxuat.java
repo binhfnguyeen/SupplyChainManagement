@@ -4,6 +4,7 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -53,6 +54,7 @@ public class Donhangxuat implements Serializable {
     @Column(name = "ThoiGianDuKien")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date thoiGianDuKien;
     @Column(name = "ThoiGianNhan")
     @Temporal(TemporalType.DATE)
@@ -172,6 +174,34 @@ public class Donhangxuat implements Serializable {
 
     public void setCreatedDate(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * @return the thoiGianDuKien
+     */
+    public Date getThoiGianDuKien() {
+        return thoiGianDuKien;
+    }
+
+    /**
+     * @param thoiGianDuKien the thoiGianDuKien to set
+     */
+    public void setThoiGianDuKien(Date thoiGianDuKien) {
+        this.thoiGianDuKien = thoiGianDuKien;
+    }
+
+    /**
+     * @return the thoiGianNhan
+     */
+    public Date getThoiGianNhan() {
+        return thoiGianNhan;
+    }
+
+    /**
+     * @param thoiGianNhan the thoiGianNhan to set
+     */
+    public void setThoiGianNhan(Date thoiGianNhan) {
+        this.thoiGianNhan = thoiGianNhan;
     }
     
 }

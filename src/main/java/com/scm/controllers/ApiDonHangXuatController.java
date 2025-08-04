@@ -87,4 +87,20 @@ public class ApiDonHangXuatController {
     public void deleteDonHangXuat(@PathVariable(value = "dhID") int id){
         this.dhxService.deleteDonhangxuat(id);
     }
+    
+    @GetMapping("/secure/Khachhang/{khId}/don-hang")
+    public ResponseEntity<List<Donhangxuat>> getByUserId(@PathVariable("khId") int userId){
+        return new ResponseEntity<>(this.dhxService.getByUserId(userId), HttpStatus.OK);
+    }
+    
+    @GetMapping("/secure/Nhanvien/{nvId}/don-hang")
+    public ResponseEntity<List<Donhangxuat>> getByNhanVienId(@PathVariable("nvId") int nvId){
+        return new ResponseEntity<>(this.dhxService.getByNhanVienId(nvId), HttpStatus.OK);
+    }
+    
+    @PostMapping("secure/donhangxuat/part-update")
+    public ResponseEntity<?> partUpdateDonHangXuat(@RequestBody Donhangxuat dhx){
+        this.dhxService.partUpdateDonhangXuat(dhx);
+        return ResponseEntity.ok("Đã cập nhật đơn hàng xuất thành công.");
+    }
 }

@@ -21,4 +21,7 @@ public interface DonHangXuatService {
     Donhangxuat getDonhangxuatById(int id);
     void UpdateDonhangxuat(Donhangxuat dhx);
     void deleteDonhangxuat(int id);
+    List<Donhangxuat> getByUserId(int userId);
+    List<Donhangxuat> getByNhanVienId(int NhanVienId);
+    void partUpdateDonhangXuat(Donhangxuat dhx);
 }

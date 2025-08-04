@@ -64,8 +64,19 @@ public class DonHangXuatServiceImpl implements DonHangXuatService{
         }
     }
 
-    
-    
-   
-    
+    @Override
+    public List<Donhangxuat> getByUserId(int userId) {
+        return this.dhxRepo.getByUserId(userId);
+    }
+
+    @Override
+    public List<Donhangxuat> getByNhanVienId(int NhanVienId) {
+        return this.dhxRepo.getByNhanVienId(NhanVienId);
+    }
+
+    @Override
+    public void partUpdateDonhangXuat(Donhangxuat dhx) {
+         this.dhxRepo.partUpdateDonhangXuat(dhx);
+    }
+
 }

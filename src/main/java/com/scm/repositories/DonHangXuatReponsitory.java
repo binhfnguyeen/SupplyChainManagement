@@ -22,4 +22,7 @@ public interface DonHangXuatReponsitory {
     Donhangxuat getDonhangxuatById(int id);
     void UpdateDonHangXuat(Donhangxuat dhx);
     void deleteDonHangXuat(int id);
+    List<Donhangxuat> getByUserId(int userId);
+    List<Donhangxuat> getByNhanVienId(int NhanVienId);
+    void partUpdateDonhangXuat(Donhangxuat dhx);
 }
