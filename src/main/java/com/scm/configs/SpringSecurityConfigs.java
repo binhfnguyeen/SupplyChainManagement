@@ -68,6 +68,8 @@ public class SpringSecurityConfigs {
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
 
                         .requestMatchers(HttpMethod.POST, "/api/secure/profile").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/secure/Khachhang/{khId}/don-hang").hasAuthority("ROLE_KHACHHANG")
+                        .requestMatchers(HttpMethod.GET, "/api/secure/DonHangXuat/{dhID}").hasAnyAuthority("ROLE_ADMIN", "ROLE_NHANVIEN","ROLE_KHACHHANG")
                         .requestMatchers(HttpMethod.GET, "/api/secure/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NHANVIEN")
                         .requestMatchers(HttpMethod.POST, "/api/secure/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_NHANVIEN")
                         .requestMatchers(HttpMethod.POST,"/api/secure/DonHangXuat").hasAnyAuthority("ROLE_ADMIN","ROLE_KHACHHANG")
