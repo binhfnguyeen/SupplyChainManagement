@@ -82,6 +82,11 @@ public class HoaDonXuatServiceImpl implements HoaDonXuatService{
     public Hoadonxuat getHoaDonXuatById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public void addHoaDonXuatById(int id) {
+        this.hdxRepo.addHoaDonXuatById(id);
+    }
     
     
 }

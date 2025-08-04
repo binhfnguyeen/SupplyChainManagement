@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public interface SanPhamRepository {
     Sanpham getSanPhamById(int id);
-    void addOrUpdateSanpham(Sanpham sp);
+    Sanpham addOrUpdateSanpham(Sanpham sp);
     List<Sanpham> getAllSanpham(Map<String, String> params);
     void deleteSanpham(int id);
 }

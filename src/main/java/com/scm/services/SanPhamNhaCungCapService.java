@@ -10,6 +10,7 @@ import com.scm.pojo.Sanpham;
 import com.scm.pojo.SanphamNhacungcap;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,7 +19,7 @@ import java.util.List;
 public interface SanPhamNhaCungCapService {
     void addSanPhamToNhaCungCap(int idNhaCungCap, int idSanPham, BigDecimal gia);
     List<SanphamNhacungcap> getSanPhamCuaNhaCungCap(int idNhaCungCap);
-    List<SanphamNccDTO> getAllSanPhamNhaCungCap();
+    List<SanphamNccDTO> getAllSanPhamNhaCungCap(Map<String, String> params);
     SanphamNhacungcap getSPNCCById(int id);
     void addOrUpdate(SanphamNhacungcap spcc);
     void deleteSanPhamNhaCungCap(int id);

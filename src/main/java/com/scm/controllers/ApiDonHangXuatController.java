@@ -46,8 +46,9 @@ public class ApiDonHangXuatController {
     
     @PostMapping("/secure/DonHangXuat")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addToCart(@RequestBody DonHangXuatRequest dhxr,Principal principal) {
-        this.dhxService.addDonHangXuatWithUser(dhxr,principal.getName());
+    public ResponseEntity<Integer> addToCart(@RequestBody DonHangXuatRequest dhxr,Principal principal) {
+        int newOrderId = this.dhxService.addDonHangXuatWithUser(dhxr, principal.getName());
+        return ResponseEntity.status(HttpStatus.CREATED).body(newOrderId);
     }
     
     

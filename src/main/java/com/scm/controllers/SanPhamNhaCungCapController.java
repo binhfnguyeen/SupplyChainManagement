@@ -52,7 +52,7 @@ public class SanPhamNhaCungCapController {
     
     @RequestMapping("/ds-spncc")
     public String list(Model model) {
-        model.addAttribute("spncc", this.spnccService.getAllSanPhamNhaCungCap());
+        model.addAttribute("spncc", this.spnccService.getAllSanPhamNhaCungCap(null));
         return "admin/spncc";
     }
 

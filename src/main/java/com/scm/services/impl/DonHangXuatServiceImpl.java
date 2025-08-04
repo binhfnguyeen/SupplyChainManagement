@@ -29,10 +29,10 @@ public class DonHangXuatServiceImpl implements DonHangXuatService{
     private UserRepository userRepo;
 
     @Override
-    public void addDonHangXuatWithUser(DonHangXuatRequest dhxr,String username) {
+    public int addDonHangXuatWithUser(DonHangXuatRequest dhxr,String username) {
         
        User u=this.userRepo.getUserByUsername(username);
-       this.dhxRepo.addDonHangXuatWithUser(dhxr,u);
+       return this.dhxRepo.addDonHangXuatWithUser(dhxr,u);
     }
 
     @Override

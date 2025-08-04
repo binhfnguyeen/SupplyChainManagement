@@ -8,6 +8,7 @@ import com.scm.pojo.Donhangxuat;
 import com.scm.pojo.Hoadonxuat;
 import com.scm.pojo.User;
 import com.scm.pojo.Vanchuyen;
+import com.scm.repositories.DonHangXuatReponsitory;
 import com.scm.repositories.HoaDonXuatRepository;
 import com.scm.repositories.UserRepository;
 import com.scm.repositories.VanChuyenRepository;
@@ -44,6 +45,9 @@ public class HoaDonXuatRepositoryImpl implements HoaDonXuatRepository{
     
     @Autowired
     private UserRepository userRepo;
+    
+    @Autowired
+    private DonHangXuatReponsitory dhxRepo;
 
     @Override
     public void addHoaDonXuat(Donhangxuat dhx) {
@@ -115,5 +119,17 @@ public class HoaDonXuatRepositoryImpl implements HoaDonXuatRepository{
         Session s = this.factory.getObject().getCurrentSession();
 
         return s.get(Hoadonxuat.class, id);
+    }
+
+    @Override
+    public void addHoaDonXuatById(int id) {
+       Session s= this.factory.getObject().getCurrentSession();
+       Hoadonxuat hdx = new Hoadonxuat();
+       Donhangxuat dhx=this.dhxRepo.getDonhangxuatById(id);
+       hdx.setIDDonHang(dhx);
+       Vanchuyen vc=dhx.getIDVanChuyen();
+       BigDecimal total=BigDecimal.ZERO;
+       hdx.setTongChiPhi(total.add(dhx.getTongTien()).add(this.vcRepo.getSoTien(vc)));
+       s.persist(hdx);
     }
 }

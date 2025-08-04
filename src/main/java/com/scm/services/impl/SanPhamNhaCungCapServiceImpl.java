@@ -14,6 +14,7 @@ import com.scm.repositories.SanPhamRepository;
 import com.scm.services.SanPhamNhaCungCapService;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,8 +71,8 @@ public class SanPhamNhaCungCapServiceImpl implements SanPhamNhaCungCapService {
     }
 
     @Override
-    public List<SanphamNccDTO> getAllSanPhamNhaCungCap() {
-        return this.spNCCRepository.getAllSanPhamNhaCungCap();
+    public List<SanphamNccDTO> getAllSanPhamNhaCungCap(Map<String, String> params) {
+        return this.spNCCRepository.getAllSanPhamNhaCungCap(params);
     }
 
     @Override

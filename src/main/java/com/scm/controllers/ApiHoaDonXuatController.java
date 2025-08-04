@@ -61,6 +61,19 @@ public class ApiHoaDonXuatController {
         }
     }
     
+    @PostMapping("/secure/hoadonxuat/{dhID}")
+    public ResponseEntity<?> addHoaDonXuatById(@PathVariable(value = "dhID") int id) {
+//        try {
+            this.hdxService.addHoaDonXuatById(id);
+            return ResponseEntity.status(HttpStatus.CREATED).body("Xuất hóa đơn xuất thành công");
+//        } catch (IllegalArgumentException ex) {
+//            return ResponseEntity.badRequest().body("Lỗi: " + ex.getMessage());
+//        } catch (Exception ex) {
+//            ex.printStackTrace();;
+//            return ResponseEntity.internalServerError().body("Lỗi hệ thống");
+//        }
+    }
+    
     @GetMapping("secure/HoaDonXuatOfUser")
     public ResponseEntity<List<Hoadonxuat>> list(@RequestParam Map<String, String> params,Principal principal){
 //        User u=this.userService.getUserByUsername(principal.getName());

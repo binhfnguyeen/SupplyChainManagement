@@ -38,7 +38,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository {
     }
 
     @Override
-    public void addOrUpdateSanpham(Sanpham sp) {
+    public Sanpham addOrUpdateSanpham(Sanpham sp) {
         Session s = this.factory.getObject().getCurrentSession();
 
         if (sp.getId() == null) {
@@ -46,6 +46,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository {
         } else {
             s.merge(sp);
         }
+        return sp;
     }
 
     @Override

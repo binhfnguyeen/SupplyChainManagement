@@ -14,6 +14,7 @@ import com.scm.repositories.NhaCungCapRepository;
 import com.scm.repositories.NhanVienRepository;
 import com.scm.repositories.SanPhamNhaCungCapRepository;
 import com.scm.repositories.SanPhamRepository;
+import com.scm.repositories.VanChuyenRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
@@ -47,6 +48,9 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
     @Autowired
     private SanPhamRepository spRepo;
     
+    @Autowired
+    private VanChuyenRepository vcRepo;
+    
 //    @Autowired
 //    private NhanVienRepository nvRepo;
     
@@ -65,12 +69,13 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
     }
     
     @Override
-    public void addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u) {
+    public int addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u) {
         if (dhxr != null) {
             Session s = this.factory.getObject().getCurrentSession();
             Donhangxuat dhx = new Donhangxuat();
             dhx.setIDKhachHang(this.khRepo.getKhachHangByKhachHangName("Công ty TNHH A"));
             dhx.setIDNhanVien(u.getNhanvien());
+            dhx.setIDVanChuyen(this.vcRepo.getVanChuyenById(dhxr.getiDVanChuyen()));
             s.persist(dhx);
             
             BigDecimal total=BigDecimal.ZERO;
@@ -87,7 +92,9 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory{
             
             dhx.setTongTien(total);
             s.persist(dhx);
+            return dhx.getId();
         }
+        return 0;
     }   
 
     @Override
