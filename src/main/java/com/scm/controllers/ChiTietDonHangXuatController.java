@@ -6,9 +6,11 @@ package com.scm.controllers;
 
 import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.pojo.Donhangxuat;
+import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Sanpham;
 import com.scm.services.ChiTietDonHangXuatService;
 import com.scm.services.DonHangXuatService;
+import com.scm.services.NhaCungCapService;
 import com.scm.services.SanPhamService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,15 @@ public class ChiTietDonHangXuatController {
     private SanPhamService spService;
     
     
+    @Autowired
+    private NhaCungCapService nccService;
+    
+    @ModelAttribute("dsNhaCungCap")
+    public List<Nhacungcap> getNhacungcap() {
+        return this.nccService.getDsNhaCungCap(null);
+    }
+    
+    
     @ModelAttribute("dsDonHangXuat")
     public List<Donhangxuat> getNhanVien() {
         return this.dhxService.getDonhangxuat(null);
@@ -67,7 +78,6 @@ public class ChiTietDonHangXuatController {
     @PostMapping("/ds-chitiet-dhx/form")
     public String addOrUpdateChiTiet(@ModelAttribute("chitiet") Chitietdonhangxuat chitiet, RedirectAttributes redirectAttrs) {
         this.chitietService.addOrUpdateChiTiet(chitiet);
-        
         return "redirect:/admin/ds-chitiet-dhx";
     }
 

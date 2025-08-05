@@ -4,6 +4,7 @@
  */
 package com.scm.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -21,7 +22,10 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -47,6 +51,15 @@ public class Donhangxuat implements Serializable {
     private BigDecimal tongTien=BigDecimal.ZERO;
     @Column(name = "TinhTrang")
     private String tinhTrang;
+    @Column(name = "ThoiGianDuKien")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date thoiGianDuKien;
+    @Column(name = "ThoiGianNhan")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date thoiGianNhan;
     @JoinColumn(name = "IDKhachHang", referencedColumnName = "ID")
     @ManyToOne
     private Khachhang iDKhachHang;
@@ -161,6 +174,34 @@ public class Donhangxuat implements Serializable {
 
     public void setCreatedDate(Date date) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * @return the thoiGianDuKien
+     */
+    public Date getThoiGianDuKien() {
+        return thoiGianDuKien;
+    }
+
+    /**
+     * @param thoiGianDuKien the thoiGianDuKien to set
+     */
+    public void setThoiGianDuKien(Date thoiGianDuKien) {
+        this.thoiGianDuKien = thoiGianDuKien;
+    }
+
+    /**
+     * @return the thoiGianNhan
+     */
+    public Date getThoiGianNhan() {
+        return thoiGianNhan;
+    }
+
+    /**
+     * @param thoiGianNhan the thoiGianNhan to set
+     */
+    public void setThoiGianNhan(Date thoiGianNhan) {
+        this.thoiGianNhan = thoiGianNhan;
     }
     
 }

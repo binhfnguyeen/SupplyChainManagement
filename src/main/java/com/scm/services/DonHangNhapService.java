@@ -17,7 +17,7 @@ import java.util.Map;
 public interface DonHangNhapService {
     void createDonHangNhap(DonHangNhapRequest request);
     List<DonHangNhapResponse> getAllDonHangNhap(Map<String, String> params);
-    void updateDonHangNhap(DonHangNhapRequest request, int id);
+    DonHangNhapResponse getDHNById(int id);
     List<Donhangnhap> getAllDonHangNhap();
     Donhangnhap getDonHangNhapById(int id);
     void addOrUpdateDonHangNhap(Donhangnhap dhn);

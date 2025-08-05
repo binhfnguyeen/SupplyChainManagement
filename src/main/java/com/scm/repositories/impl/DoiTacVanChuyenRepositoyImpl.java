@@ -32,12 +32,6 @@ public class DoiTacVanChuyenRepositoyImpl implements DoiTacVanChuyenRepositoy{
     private LocalSessionFactoryBean factory;
 
     @Override
-    public void addDoitacvanchuyen(Doitacvanchuyen dtvc) {
-        Session s= this.factory.getObject().getCurrentSession();
-        s.persist(dtvc);
-    }
-
-    @Override
     public List<Doitacvanchuyen> getDoiTacVanChuyen(Map<String, String> params) {
         Session s = this.factory.getObject().getCurrentSession();
         CriteriaBuilder b=s.getCriteriaBuilder();

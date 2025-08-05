@@ -17,9 +17,12 @@ import java.util.Map;
  */
 public interface DonHangXuatReponsitory {
     void addDonHangXuat(Donhangxuat dhx);
-    void addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u);
+    int addDonHangXuatWithUser(DonHangXuatRequest dhxr,User u);
     List<Donhangxuat> getDonhangxuat(Map<String,String>params);
     Donhangxuat getDonhangxuatById(int id);
     void UpdateDonHangXuat(Donhangxuat dhx);
     void deleteDonHangXuat(int id);
+    List<Donhangxuat> getByUserId(int userId);
+    List<Donhangxuat> getByNhanVienId(int NhanVienId);
+    void partUpdateDonhangXuat(Donhangxuat dhx);
 }

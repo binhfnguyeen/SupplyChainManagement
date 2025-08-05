@@ -48,6 +48,7 @@ public class HoaDonXuatController {
         model.addAttribute("hoadonxuat", hoadon);
         return "admin/form_hdx";
     }
+   
 
     @PostMapping("/ds-hoadonxuat/form")
     public String addOrUpdateHoaDonXuat(@ModelAttribute("hoadonxuat") Hoadonxuat hdx) {

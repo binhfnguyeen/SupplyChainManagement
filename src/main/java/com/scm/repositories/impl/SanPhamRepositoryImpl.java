@@ -4,11 +4,13 @@ package com.scm.repositories.impl;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+import com.scm.pojo.Nhacungcap;
 import com.scm.pojo.Sanpham;
 import com.scm.repositories.SanPhamRepository;
 import jakarta.persistence.Query;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -36,7 +38,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository {
     }
 
     @Override
-    public void addOrUpdateSanpham(Sanpham sp) {
+    public Sanpham addOrUpdateSanpham(Sanpham sp) {
         Session s = this.factory.getObject().getCurrentSession();
 
         if (sp.getId() == null) {
@@ -44,6 +46,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository {
         } else {
             s.merge(sp);
         }
+        return sp;
     }
 
     @Override
@@ -58,6 +61,7 @@ public class SanPhamRepositoryImpl implements SanPhamRepository {
         Query query = s.createQuery(q);
         return query.getResultList();
     }
+    
 
     @Override
     public void deleteSanpham(int id) {

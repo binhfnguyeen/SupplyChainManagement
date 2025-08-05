@@ -29,25 +29,24 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin
 @RequestMapping("/api")
 public class ApiDoiTacVanChuyen {
+
     @Autowired
     private DoiTacVanChuyenService dtvcService;
-    
-    
-    @PostMapping("/DoiTacVanChuyen")
+
+    @PostMapping("/secure/DoiTacVanChuyen")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDoiTacVanChuyen(@RequestBody Doitacvanchuyen dtvc) {
-        this.dtvcService.addDoiTacVanChuyen(dtvc);
+    public void addOrUpdateDoiTacVanChuyen(@RequestBody Doitacvanchuyen dtvc) {
+        this.dtvcService.addOrUpdateDtvc(dtvc);
     }
     
-    
-    @GetMapping("/DoiTacVanChuyen")
+    @GetMapping("/secure/DoiTacVanChuyen")
     public ResponseEntity<List<Doitacvanchuyen>> list(@RequestParam Map<String,String>params){
         return new ResponseEntity<>(this.dtvcService.getDoiTacVanChuyen(params),HttpStatus.OK);
     }
-    
+
     @GetMapping("/DoiTacVanChuyen/{dtID}")
     public ResponseEntity<Doitacvanchuyen> retrieve(@PathVariable(value = "dtID") int id) {
         return new ResponseEntity<>(this.dtvcService.getDoitacvanchuyenById(id), HttpStatus.OK);
     }
-    
+
 }

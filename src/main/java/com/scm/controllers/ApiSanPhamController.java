@@ -4,8 +4,11 @@
  */
 package com.scm.controllers;
 
+import com.scm.dto.SanphamNccDTO;
 import com.scm.pojo.Sanpham;
+import com.scm.services.SanPhamNhaCungCapService;
 import com.scm.services.SanPhamService;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +38,12 @@ public class ApiSanPhamController {
     @Autowired
     private SanPhamService spService;
 
+    @Autowired
+    private SanPhamNhaCungCapService spnccService;
+
     @GetMapping("/ds-sanpham")
-    public ResponseEntity<List<Sanpham>> list(@RequestParam Map<String, String> params) {
-        return new ResponseEntity<>(this.spService.getAllSanpham(params), HttpStatus.OK);
+    public ResponseEntity<List<SanphamNccDTO>> list(@RequestParam Map<String, String> params) {
+        return new ResponseEntity<>(this.spnccService.getAllSanPhamNhaCungCap(params), HttpStatus.OK);
     }
 
     @GetMapping("/ds-sanpham/{spID}")
@@ -45,20 +51,25 @@ public class ApiSanPhamController {
         return new ResponseEntity<>(this.spService.getSanPhamById(id), HttpStatus.OK);
     }
 
-    @PostMapping(path = "/ds-sanpham", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/secure/ds-sanpham", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<String> addOrUpdateSanpham(@RequestParam(value = "id", required = false) Integer id,
+    public ResponseEntity<?> addOrUpdateSanpham(@RequestParam(value = "id", required = false) Integer id,
             @RequestParam("ten") String ten,
             @RequestParam("hinh") MultipartFile hinh) {
 
         try {
             Sanpham sp = new Sanpham();
-            if (id != null)
+            if (id != null) {
                 sp.setId(id);
+            }
             sp.setTen(ten);
-            this.spService.addOrUpdateSanpham(sp, hinh);
-            return id != null ? ResponseEntity.status(HttpStatus.OK).body("Cập nhật sản phẩm thành công"): 
-                    ResponseEntity.status(HttpStatus.OK).body("Thêm sản phẩm thành công");
+
+            Sanpham savedSp = this.spService.addOrUpdateSanpham(sp, hinh);
+
+            int spID= savedSp.getId();
+
+            return ResponseEntity.ok(spID);
+
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body("Lỗi: " + ex.getMessage());
         } catch (Exception ex) {
@@ -67,7 +78,7 @@ public class ApiSanPhamController {
         }
     }
 
-    @DeleteMapping("/ds-sanpham/{spID}")
+    @DeleteMapping("/secure/ds-sanpham/{spID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSanPham(@PathVariable(value = "spID") int id
     ) {

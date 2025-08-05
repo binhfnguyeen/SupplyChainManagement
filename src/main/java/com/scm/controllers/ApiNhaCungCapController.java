@@ -44,13 +44,13 @@ public class ApiNhaCungCapController {
         return new ResponseEntity<>(this.nccService.getNCCById(id), HttpStatus.OK);
     }
     
-    @PostMapping("/ds-nhacungcap")
+    @PostMapping("/secure/ds-nhacungcap")
     @ResponseStatus(HttpStatus.CREATED)
     public void addOrUpdateSanpham(@RequestBody Nhacungcap ncc){
         this.nccService.addOrUpdateNCC(ncc);
     }
     
-    @DeleteMapping("/ds-nhacungcap/{nccID}")
+    @DeleteMapping("/secure/ds-nhacungcap/{nccID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteNhaCungCap(@PathVariable(value = "nccID") int id){
         this.nccService.deleteNCC(id);

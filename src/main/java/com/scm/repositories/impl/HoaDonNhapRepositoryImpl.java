@@ -4,12 +4,15 @@
  */
 package com.scm.repositories.impl;
 
+import com.scm.pojo.Donhangnhap;
 import com.scm.pojo.Hoadonnhap;
 import com.scm.repositories.HoaDonNhapRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
@@ -26,6 +29,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public class HoaDonNhapRepositoryImpl implements HoaDonNhapRepository {
+
+    private static final int PAGE_SIZE = 6;
 
     @Autowired
     private LocalSessionFactoryBean factory;
@@ -54,7 +59,32 @@ public class HoaDonNhapRepositoryImpl implements HoaDonNhapRepository {
 
         q.select(root).distinct(true);
 
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String fromPrice = params.get("fromPrice");
+            if (fromPrice != null && !fromPrice.isEmpty()) {
+                predicates.add(b.greaterThanOrEqualTo(root.get("tongChiPhi"), fromPrice));
+            }
+
+            String toPrice = params.get("toPrice");
+            if (toPrice != null && !toPrice.isEmpty()) {
+                predicates.add(b.lessThanOrEqualTo(root.get("tongChiPhi"), toPrice));
+            }
+
+            if (!predicates.isEmpty()) {
+                q.where(predicates.toArray(new Predicate[0]));
+            }
+        }
+
         Query<Hoadonnhap> query = s.createQuery(q);
+
+        if (params != null && params.containsKey("page")) {
+            int page = Integer.parseInt(params.get("page"));
+            int start = (page - 1) * PAGE_SIZE;
+            query.setFirstResult(start);
+            query.setMaxResults(PAGE_SIZE);
+        }
+
         return query.getResultList();
     }
 

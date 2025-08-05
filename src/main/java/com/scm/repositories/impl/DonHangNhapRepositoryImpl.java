@@ -13,11 +13,13 @@ import com.scm.repositories.SanPhamNhaCungCapRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.stereotype.Repository;
@@ -31,9 +33,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DonHangNhapRepositoryImpl implements DonHangNhapRepository {
 
+    private static final int PAGE_SIZE = 6;
+
     @Autowired
     private LocalSessionFactoryBean factory;
-    
+
     @Autowired
     private SanPhamNhaCungCapRepository spnccRepo;
 
@@ -58,7 +62,26 @@ public class DonHangNhapRepositoryImpl implements DonHangNhapRepository {
 
         q.select(root).distinct(true);
 
-        return s.createQuery(q).getResultList();
+        if (params != null) {
+            List<Predicate> predicates = new ArrayList<>();
+            String kho = params.get("kho");
+            if (kho != null && !kho.isEmpty()) {
+                predicates.add(b.like(root.get("iDKho").get("diaChi"), String.format("%%%s%%", kho)));
+            }
+            
+            q.where(predicates.toArray(Predicate[]::new));
+        }
+
+        Query<Donhangnhap> query = s.createQuery(q);
+
+        if (params != null && params.containsKey("page")) {
+            int page = Integer.parseInt(params.get("page"));
+            int start = (page - 1) * PAGE_SIZE;
+            query.setFirstResult(start);
+            query.setMaxResults(PAGE_SIZE);
+        }
+
+        return query.getResultList();
     }
 
     @Override

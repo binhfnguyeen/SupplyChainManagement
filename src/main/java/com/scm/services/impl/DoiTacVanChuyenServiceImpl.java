@@ -23,11 +23,6 @@ public class DoiTacVanChuyenServiceImpl implements DoiTacVanChuyenService{
     private DoiTacVanChuyenRepositoy dtvcRepo;
 
     @Override
-    public void addDoiTacVanChuyen(Doitacvanchuyen dtvc) {
-        this.dtvcRepo.addDoitacvanchuyen(dtvc);
-    }
-
-    @Override
     public List<Doitacvanchuyen> getDoiTacVanChuyen(Map<String, String> params) {
         return this.dtvcRepo.getDoiTacVanChuyen(params);
     }

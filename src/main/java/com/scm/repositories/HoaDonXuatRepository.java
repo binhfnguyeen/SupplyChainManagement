@@ -15,6 +15,9 @@ import java.util.Map;
  */
 public interface HoaDonXuatRepository {
     void addHoaDonXuat(Donhangxuat dhx);
+    void addHoaDonXuatById(int id);
     void addOrUpdateHoaDonNhap(Hoadonxuat hdx);
     List<Hoadonxuat> getAllHoaDonXuat(Map<String, String> params);
+    List<Hoadonxuat> getAllHoaDonXuatByUser(Map<String, String> params,String username);
+    Hoadonxuat getHoaDonXuatById(int id);
 }

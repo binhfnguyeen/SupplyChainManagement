@@ -149,53 +149,6 @@ public class DonHangNhapServiceImpl implements DonHangNhapService {
     }
 
     @Override
-    public void updateDonHangNhap(DonHangNhapRequest request, int id) {
-        Nhanvien nv = this.nhanVienRepository.getNhanvienById(request.getIdNhanVien());
-        Kho kho = this.khoRepository.getKhoById(request.getIdKho());
-        Vanchuyen vc = this.vanChuyenRepository.getVanChuyenById(request.getIdVanChuyen());
-        Nhacungcap ncc = this.nccRepository.getNCCById(request.getIdNhaCungCap());
-        if (nv == null || kho == null || vc == null) {
-            throw new IllegalArgumentException("Invalid NhanVien, Kho or VanChuyen ID");
-        }
-
-        Donhangnhap dhn = donHangNhapRepository.getDonHangNhapById(id);
-        dhn.setIDNhanVien(nv);
-        dhn.setIDKho(kho);
-        dhn.setIDVanChuyen(vc);
-        dhn.setTinhTrang(request.getTinhTrang());
-        dhn.setThoiGianDuKien(request.getThoiGianDuKien());
-        dhn.setThoiGianNhan(request.getThoiGianNhan());
-
-        this.chitietRepository.deleteChiTietByDonHangId(id);
-
-        BigDecimal tongTien = BigDecimal.ZERO;
-
-        for (ChiTietDonHangNhapRequest ct : request.getChiTietDonHangNhap()) {
-            Sanpham sp = this.sanPhamRepository.getSanPhamById(ct.getIdSanPham());
-            if (sp == null) {
-                throw new IllegalArgumentException("Invalid SanPham ID: " + ct.getIdSanPham());
-            }
-
-            BigDecimal gia = this.spnccRepository.getGia(sp, ncc);
-            BigDecimal thanhTien = gia.multiply(BigDecimal.valueOf(ct.getSoLuong()));
-            tongTien = tongTien.add(thanhTien);
-
-            Chitietdonhangnhap chitiet = new Chitietdonhangnhap();
-            chitiet.setIDDonHang(dhn);
-            chitiet.setIDSanPham(sp);
-            chitiet.setSoLuong(ct.getSoLuong());
-            chitietRepository.addChiTiet(chitiet);
-        }
-
-        if (vc.getSoTien() != null) {
-            tongTien = tongTien.add(vc.getSoTien());
-        }
-
-        dhn.setTongTien(tongTien);
-        donHangNhapRepository.updateDonHangNhap(dhn);
-    }
-
-    @Override
     public List<Donhangnhap> getAllDonHangNhap() {
         return this.donHangNhapRepository.getDonHangNhap(null);
     }
@@ -255,6 +208,34 @@ public class DonHangNhapServiceImpl implements DonHangNhapService {
 
         dh.setTongTien(tongTien);
         this.donHangNhapRepository.updateDonHangNhap(dh);
+    }
+
+    @Override
+    public DonHangNhapResponse getDHNById(int id) {
+        Donhangnhap dh = this.donHangNhapRepository.getDonHangNhapById(id);
+        DonHangNhapResponse res = new DonHangNhapResponse();
+
+        res.setId(dh.getId());
+        res.setTenNhanVien(dh.getIDNhanVien().getHoTen());
+        res.setDiaChiKho(dh.getIDKho().getDiaChi());
+        res.setTinhTrangVanChuyen(dh.getIDVanChuyen().getTinhTrang());
+        res.setTinhTrang(dh.getTinhTrang());
+        res.setTongTien(dh.getTongTien());
+        res.setThoiGianDuKien(dh.getThoiGianDuKien());
+        res.setThoiGianNhan(dh.getThoiGianNhan());
+
+        List<ChiTietDonHangNhapResponse> listChiTiet = new ArrayList<>();
+        for (Chitietdonhangnhap ct : dh.getChitietdonhangnhapSet()) {
+            ChiTietDonHangNhapResponse ctRes = new ChiTietDonHangNhapResponse();
+            ctRes.setIdSanPham(ct.getIDSanPham().getId());
+            ctRes.setTenSanPham(ct.getIDSanPham().getTen());
+            ctRes.setSoLuong(ct.getSoLuong());
+            listChiTiet.add(ctRes);
+        }
+
+        res.setChiTiet(listChiTiet);
+
+        return res;
     }
 
 }

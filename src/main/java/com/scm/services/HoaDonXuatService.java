@@ -4,6 +4,7 @@
  */
 package com.scm.services;
 
+import com.scm.dto.HoaDonXuatResponse;
 import com.scm.pojo.Donhangxuat;
 import com.scm.pojo.Hoadonxuat;
 import java.util.List;
@@ -15,9 +16,12 @@ import java.util.Map;
  */
 public interface HoaDonXuatService {
     void addHoaDonXuat(Donhangxuat dhx);
+    void addHoaDonXuatById(int id);
     Hoadonxuat getHoaDonXuatById(int id);
     void xuatHoaDonXuat(int id);
-    List<Hoadonxuat> getAllHoaDonXuat(Map <String, String> params);
+    List<HoaDonXuatResponse> getAllHoaDonXuat(Map <String, String> params);
     void addOrUpdateHoaDonXuat(Hoadonxuat hdx);
+    HoaDonXuatResponse getHoaDonNhapById(int id);
     List<Hoadonxuat> getDsHoaDon(Map <String, String> params);
+    List<Hoadonxuat> getAllHoaDonXuatByUser(Map<String, String> params,String username);
 }

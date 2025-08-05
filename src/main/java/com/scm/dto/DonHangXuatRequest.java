@@ -14,6 +14,8 @@ import java.util.List;
 public class DonHangXuatRequest {
     private int idNhanVien;
     private List<Cart> carts;
+    private String tinhTrang;
+    private int iDVanChuyen;
 
     /**
      * @return the idNhanVien
@@ -41,6 +43,34 @@ public class DonHangXuatRequest {
      */
     public void setCarts(List<Cart> carts) {
         this.carts = carts;
+    }
+
+    /**
+     * @return the tinhTrang
+     */
+    public String getTinhTrang() {
+        return tinhTrang;
+    }
+
+    /**
+     * @param tinhTrang the tinhTrang to set
+     */
+    public void setTinhTrang(String tinhTrang) {
+        this.tinhTrang = tinhTrang;
+    }
+
+    /**
+     * @return the iDVanChuyen
+     */
+    public int getiDVanChuyen() {
+        return iDVanChuyen;
+    }
+
+    /**
+     * @param iDVanChuyen the iDVanChuyen to set
+     */
+    public void setiDVanChuyen(int iDVanChuyen) {
+        this.iDVanChuyen = iDVanChuyen;
     }
     
 }

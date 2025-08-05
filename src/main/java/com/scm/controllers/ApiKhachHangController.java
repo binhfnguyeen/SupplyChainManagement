@@ -27,7 +27,7 @@ public class ApiKhachHangController {
     
     @PostMapping("/KhachHang")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addDoiTacVanChuyen(@RequestBody Khachhang kh) {
+    public void addKhachHang(@RequestBody Khachhang kh) {
         this.khService.addOrUpdateKhachHangWithUser(kh);
     }
     

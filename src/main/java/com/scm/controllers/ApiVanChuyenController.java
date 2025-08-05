@@ -34,7 +34,7 @@ public class ApiVanChuyenController {
     @Autowired
     private VanChuyenService vcService;
 
-    @PostMapping("/ds-vanchuyen")
+    @PostMapping("/secure/ds-vanchuyen")
     @ResponseStatus(HttpStatus.CREATED)
     public void addOrUpdateVanChuyen(@RequestBody Vanchuyen vc) {
         this.vcService.addOrUpdateVanChuyen(vc);
@@ -50,7 +50,7 @@ public class ApiVanChuyenController {
         return new ResponseEntity<>(this.vcService.getVanChuyenById(id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/ds-vanchuyen/{vcID}")
+    @DeleteMapping("/secure/ds-vanchuyen/{vcID}")
     public ResponseEntity<?> delete(@PathVariable(value = "vcID") int id) {
         this.vcService.deleteVanChuyen(id);
         return ResponseEntity.ok("Đã xóa vận chuyển có ID: " + id);

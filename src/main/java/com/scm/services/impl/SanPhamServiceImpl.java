@@ -44,7 +44,7 @@ public class SanPhamServiceImpl implements SanPhamService {
     }
 
     @Override
-    public void addOrUpdateSanpham(Sanpham sp, MultipartFile hinh) {
+    public Sanpham addOrUpdateSanpham(Sanpham sp, MultipartFile hinh) {
         if (!hinh.isEmpty()) {
             try {
                 Map res = cloudinary.uploader().upload(hinh.getBytes(), ObjectUtils.asMap("resource_type", "auto"));
@@ -54,6 +54,8 @@ public class SanPhamServiceImpl implements SanPhamService {
             }
         }
         spRepo.addOrUpdateSanpham(sp);
+        return sp;
+        
     }
 
     @Override

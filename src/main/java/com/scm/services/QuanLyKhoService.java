@@ -5,7 +5,6 @@
 package com.scm.services;
 
 import com.scm.pojo.KhoSanpham;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +12,5 @@ import java.util.List;
  * @author Dell
  */
 public interface QuanLyKhoService {
-    void addSanPhamToKho(int khoId, int sanPhamId, int soLuong, Date hanSuDung);
     List<KhoSanpham> getSanPhamTrongKho(int khoId);
 }

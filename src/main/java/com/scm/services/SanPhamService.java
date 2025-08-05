@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 public interface SanPhamService {
     Sanpham getSanPhamById(int id);
-    void addOrUpdateSanpham(Sanpham sp, MultipartFile hinh);
+    Sanpham addOrUpdateSanpham(Sanpham sp, MultipartFile hinh);
     List<Sanpham> getAllSanpham(Map<String, String> params);
     void deleteSanpham(int id);
 }

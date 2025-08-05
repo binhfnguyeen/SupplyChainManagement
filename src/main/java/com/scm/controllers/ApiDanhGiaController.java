@@ -29,7 +29,7 @@ public class ApiDanhGiaController {
     @Autowired
     private DanhGiaService dgService;
     
-    @PostMapping("/danhgia")
+    @PostMapping("/secure/danhgia")
     public ResponseEntity<String> danhgia(@RequestBody Danhgia dg){
         try {
             this.dgService.addOrUpdateDanhGia(dg);
@@ -39,7 +39,7 @@ public class ApiDanhGiaController {
         }
     }
     
-    @GetMapping("/nhacungcap/{nccId}/danhgia")
+    @GetMapping("/secure/nhacungcap/{nccId}/danhgia")
     public ResponseEntity<List<Danhgia>> getDanhGiaByNCC(@PathVariable(value = "nccId") int nccId) {
         List<Danhgia> danhGiaList = this.dgService.findDanhGiaByNCC(nccId);
         return ResponseEntity.ok(danhGiaList);

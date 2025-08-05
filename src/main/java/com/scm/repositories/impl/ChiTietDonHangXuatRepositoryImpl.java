@@ -4,10 +4,12 @@
  */
 package com.scm.repositories.impl;
 
+import com.scm.dto.ChiTietDonHangXuatResponse;
 import com.scm.pojo.Chitietdonhangxuat;
 import com.scm.pojo.Donhangxuat;
 import com.scm.repositories.ChiTietDonHangXuatRepository;
 import com.scm.repositories.DonHangXuatReponsitory;
+import com.scm.repositories.NhaCungCapRepository;
 import com.scm.repositories.SanPhamNhaCungCapRepository;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -38,6 +40,9 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
     @Autowired
     private DonHangXuatReponsitory dhxRepo;
     
+    @Autowired
+    private NhaCungCapRepository nccRepo;
+    
     
     
     @Override
@@ -47,6 +52,9 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
     if (chitiet.getId() == null) {
         // Lấy đối tượng đơn hàng xuất
         Donhangxuat dhx = chitiet.getIDDonHang();
+        
+        System.out.println(chitiet.getIDNhaCungCap());
+        
 
         if (dhx == null || dhx.getId() == null) {
             throw new IllegalArgumentException("Đơn hàng xuất không hợp lệ.");
@@ -61,7 +69,10 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
         // Tính tổng tiền mới
         BigDecimal tongCu = fullDhx.getTongTien() != null ? fullDhx.getTongTien() : BigDecimal.ZERO;
         BigDecimal gia = this.sp_nccRepo.getGia(chitiet.getIDSanPham(), chitiet.getIDNhaCungCap());
-
+        
+        System.out.println(chitiet.getIDNhaCungCap());
+        System.out.println(gia);
+        
         if (gia == null) {
             throw new IllegalArgumentException("Không tìm thấy giá của sản phẩm với nhà cung cấp.");
         }
@@ -126,6 +137,17 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
         
         Chitietdonhangxuat chitiet = this.getChiTietById(id);
         s.remove(chitiet);
+    }
+    
+     @Override
+     public List<ChiTietDonHangXuatResponse> getDsSanPham(int id){
+        Session s =this.factory.getObject().getCurrentSession();
+        String hql="SELECT new com.scm.dto.ChiTietDonHangXuatResponse(s.iDSanPham.id,s.iDSanPham.ten,s.soLuong) "
+                +"FROM Chitietdonhangxuat s "
+                +"WHERE s.iDDonHang.id = :id";
+        Query<ChiTietDonHangXuatResponse> query= s.createQuery(hql,ChiTietDonHangXuatResponse.class);
+        query.setParameter("id", id);
+        return query.getResultList();
     }
     
 }

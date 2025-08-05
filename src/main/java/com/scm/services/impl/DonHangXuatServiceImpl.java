@@ -29,10 +29,10 @@ public class DonHangXuatServiceImpl implements DonHangXuatService{
     private UserRepository userRepo;
 
     @Override
-    public void addDonHangXuatWithUser(DonHangXuatRequest dhxr,String username) {
+    public int addDonHangXuatWithUser(DonHangXuatRequest dhxr,String username) {
         
        User u=this.userRepo.getUserByUsername(username);
-       this.dhxRepo.addDonHangXuatWithUser(dhxr,u);
+       return this.dhxRepo.addDonHangXuatWithUser(dhxr,u);
     }
 
     @Override
@@ -64,8 +64,19 @@ public class DonHangXuatServiceImpl implements DonHangXuatService{
         }
     }
 
-    
-    
-   
-    
+    @Override
+    public List<Donhangxuat> getByUserId(int userId) {
+        return this.dhxRepo.getByUserId(userId);
+    }
+
+    @Override
+    public List<Donhangxuat> getByNhanVienId(int NhanVienId) {
+        return this.dhxRepo.getByNhanVienId(NhanVienId);
+    }
+
+    @Override
+    public void partUpdateDonhangXuat(Donhangxuat dhx) {
+         this.dhxRepo.partUpdateDonhangXuat(dhx);
+    }
+
 }
