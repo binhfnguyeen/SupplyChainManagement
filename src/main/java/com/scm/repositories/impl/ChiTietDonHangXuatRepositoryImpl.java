@@ -50,7 +50,7 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
         Session s = this.factory.getObject().getCurrentSession();
 
     if (chitiet.getId() == null) {
-        // Lấy đối tượng đơn hàng xuất
+        
         Donhangxuat dhx = chitiet.getIDDonHang();
         
         System.out.println(chitiet.getIDNhaCungCap());
@@ -60,13 +60,11 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
             throw new IllegalArgumentException("Đơn hàng xuất không hợp lệ.");
         }
 
-        // Lấy bản đầy đủ của Donhangxuat từ DB để đảm bảo đầy đủ dữ liệu
         Donhangxuat fullDhx = s.get(Donhangxuat.class, dhx.getId());
         if (fullDhx == null) {
             throw new IllegalArgumentException("Không tìm thấy đơn hàng xuất trong DB.");
         }
 
-        // Tính tổng tiền mới
         BigDecimal tongCu = fullDhx.getTongTien() != null ? fullDhx.getTongTien() : BigDecimal.ZERO;
         BigDecimal gia = this.sp_nccRepo.getGia(chitiet.getIDSanPham(), chitiet.getIDNhaCungCap());
         
@@ -81,12 +79,10 @@ public class ChiTietDonHangXuatRepositoryImpl implements ChiTietDonHangXuatRepos
         System.out.println(thanhTien);
         fullDhx.setTongTien(tongCu.add(thanhTien));
 
-        // Gán lại đơn hàng đã đầy đủ và managed
         chitiet.setIDDonHang(fullDhx);
 
-        // Lưu cả hai: đơn hàng đã cập nhật và chi tiết mới
-        s.merge(fullDhx);      // cập nhật đơn hàng
-        s.merge(chitiet);      // lưu chi tiết
+        s.merge(fullDhx);      
+        s.merge(chitiet);      
     }
     }
 

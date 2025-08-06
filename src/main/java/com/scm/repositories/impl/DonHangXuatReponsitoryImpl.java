@@ -21,6 +21,7 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
@@ -43,8 +44,6 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory {
 
     private static final int PAGE_SIZE = 6;
 
-    @Autowired
-    private KhachHangRepository khRepo;
 
     @Autowired
     private SanPhamRepository spRepo;
@@ -53,9 +52,6 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory {
     @Autowired
     private VanChuyenRepository vcRepo;
     
-
-//    @Autowired
-//    private NhanVienRepository nvRepo;
     @Autowired
     private NhaCungCapRepository nccRepo;
 
@@ -76,10 +72,13 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory {
         if (dhxr != null) {
             Session s = this.factory.getObject().getCurrentSession();
             Donhangxuat dhx = new Donhangxuat();
-            dhx.setIDKhachHang(this.khRepo.getKhachHangByKhachHangName("Công ty TNHH A"));
-            dhx.setIDNhanVien(u.getNhanvien());
+            if(u.getKhachhang()!=null){
+                dhx.setIDKhachHang(u.getKhachhang());
+            }else{
+                throw new NullPointerException("User không đăng ký với role KHACHHANG");
+            }
+            
             dhx.setIDVanChuyen(this.vcRepo.getVanChuyenById(dhxr.getiDVanChuyen()));
-            s.persist(dhx);
 
             BigDecimal total = BigDecimal.ZERO;
 
@@ -92,7 +91,10 @@ public class DonHangXuatReponsitoryImpl implements DonHangXuatReponsitory {
                 total = total.add(this.sp_nccRepo.getGia(c.getIDSanPham(), c.getIDNhaCungCap()).multiply(BigDecimal.valueOf(x.getQuantity())));
                 s.persist(c);
             }
-
+            dhx.setTinhTrang("Đang xử lý");
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_MONTH, 3);
+            dhx.setThoiGianDuKien(calendar.getTime());
             dhx.setTongTien(total);
             s.persist(dhx);
             return dhx.getId();

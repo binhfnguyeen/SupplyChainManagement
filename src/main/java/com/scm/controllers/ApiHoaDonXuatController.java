@@ -11,6 +11,7 @@ import com.scm.pojo.Hoadonxuat;
 import com.scm.services.DonHangXuatService;
 import com.scm.services.HoaDonXuatService;
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,16 +42,14 @@ public class ApiHoaDonXuatController {
     @Autowired
     private DonHangXuatService dhxService;
     
-//    @PostMapping("/secure/donHoaDonXuat")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void addHoaDonXuat(@RequestBody Donhangxuat dhx) {
-//        this.hdxService.addHoaDonXuat(dhx);
-//    }
     
     @PostMapping("/secure/donhangxuat/{dhID}/xuat-hoadon")
     public ResponseEntity<?> create(@PathVariable(value = "dhID") int id) {
         try {
             Donhangxuat dhx=this.dhxService.getDonhangxuatById(id);
+            Calendar calendar = Calendar.getInstance();
+            dhx.setThoiGianNhan(calendar.getTime());
+            this.dhxService.UpdateDonhangxuat((dhx));
             this.hdxService.addHoaDonXuat(dhx);
             return ResponseEntity.status(HttpStatus.CREATED).body("Xuất hóa đơn xuất thành công");
         } catch (IllegalArgumentException ex) {
@@ -63,23 +62,12 @@ public class ApiHoaDonXuatController {
     
     @PostMapping("/secure/hoadonxuat/{dhID}")
     public ResponseEntity<?> addHoaDonXuatById(@PathVariable(value = "dhID") int id) {
-//        try {
             this.hdxService.addHoaDonXuatById(id);
             return ResponseEntity.status(HttpStatus.CREATED).body("Xuất hóa đơn xuất thành công");
-//        } catch (IllegalArgumentException ex) {
-//            return ResponseEntity.badRequest().body("Lỗi: " + ex.getMessage());
-//        } catch (Exception ex) {
-//            ex.printStackTrace();;
-//            return ResponseEntity.internalServerError().body("Lỗi hệ thống");
-//        }
     }
     
     @GetMapping("secure/HoaDonXuatOfUser")
     public ResponseEntity<List<Hoadonxuat>> list(@RequestParam Map<String, String> params,Principal principal){
-//        User u=this.userService.getUserByUsername(principal.getName());
-//        if(u.getRole().equals("KHACHHANG")){
-//            params.put("user", u.getUsername());
-//        }
         String username=principal.getName();
         return new ResponseEntity<>(this.hdxService.getAllHoaDonXuatByUser(params,username),HttpStatus.OK);
     }
