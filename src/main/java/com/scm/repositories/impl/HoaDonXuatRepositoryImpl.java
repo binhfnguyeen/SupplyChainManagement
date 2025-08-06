@@ -20,6 +20,8 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.hibernate.Session;
@@ -56,8 +58,11 @@ public class HoaDonXuatRepositoryImpl implements HoaDonXuatRepository{
        hdx.setIDDonHang(dhx);
        Vanchuyen vc=dhx.getIDVanChuyen();
        BigDecimal total=BigDecimal.ZERO;
+       Calendar calendar = Calendar.getInstance(); // ngày hôm nay
+       dhx.setThoiGianNhan(calendar.getTime());
        hdx.setTongChiPhi(total.add(dhx.getTongTien()).add(this.vcRepo.getSoTien(vc)));
        s.persist(hdx);
+       this.dhxRepo.UpdateDonHangXuat(dhx);
     }
 
     @Override
@@ -93,7 +98,6 @@ public class HoaDonXuatRepositoryImpl implements HoaDonXuatRepository{
         Root<Hoadonxuat> root = q.from(Hoadonxuat.class);
         q.select(root);
 
-        // Join từ Hoadonxuat -> Donhangxuat -> Khachhang -> User
         Join<Object, Object> donHangJoin = root.join("iDDonHang");
         Join<Object, Object> khachHangJoin = donHangJoin.join("iDKhachHang");
         Join<Object, Object> userJoin = khachHangJoin.join("userID");  // assuming field name is "user"
@@ -101,8 +105,6 @@ public class HoaDonXuatRepositoryImpl implements HoaDonXuatRepository{
         List<Predicate> predicates = new ArrayList<>();
         predicates.add(b.equal(userJoin.get("username"), username));
 
-        // Bạn có thể thêm điều kiện lọc từ params nếu cần
-        // Ví dụ lọc theo tình trạng đơn hàng:
         if (params != null && params.containsKey("tinhTrang")) {
             predicates.add(b.equal(donHangJoin.get("tinhTrang"), params.get("tinhTrang")));
         }

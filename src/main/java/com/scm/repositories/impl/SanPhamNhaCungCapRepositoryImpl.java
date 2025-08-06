@@ -76,18 +76,6 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
             return BigDecimal.ZERO;
         }
     }
-
-//    @Override
-//    public List<SanphamNhacungcap> getAllSanPhamNhaCungCap() {
-//        Session s = this.factory.getObject().getCurrentSession();
-//        String hql = "SELECT s.iDSanPham.tenSanPham, s.iDNhaCungCap.tenNhaCungCap, s.gia "
-//               + "FROM SanphamNhacungcap s";
-//    
-//        Query query = s.createQuery(hql);
-//
-////        Query query = s.createQuery(q);
-//        return query.getResultList();
-//    }
     
    
     
@@ -105,8 +93,6 @@ public class SanPhamNhaCungCapRepositoryImpl implements SanPhamNhaCungCapReposit
             query.setFirstResult(start);
             query.setMaxResults(PAGE_SIZE);
         }
-
-//        Query query = s.createQuery(q);
         return query.getResultList();
     }
 

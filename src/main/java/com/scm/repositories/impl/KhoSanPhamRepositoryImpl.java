@@ -46,8 +46,6 @@ public class KhoSanPhamRepositoryImpl implements KhoSanPhamRepository {
         CriteriaBuilder b = s.getCriteriaBuilder();
         CriteriaQuery<KhoSanpham> q = b.createQuery(KhoSanpham.class);
         Root<KhoSanpham> root = q.from(KhoSanpham.class);
-//        Join<KhoSanpham,Sanpham> join=root.join("iDSanPham",JoinType.RIGHT);
-//        q.multiselect(join.get("id"),join.get("ten"),join.get("soLuong"));
         String hql = "SELECT ks FROM KhoSanpham ks "
                + "JOIN FETCH ks.iDSanPham sp "
                + "WHERE ks.iDKho.id = :khoId";
